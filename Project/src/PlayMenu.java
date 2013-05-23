@@ -2,16 +2,27 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class PlayScreen
+/*TODO: We need to restrict input to jTextArea to numbers only
+ *"Finish and Check Answer" should ask sudoku if it is solved correctly, if not 
+ *
+ * When 
+ * 
+ */
+public class PlayMenu
 {
-   public PlayScreen()
+	
+	private Sudoku SudokuBoarda;
+   public PlayMenu(Sudoku SudokuBoard)
    {
+	  this.SudokuBoarda = SudokuBoard;
+	  
       GridBagLayout gridbag = new GridBagLayout();
       GridBagConstraints c = new GridBagConstraints();
-      JFrame f=new JFrame();
+      final BackgroundJFrame f=new BackgroundJFrame();
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       f.setLayout(gridbag);
       c.fill =GridBagConstraints.BOTH;
+      
       
       JButton playButton = new JButton("Save");
       c.gridx = 0;
@@ -51,7 +62,9 @@ public class PlayScreen
          {
             public void actionPerformed(ActionEvent event)
             {
-            	Client c = new Client();
+            	f.setVisible(false);
+            	SudokuStore storage= new SudokuStore(); 
+            	MainMenu c = new MainMenu(SudokuBoarda);
             }
          });
       
@@ -86,18 +99,32 @@ public class PlayScreen
       {
     	  for(int j = 0; j < 9; j++)
     	  {
-    	      JTextArea sodukuArea = new JTextArea();
+    		  JTextField sudokuArea;
+    	      if (SudokuBoarda.getSudoku()[i][j] != 0) {
+    	    	  sudokuArea = new JTextField(Integer.toString(SudokuBoarda.getSudoku()[i][j]));
+        	      sudokuArea.setEditable(false);
+    	      } else {
+    	    	  sudokuArea = new JTextField();
+    	    	  sudokuArea.setEditable(true);
+    	      }
+    	      Font font = new Font("Verdana", Font.BOLD, 12);
+    	      sudokuArea.setFont(font);
+    	      sudokuArea.setOpaque(true);
+    	      sudokuArea.setHorizontalAlignment(JTextField.CENTER);
     	      c.gridx = i;
     	      c.gridy = j+1;
     	      c.weightx = 1;
     	      c.weighty = 1;
     	      c.anchor = GridBagConstraints.CENTER;
     	      c.insets = new Insets(5,5,5,5);
-    	      f.add(sodukuArea, c);
+    	      f.add(sudokuArea, c);
     	  }
       }
 
-      f.setSize(500,400);
+      f.setSize(600,500);
       f.setVisible(true);
+      
+      
    }
+   
 }

@@ -159,6 +159,10 @@ public boolean solve() {
 		System.arraycopy(unsolvedSudoku, 0, sudoku, 0, gridSize);
 	}
 	
+	public int[][] getSudoku() {
+		return sudoku;
+	}
+	
 	
 	private int[][] sudoku;
 	private int[][] unsolvedSudoku;

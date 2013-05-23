@@ -1,19 +1,55 @@
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
+import java.awt.image.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
-public class Client
+import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
+
+/*TODO: Need to have working;
+ * Read in difficulty from drop down menu when we click "Play Sudoku"
+ * 
+ */
+
+public class MainMenu
 {
-   public Client()
+	//private SudokuSotre; //Has list of boards (easy, medium, hard)
+	private Sudoku SudokuBoards;
+	private int difficulty;
+	
+	
+	
+	public MainMenu(Sudoku boards)
+	
    {
+	  this.SudokuBoards = boards;
+	  try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (UnsupportedLookAndFeelException e) {
+		    // handle exception
+		} catch (ClassNotFoundException e) {
+		    // handle exception
+		} catch (InstantiationException e) {
+		    // handle exception
+		} catch (IllegalAccessException e) {
+		    // handle exception
+		}
       GridBagLayout gridbag = new GridBagLayout();
       GridBagConstraints c = new GridBagConstraints();
-      JFrame f=new JFrame();
+      final BackgroundJFrame f=new BackgroundJFrame();
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       f.setLayout(gridbag);
       c.fill =GridBagConstraints.BOTH;
       
-      JButton playButton = new JButton("Play Soduku");
+      
+      JButton playButton = new JButton("Play Sudoku");
       c.gridx = 0;
       c.gridy = 0;
       c.ipady = 10;
@@ -23,7 +59,9 @@ public class Client
          {
             public void actionPerformed(ActionEvent event)
             {
-            	PlayScreen p = new PlayScreen();
+            	//Read difficulty from drop down menu, set difficulty = {1.2.3}
+            	f.setVisible(false);
+            	PlayMenu p = new PlayMenu(SudokuBoards);
             }
          });
 
@@ -57,9 +95,16 @@ public class Client
          {
             public void actionPerformed(ActionEvent event)
             {
+            	System.exit(0);
             }
          });
-      f.setSize(500,400);
+      f.setSize(600,500);
       f.setVisible(true);
    }
+   
+   /*private Sudoku getSudoku (int difficulty){
+	   return SudokuBoards.getSudoku(difficulty);
+	   
+   }*/
+   
 }
