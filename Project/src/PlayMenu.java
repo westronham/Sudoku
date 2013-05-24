@@ -113,6 +113,7 @@ public class PlayMenu
     	      sudokuArea.setFont(font);
     	      sudokuArea.setOpaque(true);
     	      sudokuArea.setHorizontalAlignment(JTextField.CENTER);
+    	      sudokuArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     	      c.gridx = i;
     	      c.gridy = j+1;
     	      c.weightx = 1;
