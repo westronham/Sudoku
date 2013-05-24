@@ -22,6 +22,8 @@ public class testSudoku {
 				}
 				scanner.close();
 			
+			
+			
 			Sudoku sudoku = new Sudoku();
 			sudoku.initSudoku(row);
 			sudoku.initConditionMatrices();
@@ -30,8 +32,9 @@ public class testSudoku {
 			
 			//SudokuStore storage= new SudokuStore(); 
 			//storage.setBoard(sudoku.getDifficulty(), sudoku); //Give easy (1) sudoku board Sudoku' to the storage class		
-		
-			MainMenu m = new MainMenu(sudoku);
+			final BackgroundJFrame f=new BackgroundJFrame();
+			MainMenu mainMenu = new MainMenu(sudoku);
+			mainMenu.startMainMenu(f);
 			} catch (FileNotFoundException e) {}
 	   }
 		

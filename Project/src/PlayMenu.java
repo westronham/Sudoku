@@ -15,10 +15,13 @@ public class PlayMenu
    public PlayMenu(Sudoku SudokuBoard)
    {
 	  this.SudokuBoarda = SudokuBoard;
-	  
+   }
+   
+   public void startPlayMenu(final BackgroundJFrame f) {
+	   
       GridBagLayout gridbag = new GridBagLayout();
       GridBagConstraints c = new GridBagConstraints();
-      final BackgroundJFrame f=new BackgroundJFrame();
+      
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       f.setLayout(gridbag);
       c.fill =GridBagConstraints.BOTH;
@@ -62,9 +65,11 @@ public class PlayMenu
          {
             public void actionPerformed(ActionEvent event)
             {
-            	f.setVisible(false);
+            	f.getContentPane().removeAll();
+            	SwingUtilities.updateComponentTreeUI(f);
             	SudokuStore storage= new SudokuStore(); 
-            	MainMenu c = new MainMenu(SudokuBoarda);
+            	MainMenu mainMenu = new MainMenu(SudokuBoarda);
+            	mainMenu.startMainMenu(f);
             }
          });
       

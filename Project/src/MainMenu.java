@@ -25,25 +25,13 @@ public class MainMenu
 	
    {
 	  this.SudokuBoards = boards;
-	  try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            break;
-		        }
-		    }
-		} catch (UnsupportedLookAndFeelException e) {
-		    // handle exception
-		} catch (ClassNotFoundException e) {
-		    // handle exception
-		} catch (InstantiationException e) {
-		    // handle exception
-		} catch (IllegalAccessException e) {
-		    // handle exception
-		}
+   }
+	
+	public void startMainMenu(final BackgroundJFrame f) {
+		
       GridBagLayout gridbag = new GridBagLayout();
       GridBagConstraints c = new GridBagConstraints();
-      final BackgroundJFrame f=new BackgroundJFrame();
+ 
       f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       f.setLayout(gridbag);
       c.fill =GridBagConstraints.BOTH;
@@ -60,8 +48,10 @@ public class MainMenu
             public void actionPerformed(ActionEvent event)
             {
             	//Read difficulty from drop down menu, set difficulty = {1.2.3}
-            	f.setVisible(false);
+            	f.getContentPane().removeAll();
+            	SwingUtilities.updateComponentTreeUI(f);
             	PlayMenu p = new PlayMenu(SudokuBoards);
+            	p.startPlayMenu(f);
             }
          });
 
