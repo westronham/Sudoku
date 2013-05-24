@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class BackgroundJFrame extends JFrame {
 	public BackgroundJFrame() {
-		setTitle("Background Color for JFrame");
+		setTitle("Sudoku");
 		setSize(400,400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

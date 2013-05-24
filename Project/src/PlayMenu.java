@@ -100,14 +100,16 @@ public class PlayMenu
     	  for(int j = 0; j < 9; j++)
     	  {
     		  JTextField sudokuArea;
+    		  Font font;
     	      if (SudokuBoarda.getSudoku()[i][j] != 0) {
     	    	  sudokuArea = new JTextField(Integer.toString(SudokuBoarda.getSudoku()[i][j]));
         	      sudokuArea.setEditable(false);
+        	      font = new Font("Verdana", Font.BOLD, 12);
     	      } else {
     	    	  sudokuArea = new JTextField();
     	    	  sudokuArea.setEditable(true);
+    	    	  font = new Font("Verdana", Font.PLAIN, 12);
     	      }
-    	      Font font = new Font("Verdana", Font.BOLD, 12);
     	      sudokuArea.setFont(font);
     	      sudokuArea.setOpaque(true);
     	      sudokuArea.setHorizontalAlignment(JTextField.CENTER);
