@@ -28,7 +28,7 @@ public class BackgroundJFrame extends JFrame {
 		setVisible(true);
 		
 		setLayout(new BorderLayout());
-		setContentPane(new JLabel(new ImageIcon("C:\\Users\\Ron\\git\\Project\\Project\\image.jpg")));
+		setContentPane(new JLabel(new ImageIcon("C:\\Users\\Ron\\My Documents\\GitHub\\Project\\Project\\image.jpg")));
 		setLayout(new FlowLayout());
 		
 		setSize(400,400);
