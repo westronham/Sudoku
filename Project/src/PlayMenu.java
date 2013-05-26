@@ -51,7 +51,8 @@ public class PlayMenu
          {
             public void actionPerformed(ActionEvent event)
             {
-               
+              //Board resets but need to get the Sudoku grid to reprint
+            	SudokuBoarda.resetSudoku();
             }
          });
       
@@ -99,7 +100,8 @@ public class PlayMenu
                
             }
          });
-            
+           
+      
       for(int i = 0; i < 9; i++)
       {
     	  for(int j = 0; j < 9; j++)
