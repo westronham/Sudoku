@@ -51,7 +51,8 @@ public class PlayMenu
          {
             public void actionPerformed(ActionEvent event)
             {
-               
+              //Board resets but need to get the Sudoku grid to reprint
+            	SudokuBoarda.resetSudoku();
             }
          });
       
@@ -67,7 +68,6 @@ public class PlayMenu
             {
             	f.getContentPane().removeAll();
             	SwingUtilities.updateComponentTreeUI(f);
-            	SudokuStore storage= new SudokuStore(); 
             	MainMenu mainMenu = new MainMenu(SudokuBoarda);
             	mainMenu.startMainMenu(f);
             }
@@ -99,7 +99,8 @@ public class PlayMenu
                
             }
          });
-            
+           
+      
       for(int i = 0; i < 9; i++)
       {
     	  for(int j = 0; j < 9; j++)

@@ -34,7 +34,10 @@ public class Sudoku {
 		}
 		gridSize = sudoku.length;
 		gridBoxSize = (int)Math.sqrt(gridSize);
-		System.arraycopy(unsolvedSudoku, 0, sudoku, 0, gridSize);
+		for (int k = 0; k < gridSize; k++) {
+			sudoku[k] = unsolvedSudoku[k].clone();
+		}
+		//System.arraycopy(unsolvedSudoku, 0, sudoku, 0, gridSize);
 	}
 	
 	/*
@@ -151,12 +154,12 @@ public boolean solve() {
 	}
 	
 	/*
-	 * NOT WORKING YET
-	 * Pretty self-explanatory
-	 * If we want to start our sudoku again we just reload it with the default values
+	 * Got it working
 	 */
 	public void resetSudoku() {
-		System.arraycopy(unsolvedSudoku, 0, sudoku, 0, gridSize);
+		for (int k = 0; k < gridSize; k++) {
+			sudoku[k] = unsolvedSudoku[k].clone();
+		}
 	}
 	
 	public int[][] getSudoku() {
