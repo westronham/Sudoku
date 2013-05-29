@@ -188,7 +188,6 @@ public class PlayMenu {
 					@Override
 					public void keyPressed(KeyEvent arg0) {
 						if (!sudokuArea.getText().isEmpty() && sudokuArea.isEditable()) {
-							System.out.println(sudokuArea.getText());
 							sudokuArea.setText("");
 						}
 					}
