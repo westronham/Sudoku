@@ -14,25 +14,16 @@ public class testSudoku {
 		 * Get a bunch of sudoku boards
 		 */
 		   try { //Get sudoku based on diffuiculty (test with only 1, it will be "easy". We can replace this with an input class
-				Scanner scanner = new Scanner(new FileReader(args[0]));
+				Scanner scanner = new Scanner(new FileReader("input1.txt"));
 				int[] row = new int[100];
 				int i = 0;
 				while(scanner.hasNextInt()){
 				   row[i++] = scanner.nextInt();
 				}
 				scanner.close();
-			
-			
-			
-			Sudoku sudoku = new Sudoku();
-			sudoku.initSudoku(row);
-			
-			sudoku.printSudoku();
-			//sudoku.resetSudoku();
-			//SudokuStore storage= new SudokuStore(); 
-			//storage.setBoard(sudoku.getDifficulty(), sudoku); //Give easy (1) sudoku board Sudoku' to the storage class		
+
 			final BackgroundJFrame f=new BackgroundJFrame();
-			MainMenu mainMenu = new MainMenu(sudoku);
+			MainMenu mainMenu = new MainMenu();
 			mainMenu.startMainMenu(f);
 			} catch (FileNotFoundException e) {}
 	   }

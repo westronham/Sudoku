@@ -12,8 +12,8 @@
  */
 public class Sudoku {
 	public Sudoku () {
-		sudoku = new int[9][9];
 		unsolvedSudoku = new int[9][9];
+		solvedSudoku = new int[9][9];
 	}
 	
 	/*
@@ -24,30 +24,50 @@ public class Sudoku {
 	 * gridBoxSize - will always be 3
 	 * I'm trying to make a copy of the unsolved Sudoku so we can reload it if the user wants to restart but it's not working yet
 	 */
-	public void initSudoku(int[] coordinates) {
+	public void initSudoku(int[] coordinates, int difficulty) {
 		int row = 0;
+		this.difficulty = difficulty;
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 			unsolvedSudoku[j][i] = coordinates[j + (9 * row)];
 			}
 			row++;
 		}
-		gridSize = sudoku.length;
+		gridSize = unsolvedSudoku.length;
 		gridBoxSize = (int)Math.sqrt(gridSize);
-		for (int k = 0; k < gridSize; k++) {
-			sudoku[k] = unsolvedSudoku[k].clone();
-		}
+		
+		sudoku = cloneUnsolvedSudoku();
+		solvedSudoku = cloneUnsolvedSudoku();
+		
 		initConditionMatrices();
 		solve();
 	}
 	
+	public int[][] cloneUnsolvedSudoku (){
+		int[][] clonedSudoku = new int[9][9];
+		
+		for (int k = 0; k < gridSize; k++) {
+			clonedSudoku[k] = unsolvedSudoku[k].clone();
+		}
+		return clonedSudoku;
+	}
+	
 	/*
-	 * Simply prints the Sudoku
+	 * Simply prints the Sudoku. Used for debugging.
 	 */
 	public void printSudoku() {
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
 				System.out.print(sudoku[j][i] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public void printSolvedSudoku() {
+		for (int i = 0; i < gridSize; i++) {
+			for (int j = 0; j < gridSize; j++) {
+				System.out.print(solvedSudoku[j][i] + " ");
 			}
 			System.out.println();
 		}
@@ -117,12 +137,12 @@ public boolean solve() {
 	            return true;
 	        }
 	    }
-	    if(sudoku[i][j] != 0) {
+	    if(solvedSudoku[i][j] != 0) {
 	        return solve(i + 1, j);
 	    }
 	    for(int value = 1; value <= gridSize; value++) {
 	        if(isValid(i, j, value)) {
-	            sudoku[i][j] = value;
+	        	solvedSudoku[i][j] = value;
 	            setValueConditions(i, j, value, true);
 	            if(solve(i + 1, j)) {
 	                return true;
@@ -130,7 +150,7 @@ public boolean solve() {
 	            setValueConditions(i, j, value, false);
 	        }
 	    }
-	    sudoku[i][j] = 0;
+	    solvedSudoku[i][j] = 0;
 	    return false;
 	}
 
@@ -163,13 +183,42 @@ public boolean solve() {
 		}
 	}
 	
-	public int[][] getSudoku() {
+	//set check that it is a [9][9] array
+	public void setSudoku(int[][] board) {
+		sudoku = board;
+	}
+	
+	public boolean checkBoard(){
+		for(int i = 0; i < 9; i++)
+        {
+      	  for(int j = 0; j < 9; j++)
+      	  {
+      		 if(!(sudoku[i][j] == solvedSudoku[i][j])){
+      			return false;
+      		 }
+      	  }
+        }
+		
+		return true;
+	}
+	
+	public int[][] getPlayerSudoku() {
 		return sudoku;
 	}
 	
+	public int[][] getSolvedSudoku() {
+		return solvedSudoku;
+	}
 	
-	private int[][] sudoku;
-	private int[][] unsolvedSudoku;
+	public int getDifficulty() {
+		return difficulty;
+	}
+	
+	
+	private int difficulty;
+	private int[][] sudoku; 		//the player's board everytime it is updated
+	private int[][] unsolvedSudoku; //the original default board
+	private int[][] solvedSudoku;   //the correct, solved board
 	private int gridSize;
 	private int gridBoxSize;
 	private boolean rowMatrix[][];
