@@ -5,6 +5,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 
 
 /*TODO: We need to restrict input to jTextArea to numbers only
@@ -128,7 +130,7 @@ public class PlayMenu {
 		hintButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					doc.setDocumentFilter(null);
+					doc.setDocumentFilter(new DocumentFilter());
 					int randomNum = (new Random ()).nextInt(8) + 1;
 					while(hintSystem.doneNumber(randomNum)) {
 						randomNum = (new Random ()).nextInt(8) + 1;
@@ -190,10 +192,11 @@ public class PlayMenu {
 
 					@Override
 					public void keyReleased(KeyEvent arg0) {
-						/*if (!sudokuArea.getText().isEmpty()) {
+						if (!sudokuArea.getText().isEmpty()) {
 							System.out.println(sudokuArea.getText());
+							sudokuArea.setText("");
 							sudokuArea.setText(Character.toString(arg0.getKeyChar()));
-						}*/
+						}
 						updateUserSudoku();
 					}
 

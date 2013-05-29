@@ -21,7 +21,7 @@ public class SudokuBoard extends JPanel {
         public static class BoardPart extends JPanel {
 
             public BoardPart(int j) {
-                setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 setLayout(new GridLayout(3, 3));
                 JTextField boxCell[] = new JTextField[9];
                 int boxCol = getBoxColCoordinate(j);

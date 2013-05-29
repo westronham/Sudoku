@@ -4,17 +4,20 @@ import java.util.regex.*;
 
 public class InputLimiter extends DocumentFilter {
     public InputLimiter() {
-        maxChars = 1;
+        maxChars = 2;
     }
     
     public void replace(FilterBypass fb, int offs, int length, String str, AttributeSet a)
         throws BadLocationException {
     	    
     		Pattern validDigits = Pattern.compile("\\d");
+    		Pattern emptySpace = Pattern.compile("");
     	    Matcher digitMatcher = validDigits.matcher(str); 
+    	    Matcher emptyMatcher = emptySpace.matcher(str);
     	    boolean isDigit = digitMatcher.matches();
+    	    boolean isEmpty = emptyMatcher.matches();
     	    
-    		if(isDigit)
+    		if(isDigit || isEmpty)
     			if ((fb.getDocument().getLength() + str.length()) <= maxChars)
         			super.replace(fb, offs, length, str, a);
         		else
