@@ -26,12 +26,12 @@ public class testSudoku {
 			
 			Sudoku sudoku = new Sudoku();
 			sudoku.initSudoku(row);
-			sudoku.initConditionMatrices();
-			sudoku.solve();
+			
+			
 			sudoku.printSudoku();
 			//sudoku.resetSudoku();
-			//SudokuStore storage= new SudokuStore(); 
-			//storage.setBoard(sudoku.getDifficulty(), sudoku); //Give easy (1) sudoku board Sudoku' to the storage class		
+
+			
 			final BackgroundJFrame f=new BackgroundJFrame();
 			MainMenu mainMenu = new MainMenu(sudoku);
 			mainMenu.startMainMenu(f);
