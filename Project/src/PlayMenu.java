@@ -187,16 +187,14 @@ public class PlayMenu {
 
 					@Override
 					public void keyPressed(KeyEvent arg0) {
-
+						if (!sudokuArea.getText().isEmpty() && sudokuArea.isEditable()) {
+							System.out.println(sudokuArea.getText());
+							sudokuArea.setText("");
+						}
 					}
 
 					@Override
 					public void keyReleased(KeyEvent arg0) {
-						if (!sudokuArea.getText().isEmpty()) {
-							System.out.println(sudokuArea.getText());
-							sudokuArea.setText("");
-							sudokuArea.setText(Character.toString(arg0.getKeyChar()));
-						}
 						updateUserSudoku();
 					}
 
@@ -204,22 +202,6 @@ public class PlayMenu {
 					public void keyTyped(KeyEvent arg0) {
 						
 					}
-				});
-				sudokuArea.addFocusListener(new
-						FocusListener() {
-
-							@Override
-							public void focusGained(FocusEvent arg0) {
-								sudokuArea.selectAll();
-								
-							}
-
-							@Override
-							public void focusLost(FocusEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-							
 				});
 			}
 		}
