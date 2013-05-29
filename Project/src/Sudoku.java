@@ -12,7 +12,7 @@
  */
 public class Sudoku {
 	public Sudoku () {
-		solvedSudoku = new int[9][9];
+		sudoku = new int[9][9];
 		unsolvedSudoku = new int[9][9];
 	}
 	
@@ -32,10 +32,11 @@ public class Sudoku {
 			}
 			row++;
 		}
-		gridSize = unsolvedSudoku.length;
+		gridSize = sudoku.length;
 		gridBoxSize = (int)Math.sqrt(gridSize);
-		sudoku = cloneUnsolvedSudoku();
-		
+		for (int k = 0; k < gridSize; k++) {
+			sudoku[k] = unsolvedSudoku[k].clone();
+		}
 		initConditionMatrices();
 		solve();
 	}
@@ -162,46 +163,13 @@ public boolean solve() {
 		}
 	}
 	
-	public int[][] cloneUnsolvedSudoku (){
-		int[][] clonedSudoku = new int[9][9];
-		
-		for (int k = 0; k < gridSize; k++) {
-			clonedSudoku[k] = unsolvedSudoku[k].clone();
-		}
-		return clonedSudoku;
-	}
-	
-	public int[][] getPlayerSudoku() {
+	public int[][] getSudoku() {
 		return sudoku;
 	}
-	
-	public int[][] getSolvedSudoku() {
-		return solvedSudoku;
-	}
-	
-	//set check that it is a [9][9] array
-		public void setSudoku(int[][] board) {
-			sudoku = board;
-		}
-		
-		public boolean checkBoard(){
-			for(int i = 0; i < 9; i++)
-	        {
-	      	  for(int j = 0; j < 9; j++)
-	      	  {
-	      		 if(!(sudoku[i][j] == solvedSudoku[i][j])){
-	      			return false;
-	      		 }
-	      	  }
-	        }
-			
-			return true;
-		}
 	
 	
 	private int[][] sudoku;
 	private int[][] unsolvedSudoku;
-	private int[][] solvedSudoku;
 	private int gridSize;
 	private int gridBoxSize;
 	private boolean rowMatrix[][];
