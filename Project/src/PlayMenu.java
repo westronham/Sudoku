@@ -31,6 +31,11 @@ public class PlayMenu {
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		  
+		//start a new thread
+	      Timer gameTimer = new Timer();
+	      Thread timeThread = new Thread(gameTimer);
+	      timeThread.start();
+		
 		f.setLayout(gridbag);
 		c.fill = GridBagConstraints.BOTH;
 		  
@@ -40,6 +45,7 @@ public class PlayMenu {
 		this.checkButton(f, c);
 		this.hintButton(f, c);
 		this.sudokuBoard(f, c);
+		//this.showTimer(f, c);
 		  
 		f.setSize(620,600);
 		f.setVisible(true);
@@ -70,7 +76,6 @@ public class PlayMenu {
 		instructionButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					//Board resets but need to get the Sudoku grid to reprint
 					sudokuBoard.resetSudoku();
 					f.getContentPane().removeAll();
 					SwingUtilities.updateComponentTreeUI(f);
@@ -206,15 +211,32 @@ public class PlayMenu {
 		}
 	}
 	
+	private void showTimer(BackgroundJFrame f, GridBagConstraints c) {
+		JLabel timeLabel = new JLabel();
+		timeLabel.setText("Time:" + Timer.time);
+		c.gridx = 9;
+		c.gridwidth = 3;
+		f.add(timeLabel, c);
+	}
+	
 	private void updateUserSudoku() {
+		int count = 0;
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
 				if (listOfJTextAreaEntries[i][j].getText().trim().isEmpty()) {
 					sudokuBoard.getPlayerSudoku()[i][j] = 0;
+					count++;
 				} else {
 					sudokuBoard.getPlayerSudoku()[i][j] = new Integer(listOfJTextAreaEntries[i][j].getText());
 				}
 			}
+		}
+		if (count == 0) {
+			//Check to see if Sudoku is correct
+				//if yes go to victory screen
+				VictoryGUI victory = new VictoryGUI();
+				victory.startVictoryGUI();
+				//if no bring up a popup that says how many mistakes there are
 		}
 		sudokuBoard.printSudoku();
 		System.out.println();
