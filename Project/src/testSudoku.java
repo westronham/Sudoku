@@ -26,8 +26,7 @@ public class testSudoku {
 			
 			Sudoku sudoku = new Sudoku();
 			sudoku.initSudoku(row);
-			sudoku.initConditionMatrices();
-			sudoku.solve();
+			
 			sudoku.printSudoku();
 			//sudoku.resetSudoku();
 			//SudokuStore storage= new SudokuStore(); 

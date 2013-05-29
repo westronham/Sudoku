@@ -37,7 +37,8 @@ public class Sudoku {
 		for (int k = 0; k < gridSize; k++) {
 			sudoku[k] = unsolvedSudoku[k].clone();
 		}
-		//System.arraycopy(unsolvedSudoku, 0, sudoku, 0, gridSize);
+		initConditionMatrices();
+		solve();
 	}
 	
 	/*

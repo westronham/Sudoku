@@ -55,7 +55,7 @@ public class MainMenu
             }
          });
 
-      String[] options = {"Difficulty", "Easy", "Normal", "Hard"};
+      String[] options = {"Choose Difficulty", "Easy", "Normal", "Hard"};
       JComboBox modeCombo = new JComboBox(options);
       c.gridx = 1;
       c.gridy = 0;
