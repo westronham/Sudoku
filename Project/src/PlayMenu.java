@@ -199,7 +199,7 @@ public class PlayMenu {
 
 					@Override
 					public void keyReleased(KeyEvent arg0) {
-						updateUserSudoku();
+						updateUserSudoku(f);
 					}
 
 					@Override
@@ -219,7 +219,7 @@ public class PlayMenu {
 		f.add(timeLabel, c);
 	}
 	
-	private void updateUserSudoku() {
+	private void updateUserSudoku(BackgroundJFrame f) {
 		int count = 0;
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
@@ -232,13 +232,28 @@ public class PlayMenu {
 			}
 		}
 		if (count == 0) {
-			//Check to see if Sudoku is correct
-				//if yes go to victory screen
+			System.out.println(this.isCorrect());
+			if (this.isCorrect() == 0) {
 				VictoryGUI victory = new VictoryGUI();
-				victory.startVictoryGUI();
-				//if no bring up a popup that says how many mistakes there are
+				victory.startVictoryGUI(f);
+			} else {
+				JOptionPane.showMessageDialog
+				(null,"Incorrect: There are " + this.isCorrect() + " mistakes", "Incorrect Solution", JOptionPane.PLAIN_MESSAGE);
+			}
 		}
 		sudokuBoard.printSudoku();
 		System.out.println();
+	}
+	
+	private int isCorrect() {
+		int mistakes = 0;
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (sudokuBoard.getPlayerSudoku()[i][j] != sudokuBoard.getSolvedSudoku()[i][j]) {
+					mistakes++;
+				}
+			}
+		}
+		return mistakes;
 	}
 }

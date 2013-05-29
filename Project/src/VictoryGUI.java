@@ -24,11 +24,11 @@ public class VictoryGUI {
 
    }
    
-   public void startVictoryGUI () {
+   public void startVictoryGUI (final BackgroundJFrame f) {
 	   
       GridBagLayout gridbag = new GridBagLayout();
       GridBagConstraints c = new GridBagConstraints();
-      VictoryFrame vFrame = new VictoryFrame();
+      final VictoryFrame vFrame = new VictoryFrame();
       
       vFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       vFrame.setLayout(gridbag);
@@ -67,7 +67,15 @@ public class VictoryGUI {
          {
             public void actionPerformed(ActionEvent event)
             {
-            	
+            	if (difficulty < 3) {
+					difficulty++;
+            	}
+            		sudokuFile = importer.readSudoku(difficulty);
+					sudoku.initSudoku(sudokuFile, difficulty);
+					f.getContentPane().removeAll();
+					SwingUtilities.updateComponentTreeUI(f);
+					PlayMenu p = new PlayMenu(sudoku);
+					p.startPlayMenu(f);
             }
          });
            
@@ -80,7 +88,11 @@ public class VictoryGUI {
          {
             public void actionPerformed(ActionEvent event)
             {
-            	
+            	vFrame.dispose();
+            	f.getContentPane().removeAll();
+				SwingUtilities.updateComponentTreeUI(f);
+				MainMenu mainMenu = new MainMenu();
+				mainMenu.startMainMenu(f);
             }
          });
       vFrame.setSize(800,150);
