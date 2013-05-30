@@ -58,7 +58,7 @@ public class Sudoku {
 	public void printSudoku() {
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				System.out.print(solvedSudoku[j][i] + " ");
+				System.out.print(sudoku[j][i] + " ");
 			}
 			System.out.println();
 		}

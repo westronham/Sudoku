@@ -21,6 +21,7 @@ public class BackgroundJFrame extends JFrame {
 		    // handle exception
 		}
 		
+		//this.backgroundFile = backgroundFile;
 		setTitle("Sudoku");
 		setSize(400,400);
 		setLocationRelativeTo(null);
@@ -29,9 +30,14 @@ public class BackgroundJFrame extends JFrame {
 		setVisible(true);
 		
 		setLayout(new BorderLayout());
-		setContentPane(new JLabel(new ImageIcon("image.jpg")));
+		setContentPane(new JLabel(new ImageIcon("image3.jpg")));
 		setLayout(new FlowLayout());
 		
 		setSize(400,400);
 	}
+	
+	public void setBackgroundImage(String backgroundFile) {
+		setContentPane(new JLabel(new ImageIcon(backgroundFile)));
+	}
+
 }
