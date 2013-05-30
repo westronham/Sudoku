@@ -192,7 +192,8 @@ public class PlayMenu {
 
 					@Override
 					public void keyPressed(KeyEvent arg0) {
-						if (!sudokuArea.getText().isEmpty() && sudokuArea.isEditable()) {
+						int keyCode = arg0.getKeyChar();
+						if (!sudokuArea.getText().isEmpty() && sudokuArea.isEditable() && keyCode <= 57 && keyCode >= 49) {
 							sudokuArea.setText("");
 						}
 					}
