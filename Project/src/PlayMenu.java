@@ -20,14 +20,21 @@ public class PlayMenu {
 	private JTextField[][] listOfJTextAreaEntries;
 	private HintSystem hintSystem;
 	AbstractDocument doc;
+	int difficulty;
+	private SudokuImporter importer;
+  	int[] sudokuFile;
 	
-	public PlayMenu(Sudoku SudokuBoard) {
+	public PlayMenu(Sudoku SudokuBoard, int difficulty) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
 		this.hintSystem = new HintSystem(SudokuBoard);
+		this.difficulty = difficulty;
+		importer = new SudokuImporter();
+		sudokuFile = new int[81];
 	}
    
 	public void startPlayMenu(final BackgroundJFrame f) {
+		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		  
@@ -79,7 +86,7 @@ public class PlayMenu {
 					sudokuBoard.resetSudoku();
 					f.getContentPane().removeAll();
 					SwingUtilities.updateComponentTreeUI(f);
-					PlayMenu p = new PlayMenu(sudokuBoard);
+					PlayMenu p = new PlayMenu(sudokuBoard, difficulty);
 					p.startPlayMenu(f);
 				}
 		});
@@ -110,20 +117,24 @@ public class PlayMenu {
 		f.add(checkButton, c);
 		checkButton.addActionListener(new
 			ActionListener() {
-				public void actionPerformed(ActionEvent event) {
-					int[][] saveBoard = new int[9][9]; 
-					for(int i = 0; i < 9; i++) {
-						for(int j = 0; j < 9; j++) {
-							saveBoard[i][j] = new Integer(listOfJTextAreaEntries[i][j].getText());//given that the user input is only one integer between 0 and 10
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int mistakes = checkProgress();
+					if (mistakes == 0) {
+						JOptionPane.showMessageDialog
+        				(null,"All correct so far", null, JOptionPane.PLAIN_MESSAGE);
+					} else {
+						if (mistakes == 1) {
+							JOptionPane.showMessageDialog
+							(null,"Incorrect: There is " + mistakes + " mistake so far", "Incorrect Solution", JOptionPane.PLAIN_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog
+							(null,"Incorrect: There are " + mistakes + " mistakes so far", "Incorrect Solution", JOptionPane.PLAIN_MESSAGE);
 						}
 					}
-					sudokuBoard.setSudoku(saveBoard);
-					if(sudokuBoard.checkBoard()) {
-						System.out.println("Board is correct!"); //What happens if it is correct
-					} else {
-						System.out.println("Board is wrong!");
-					}
+					
 				}
+				
 		});
 	}
       
@@ -135,18 +146,7 @@ public class PlayMenu {
 		hintButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					doc.setDocumentFilter(new DocumentFilter());
-					int randomNum = (new Random ()).nextInt(8) + 1;
-					while(hintSystem.doneNumber(randomNum)) {
-						randomNum = (new Random ()).nextInt(8) + 1;
-					}        	
-					hintSystem.getHint(sudokuBoard, randomNum);
-					for(int i = 0; i < 9; i++) {
-						for(int j = 0; j < 9; j++) {
-							if(sudokuBoard.getPlayerSudoku()[i][j] != 0)
-								listOfJTextAreaEntries[i][j].setText(String.valueOf(sudokuBoard.getPlayerSudoku()[i][j]));
-						}
-					}
+					hintSystem.getHint(sudokuBoard);
 				}
 		});
 	}
@@ -232,13 +232,42 @@ public class PlayMenu {
 			}
 		}
 		if (count == 0) {
-			System.out.println(this.isCorrect());
-			if (this.isCorrect() == 0) {
-				VictoryGUI victory = new VictoryGUI();
-				victory.startVictoryGUI(f);
+			int mistakes = this.isCorrect();
+			if (mistakes == 0) {
+				ImageIcon icon = new ImageIcon("icon.gif");
+				int query = JOptionPane.showConfirmDialog (null, 
+                        "<html><font size=\"20\" face" +
+                        "=\"Papyrus\">Congratulations!</font><br><font size=\"10\" face" +
+                        "=\"Papyrus\">Would you like to start a new game?</font></html>", 
+                        "You Win", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        icon);
+				 if (query == JOptionPane.YES_OPTION){
+					 sudokuFile = importer.readSudoku(difficulty);
+						sudokuBoard.initSudoku(sudokuFile, difficulty);
+						f.getContentPane().removeAll();
+						SwingUtilities.updateComponentTreeUI(f);
+						PlayMenu p = new PlayMenu(sudokuBoard, difficulty);
+						p.startPlayMenu(f);
+				 } else if (query == JOptionPane.NO_OPTION) {
+				     f.getContentPane().removeAll();
+				     SwingUtilities.updateComponentTreeUI(f);
+				     MainMenu mainMenu = new MainMenu();
+				     mainMenu.startMainMenu(f);
+				 }
+				 
+				
+				//VictoryGUI victory = new VictoryGUI();
+				//victory.startVictoryGUI(f);
 			} else {
-				JOptionPane.showMessageDialog
-				(null,"Incorrect: There are " + this.isCorrect() + " mistakes", "Incorrect Solution", JOptionPane.PLAIN_MESSAGE);
+				if (mistakes == 1) {
+					JOptionPane.showMessageDialog
+					(null,"Incorrect: There is " + mistakes + " mistake", "Incorrect Solution", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog
+					(null,"Incorrect: There are " + mistakes + " mistakes", "Incorrect Solution", JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		}
 		sudokuBoard.printSudoku();
@@ -251,6 +280,20 @@ public class PlayMenu {
 			for (int j = 0; j < 9; j++) {
 				if (sudokuBoard.getPlayerSudoku()[i][j] != sudokuBoard.getSolvedSudoku()[i][j]) {
 					mistakes++;
+				}
+			}
+		}
+		return mistakes;
+	}
+	
+	private int checkProgress() {
+		int mistakes = 0;
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (sudokuBoard.getPlayerSudoku()[i][j] != 0) {
+					if (sudokuBoard.getPlayerSudoku()[i][j] != sudokuBoard.getSolvedSudoku()[i][j]) {
+						mistakes++;
+					}
 				}
 			}
 		}

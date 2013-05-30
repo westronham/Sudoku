@@ -19,6 +19,7 @@ public class MainMenu {
   	private SudokuImporter importer;
   	int[] sudokuFile;
   	private Sudoku sudoku;
+  	private JLabel error;
 	
 	public MainMenu() {
 		//Need to choose a board based on selected difficulty, not becasue we're passing from main
@@ -28,29 +29,33 @@ public class MainMenu {
 		sudoku = new Sudoku();
 	}
 	
-	public void startMainMenu(final BackgroundJFrame f) {	
+	public void startMainMenu(final BackgroundJFrame f) {
+		f.setBackgroundImage("image3.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(gridbag);
 		
-		c.fill =GridBagConstraints.BOTH;
-		      
+		c.fill = GridBagConstraints.BOTH;
+		
+		this.errorMessage(f, c);
 		this.playButton(f, c);
 		this.difficultyOptions(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
 		
 		f.setSize(620,600);
+		//f.pack();
 		f.setVisible(true);
 	}
       
-	private void playButton(final BackgroundJFrame f, GridBagConstraints c) {
+	private void playButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Play Sudoku");
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = 1;
 		c.ipady = 10;
+		c.gridwidth = 1;
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -61,21 +66,36 @@ public class MainMenu {
 						sudoku.initSudoku(sudokuFile, difficulty);
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
-						PlayMenu p = new PlayMenu(sudoku);
+						PlayMenu p = new PlayMenu(sudoku, difficulty);
 						p.startPlayMenu(f);
 					} else {
-						JOptionPane.showMessageDialog
-        				(null,"Please choose a difficulty", "No Difficulty Selected", JOptionPane.PLAIN_MESSAGE);
+						error.setVisible(true);
+							
+						//JOptionPane.showMessageDialog
+        				//(null,"Please choose a difficulty", "No Difficulty Selected", JOptionPane.PLAIN_MESSAGE);
 					}
 				}
 		});
+	}
+	
+	private void errorMessage(BackgroundJFrame f, GridBagConstraints c) {
+		Font font = new Font("Papyrus", Font.BOLD, 14);
+		error = new JLabel("Please select a difficulty from the drop down menu");
+		error.setFont(font);
+		error.setForeground(Color.red);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 2;
+		f.getContentPane().add(error, c);
+		error.setVisible(false);
+		SwingUtilities.updateComponentTreeUI(f);
 	}
 
 	private void difficultyOptions(final BackgroundJFrame f, GridBagConstraints c) {
 		String[] options = {"Choose Difficulty", "Easy", "Normal", "Hard"};
 		final JComboBox modeCombo = new JComboBox(options);
 		c.gridx = 1;
-		c.gridy = 0;
+		c.gridy = 1;
 		c.ipady = 0;
 		f.add(modeCombo, c);
 		modeCombo.addActionListener(new
@@ -85,14 +105,17 @@ public class MainMenu {
 						switch (s) {
 						case "Easy":
 							difficulty = 1;
+							error.setVisible(false);
 							System.out.println("Easy Difficulty selected, difficulty: " + difficulty);
 							break;
 						case "Normal":
 							difficulty = 2;
+							error.setVisible(false);
 							System.out.println("Normal Difficulty selected, difficulty: " + difficulty);
 							break;
 						case "Hard":
 							difficulty = 3;
+							error.setVisible(false);
 							System.out.println("Hard Difficulty selected, difficulty: " + difficulty);
 							break;
 						default:
@@ -107,13 +130,16 @@ public class MainMenu {
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Instruction");
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.insets = new Insets(10,0,0,0);
 		f.add(instructionButton, c);
 		instructionButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					
+					f.getContentPane().removeAll();
+					SwingUtilities.updateComponentTreeUI(f);
+					InstructionsPage instructions = new InstructionsPage();
+					instructions.startInstructionsPage(f);
 				}
 		});
 	}
@@ -121,7 +147,7 @@ public class MainMenu {
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {

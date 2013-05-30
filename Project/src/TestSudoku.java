@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class testSudoku {
+public class TestSudoku {
 
 	/**
 	 * @param args
