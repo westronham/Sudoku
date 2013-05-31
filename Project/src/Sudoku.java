@@ -121,6 +121,18 @@ public class Sudoku implements Serializable {
 	    boxMatrixUser[findBoxNum(i, j)][value - 1] = exists;
 	}
 	
+	public void setRowUserValueConditions(int i, int j, int value, boolean exists) {
+		rowMatrixUser[i][value - 1] = exists;
+	}
+	
+	public void setColUserValueConditions(int i, int j, int value, boolean exists) {
+		colMatrixUser[j][value - 1] = exists;
+	}
+	
+	public void setBoxUserValueConditions(int i, int j, int value, boolean exists) {
+		boxMatrixUser[findBoxNum(i, j)][value - 1] = exists;
+	}
+	
 	public boolean checkColUserValueConditions(int i, int j, int value) {
 		if (rowMatrixUser[i][value - 1] == true) {
 			return true;
@@ -202,7 +214,7 @@ public boolean solve() {
 /*
  * Quick method for calculating which box any coordinate is in
  */
-	private int findBoxNum(int i, int j) {
+	public int findBoxNum(int i, int j) {
 	    int boxRow = i / gridBoxSize;
 	    int boxCol = j / gridBoxSize;
 	    return (boxRow * gridBoxSize) + boxCol;

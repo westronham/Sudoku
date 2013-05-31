@@ -342,47 +342,130 @@ public class PlayMenu implements Serializable {
 		int count = 0;
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
+				int userValue = sudokuBoard.getPlayerSudoku()[i][j];
+				int textValue;
+				if (listOfJTextAreaEntries[i][j].getText().isEmpty()) {
+					textValue = 0;
+				} else {
+					textValue = Integer.parseInt(listOfJTextAreaEntries[i][j].getText());
+				}
 				if (listOfJTextAreaEntries[i][j].getText().trim().isEmpty()) {
 					if (sudokuBoard.getPlayerSudoku()[i][j] != 0) {
-						//Only if there aren't any others in the area
-						//sudokuBoard.setUserValueConditions(i, j, sudokuBoard.getPlayerSudoku()[i][j], false);
-						System.out.println("Shiiit");
-						System.out.println(sudokuBoard.getPlayerSudoku()[i][j]);
-					}
-				} else {
-					int userValue = sudokuBoard.getPlayerSudoku()[i][j];
-					int textValue = Integer.parseInt(listOfJTextAreaEntries[i][j].getText());
-					if (userValue != textValue) {
-						System.out.println("pleeeasse");
-						if (userValue != 0) {
-							sudokuBoard.setUserValueConditions(i, j, userValue, false);
-							System.out.println("var");
+						listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+						int rowCount = 0;
+						int colCount = 0;
+						int boxCount = 0;
+						for (int l = 0; l < 9; l++) {
+							if (listOfJTextAreaEntries[l][j].getText().compareTo(Integer.toString(userValue)) == 0) {
+								rowCount++;
+							}
+							if (listOfJTextAreaEntries[i][l].getText().compareTo(Integer.toString(userValue)) == 0) {
+								colCount++;
+							}
 						}
-						if (sudokuBoard.checkRowUserValueConditions(i, j, textValue) == true) {
-							//go through the row (i) and highlight the matching textValues
-							System.out.println("weeee");
-							for (int k = 0; k < 9; k++) {
-								System.out.println(listOfJTextAreaEntries[k][j].getText() + " vs " + textValue);
-								if (listOfJTextAreaEntries[k][j].getText().compareTo(Integer.toString(textValue)) == 0) {
-									System.out.println("french");
-									listOfJTextAreaEntries[k][j].setBackground(Color.RED);
+						int row = SudokuBoard.getBoxRowCoordinate(sudokuBoard.findBoxNum(i, j));
+						int col = SudokuBoard.getBoxColCoordinate(sudokuBoard.findBoxNum(i, j));
+						for (int r = row; r < row + 3; r++) {
+							for (int c = col; c < col + 3; c++) {
+								if (listOfJTextAreaEntries[r][c].getText().compareTo(Integer.toString(userValue)) == 0) {
+									boxCount++;
 								}
 							}
 						}
+						if (rowCount == 0) {
+							sudokuBoard.setRowUserValueConditions(i, j, userValue, false);
+						} else if (rowCount == 1) {
+							//make the other box turn white
+						}
+						if (colCount == 0) {
+							sudokuBoard.setColUserValueConditions(i, j, userValue, false);
+						} else if (colCount == 1) {
+							//make the other box turn white
+						}
+						if (boxCount == 0) {
+							sudokuBoard.setBoxUserValueConditions(i, j, userValue, false);
+						} else if (boxCount == 1) {
+							//make the other box turn white
+						}
+					}
+				} else {
+					if (userValue != textValue) {
+						listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+						if (userValue != 0) {
+							int rowCount = 0;
+							int colCount = 0;
+							int boxCount = 0;
+							for (int l = 0; l < 9; l++) {
+								if (listOfJTextAreaEntries[l][j].getText().compareTo(Integer.toString(userValue)) == 0) {
+									rowCount++;
+								}
+								if (listOfJTextAreaEntries[i][l].getText().compareTo(Integer.toString(userValue)) == 0) {
+									colCount++;
+								}
+							}
+							int row = SudokuBoard.getBoxRowCoordinate(sudokuBoard.findBoxNum(i, j));
+							int col = SudokuBoard.getBoxColCoordinate(sudokuBoard.findBoxNum(i, j));
+							for (int r = row; r < row + 3; r++) {
+								for (int c = col; c < col + 3; c++) {
+									if (listOfJTextAreaEntries[r][c].getText().compareTo(Integer.toString(userValue)) == 0) {
+										boxCount++;
+									}
+								}
+							}
+							if (rowCount == 0) {
+								sudokuBoard.setRowUserValueConditions(i, j, userValue, false);
+								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+							} else if (rowCount == 1) {
+								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+								//make the other box turn white
+							}
+							if (colCount == 0) {
+								sudokuBoard.setColUserValueConditions(i, j, userValue, false);
+								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+							} else if (colCount == 1) {
+								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+								//make the other box turn white
+							}
+							if (boxCount == 0) {
+								sudokuBoard.setBoxUserValueConditions(i, j, userValue, false);
+								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+							} else if (boxCount == 1) {
+								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
+								//make the other box turn white
+							}
+						}
+						if (sudokuBoard.checkRowUserValueConditions(i, j, textValue) == true) {
+							for (int k = 0; k < 9; k++) {
+								if (listOfJTextAreaEntries[k][j].getText().compareTo(Integer.toString(textValue)) == 0) {
+									listOfJTextAreaEntries[k][j].setBackground(Color.RED);
+								}
+							}
+						} else {
+							sudokuBoard.setRowUserValueConditions(i, j, textValue, true);
+						}
 						if (sudokuBoard.checkColUserValueConditions(i, j, textValue) == true) {
-							//go through the col (j) and highlight the matching textValues
-							System.out.println("ffs");
+							for (int k = 0; k < 9; k++) {
+								if (listOfJTextAreaEntries[i][k].getText().compareTo(Integer.toString(textValue)) == 0) {
+									listOfJTextAreaEntries[i][k].setBackground(Color.RED);
+								}
+							}
+						} else {
+							sudokuBoard.setColUserValueConditions(i, j, textValue, true);
 						}
 						if (sudokuBoard.checkBoxUserValueConditions(i, j, textValue) == true) {
-							//go through the gridbox (checkGridBox method) and highlight the matching textValues
-							System.out.println("sup");
-						} 
-						if (sudokuBoard.checkRowUserValueConditions(i, j, textValue) == false && 
-							sudokuBoard.checkColUserValueConditions(i, j, textValue) == false &&
-							sudokuBoard.checkBoxUserValueConditions(i, j, textValue) == false) {
-								sudokuBoard.setUserValueConditions(i, j, textValue, true);
-								System.out.println("pab");
+							int row = SudokuBoard.getBoxRowCoordinate(sudokuBoard.findBoxNum(i, j));
+							int col = SudokuBoard.getBoxColCoordinate(sudokuBoard.findBoxNum(i, j));
+							for (int r = row; r < row + 3; r++) {
+								for (int c = col; c < col + 3; c++) {
+									if (listOfJTextAreaEntries[r][c].getText().compareTo(Integer.toString(textValue)) == 0) {
+										listOfJTextAreaEntries[r][c].setBackground(Color.RED);
+									}
+								}
+							}
+						} else {
+							sudokuBoard.setBoxUserValueConditions(i, j, textValue, true);
 						}
+						
 					}
 				}
 				if (listOfJTextAreaEntries[i][j].getText().trim().isEmpty()) {
