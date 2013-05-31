@@ -43,11 +43,6 @@ public class PlayMenu implements Serializable {
 		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
-		  
-		//start a new thread
-	      Timer gameTimer = new Timer();
-	      Thread timeThread = new Thread(gameTimer);
-	      timeThread.start();
 		
 		f.setLayout(gridbag);
 		c.fill = GridBagConstraints.BOTH;
@@ -60,7 +55,7 @@ public class PlayMenu implements Serializable {
 		this.hintButton(f, c);
 		this.sudokuBoard(f, c);
 		this.checkBox(f, c);
-		//this.showTimer(f, c);
+		this.showTimer(f, c);
 		  
 		f.setSize(720,700);
 		f.setVisible(true);
@@ -259,11 +254,9 @@ public class PlayMenu implements Serializable {
 	}
 	
 	private void showTimer(BackgroundJFrame f, GridBagConstraints c) {
-		JLabel timeLabel = new JLabel();
-		timeLabel.setText("Time:" + Timer.time);
-		c.gridx = 9;
-		c.gridwidth = 3;
-		f.add(timeLabel, c);
+		//start a new thread
+		Timer gameTimer = new Timer(f, c);
+		gameTimer.start();
 	}
 	
 	private void checkBox(BackgroundJFrame f, GridBagConstraints c) {
