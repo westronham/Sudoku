@@ -62,7 +62,7 @@ public class PlayMenu implements Serializable {
 		this.checkBox(f, c);
 		//this.showTimer(f, c);
 		  
-		f.setSize(620,600);
+		f.setSize(720,700);
 		f.setVisible(true);
 	}
       

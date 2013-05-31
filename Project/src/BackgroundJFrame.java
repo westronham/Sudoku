@@ -30,10 +30,10 @@ public class BackgroundJFrame extends JFrame {
 		setVisible(true);
 		
 		setLayout(new BorderLayout());
-		setContentPane(new JLabel(new ImageIcon("image3.jpg")));
+		setContentPane(new JLabel(new ImageIcon("image4.jpg")));
 		setLayout(new FlowLayout());
 		
-		setSize(400,400);
+		setSize(620,600);
 	}
 	
 	public void setBackgroundImage(String backgroundFile) {

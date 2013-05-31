@@ -22,7 +22,7 @@ public class InstructionsPage {
 		this.instructionPanel(f, c);
 		this.returnButton(f, c);
 		
-		f.setSize(620,600);
+		f.setSize(720,700);
 		//f.pack();
 		f.setVisible(true);
 	}
@@ -57,6 +57,7 @@ public class InstructionsPage {
             + "Pellentesque eu mollis orci. Sed venenatis diam a nisl tempor "
             + "congue.</p>"
             + "</html>");
+        c.gridx = 2;
         c.gridwidth = 10;
         c.weightx = 0.5;
         c.weighty = 0.5;

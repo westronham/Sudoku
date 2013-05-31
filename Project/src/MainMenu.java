@@ -33,7 +33,7 @@ public class MainMenu {
 	}
 	
 	public void startMainMenu(final BackgroundJFrame f) {
-		f.setBackgroundImage("image3.jpg");
+		f.setBackgroundImage("image4.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		 
@@ -49,7 +49,7 @@ public class MainMenu {
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
 		
-		f.setSize(620,600);
+		f.setSize(720,700);
 		//f.pack();
 		f.setVisible(true);
 	}
