@@ -70,7 +70,7 @@ public class PlayMenu implements Serializable {
 		JButton saveButton = new JButton("Save Current Game");
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 3;
+		c.gridwidth = 2;
 		c.gridheight = 1;
 		  
 		f.add(saveButton, c);
@@ -100,7 +100,7 @@ public class PlayMenu implements Serializable {
 	}
 	
 	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton saveButton = new JButton("Save Current Game");
+		JButton saveButton = new JButton("Pause Current Game");
 		c.gridx = 2;
 		c.gridy = 0;
 		c.gridwidth = 2;
@@ -336,10 +336,6 @@ public class PlayMenu implements Serializable {
 				     MainMenu mainMenu = new MainMenu();
 				     mainMenu.startMainMenu(f);
 				 }
-				 
-				
-				//VictoryGUI victory = new VictoryGUI();
-				//victory.startVictoryGUI(f);
 			} else {
 				if (mistakes == 1) {
 					JOptionPane.showMessageDialog
