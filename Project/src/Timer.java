@@ -1,4 +1,6 @@
 import java.awt.GridBagConstraints;
+import java.io.Serializable;
+
 import javax.swing.JLabel;
 
 public class Timer implements Runnable {

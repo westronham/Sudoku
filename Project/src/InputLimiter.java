@@ -1,5 +1,7 @@
 import javax.swing.JOptionPane;
 import javax.swing.text.*;
+
+import java.io.Serializable;
 import java.util.regex.*;
 
 public class InputLimiter extends DocumentFilter {

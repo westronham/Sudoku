@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -41,9 +42,11 @@ public class HintSystem {
 		while(!isEmptyField(board, x, y)) {
 			x = (new Random ()).nextInt(8) + 1;
 			y = (new Random ()).nextInt(8) + 1;
+			System.out.println(x);
 		}        	
 		
 		if(canHint()){
+			System.out.println("HI");
 			board.getPlayerSudoku()[x][y] = board.getSolvedSudoku()[x][y];
 			numHints++;
 		}

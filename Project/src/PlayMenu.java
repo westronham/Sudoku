@@ -88,7 +88,8 @@ public class PlayMenu implements Serializable {
 						FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
 						ObjectOutputStream os = new ObjectOutputStream(fileStream);
 						os.writeObject(sudokuBoard);
-						//os.writeObject(this);
+						//os.writeObject(gameTimer);
+						os.writeObject(this);
 						os.close();
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
@@ -232,6 +233,13 @@ public class PlayMenu implements Serializable {
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					hintSystem.getHint(sudokuBoard);
+					hintButton.setText("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
+					for(int i = 0; i < 9; i++) {
+						for(int j = 0; j < 9; j++) {
+						if(sudokuBoard.getPlayerSudoku()[i][j] != 0)
+						listOfJTextAreaEntries[i][j].setText(String.valueOf(sudokuBoard.getPlayerSudoku()[i][j]));
+						}
+						}
 				}
 		});
 	}
@@ -335,24 +343,58 @@ public class PlayMenu implements Serializable {
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
 				if (listOfJTextAreaEntries[i][j].getText().trim().isEmpty()) {
+					if (sudokuBoard.getPlayerSudoku()[i][j] != 0) {
+						//Only if there aren't any others in the area
+						//sudokuBoard.setUserValueConditions(i, j, sudokuBoard.getPlayerSudoku()[i][j], false);
+						System.out.println("Shiiit");
+						System.out.println(sudokuBoard.getPlayerSudoku()[i][j]);
+					}
+				} else {
+					int userValue = sudokuBoard.getPlayerSudoku()[i][j];
+					int textValue = Integer.parseInt(listOfJTextAreaEntries[i][j].getText());
+					if (userValue != textValue) {
+						System.out.println("pleeeasse");
+						if (userValue != 0) {
+							sudokuBoard.setUserValueConditions(i, j, userValue, false);
+							System.out.println("var");
+						}
+						if (sudokuBoard.checkRowUserValueConditions(i, j, textValue) == true) {
+							//go through the row (i) and highlight the matching textValues
+							System.out.println("weeee");
+							for (int k = 0; k < 9; k++) {
+								System.out.println(listOfJTextAreaEntries[k][j].getText() + " vs " + textValue);
+								if (listOfJTextAreaEntries[k][j].getText().compareTo(Integer.toString(textValue)) == 0) {
+									System.out.println("french");
+									listOfJTextAreaEntries[k][j].setBackground(Color.RED);
+								}
+							}
+						}
+						if (sudokuBoard.checkColUserValueConditions(i, j, textValue) == true) {
+							//go through the col (j) and highlight the matching textValues
+							System.out.println("ffs");
+						}
+						if (sudokuBoard.checkBoxUserValueConditions(i, j, textValue) == true) {
+							//go through the gridbox (checkGridBox method) and highlight the matching textValues
+							System.out.println("sup");
+						} 
+						if (sudokuBoard.checkRowUserValueConditions(i, j, textValue) == false && 
+							sudokuBoard.checkColUserValueConditions(i, j, textValue) == false &&
+							sudokuBoard.checkBoxUserValueConditions(i, j, textValue) == false) {
+								sudokuBoard.setUserValueConditions(i, j, textValue, true);
+								System.out.println("pab");
+						}
+					}
+				}
+				if (listOfJTextAreaEntries[i][j].getText().trim().isEmpty()) {
 					sudokuBoard.getPlayerSudoku()[i][j] = 0;
 					count++;
 				} else {
 					sudokuBoard.getPlayerSudoku ()[i][j] = new Integer(listOfJTextAreaEntries[i][j].getText());
-					
-					//Few things: so firstly we don't want to go through every box, just the one we're on so we need to fix that
-					//Also, we need to set it back to false if we change a number
-					int value = sudokuBoard.getPlayerSudoku()[i][j];
-					if (sudokuBoard.checkUserValueConditions(i, j, value)) {
-						//highlight the conflicting cells
-						System.out.println("THERE'S A CONFLICT BIATCH");
-					} else {
-						sudokuBoard.setUserValueConditions(i, j, value, true);
-						System.out.println("all good");
-					}
 				}
 			}
 		}
+		//Also, we need to set it back to false if we change a number
+		
 		if (count == 0) {
 			int mistakes = this.isCorrect();
 			if (mistakes == 0) {

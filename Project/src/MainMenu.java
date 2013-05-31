@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -144,13 +145,14 @@ public class MainMenu {
 						FileInputStream fileStream = new FileInputStream("MyGame.ser");
 						ObjectInputStream os = new ObjectInputStream(fileStream);
 						Object one = os.readObject();
-						//Object two = os.readObject();
+						Object two = os.readObject();
+						//Object three = os.readObject();
 						sudoku = (Sudoku) one;
-						//PlayMenu p = (PlayMenu) two;
+						//Timer gameTimer = (Timer) two;
+						PlayMenu p = (PlayMenu) two;
 						os.close();
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
-						PlayMenu p = new PlayMenu(sudoku, difficulty);
 						p.startPlayMenu(f);
 					} catch (ClassNotFoundException | IOException e) {
 						// TODO Auto-generated catch block
