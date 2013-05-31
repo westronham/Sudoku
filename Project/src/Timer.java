@@ -6,21 +6,18 @@ public class Timer implements Runnable {
 	private boolean flag=true;
 	BackgroundJFrame f;
 	GridBagConstraints c;
-	public Timer(BackgroundJFrame f, GridBagConstraints c)
+	JLabel timeLabel;
+	public Timer(BackgroundJFrame f, GridBagConstraints c, JLabel timeLabel)
 	{
 		thread=new Thread(this);
 		this.f = f;
 		this.c = c;
+		this.timeLabel = timeLabel;
 	}
  
 	public void run(){
 		long beginTime=System.currentTimeMillis();
 		long time=0;
-		JLabel timeLabel = new JLabel();
-		c.gridx = 8;
-		c.gridy = 10;
-		c.gridwidth = 1;
-		f.add(timeLabel, c);
 		while(flag){
 			time=System.currentTimeMillis()-beginTime;
 			timeLabel.setText("Time: " +time/1000/60/60 + ": " + time/1000/60%60 + ": " + time/1000%60);
@@ -36,19 +33,25 @@ public class Timer implements Runnable {
 		thread.start();
 	}
  
-	public void Pause(){
-		try{
-			thread.wait();
-		}catch(InterruptedException e){
-			e.printStackTrace();
+	public void pause(){
+		synchronized(thread) {
+			try{
+				thread.wait();
+			}catch(InterruptedException e){
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public void Resume(){
+	public void resume(){
 		thread.notifyAll();
 	}
 
 	public void stop(){
 		flag=false;
+	}
+	
+	public Thread getThread() {
+		return thread;
 	}
 }

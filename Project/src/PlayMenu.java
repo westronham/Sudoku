@@ -29,6 +29,18 @@ public class PlayMenu implements Serializable {
 	private SudokuImporter importer;
   	int[] sudokuFile;
   	boolean showConflicts;
+  	JButton saveButton;
+  	JButton pauseButton;
+  	JButton restartButton;
+  	JButton exitButton;
+  	JButton checkButton;
+  	JButton hintButton;
+  	SudokuBoard board;
+  	JCheckBox checkbox;
+  	JLabel timeLabel;
+  	Timer gameTimer;
+  	
+  	
 	
 	public PlayMenu(Sudoku SudokuBoard, int difficulty) {
 		this.sudokuBoard = SudokuBoard;
@@ -62,7 +74,7 @@ public class PlayMenu implements Serializable {
 	}
       
 	private void saveButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton saveButton = new JButton("Save Current Game");
+		saveButton = new JButton("Save Current Game");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
@@ -95,20 +107,52 @@ public class PlayMenu implements Serializable {
 	}
 	
 	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton saveButton = new JButton("Pause Current Game");
+		pauseButton = new JButton("Pause Current Game");
 		c.gridx = 2;
 		c.gridy = 0;
 		c.gridwidth = 2;
 		c.gridheight = 1;
 		  
-		f.add(saveButton, c);
-		saveButton.addActionListener(new
+		f.add(pauseButton, c);
+		pauseButton.addActionListener(new
 			ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					f.getContentPane().removeAll();
+					saveButton.setVisible(false);
+				  	pauseButton.setVisible(false);
+				  	restartButton.setVisible(false);
+				  	exitButton.setVisible(false);
+				  	checkButton.setVisible(false);
+				  	hintButton.setVisible(false);
+				  	board.setVisible(false);
+				  	checkbox.setVisible(false);
+				  	timeLabel.setVisible(false);
+				  	//gameTimer.pause();
+				  	final JLabel pause = new JLabel("Game Paused");
+					f.getContentPane().add(pause);
+					final JButton returnB = new JButton("Resume Game");
+					returnB.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							f.getContentPane().remove(pause);
+							f.getContentPane().remove(returnB);
+							saveButton.setVisible(true);
+						  	pauseButton.setVisible(true);
+						  	restartButton.setVisible(true);
+						  	exitButton.setVisible(true);
+						  	checkButton.setVisible(true);
+						  	hintButton.setVisible(true);
+						  	board.setVisible(true);
+						  	checkbox.setVisible(true);
+						  	timeLabel.setVisible(true);
+						  	//gameTimer.resume();
+							
+						}
+					});
+					f.getContentPane().add(returnB);
 					SwingUtilities.updateComponentTreeUI(f);
-					PausePage paused = new PausePage(f);
+					//PausePage paused = new PausePage(f);
 					
 				}
 
@@ -116,12 +160,12 @@ public class PlayMenu implements Serializable {
 	}
       
 	private void restartButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton instructionButton = new JButton("Restart");
+		restartButton = new JButton("Restart");
 		c.gridx = 4;
 		c.gridy = 0;
 		c.gridwidth = 2;
-		f.add(instructionButton, c);
-		instructionButton.addActionListener(new
+		f.add(restartButton, c);
+		restartButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
 					sudokuBoard.resetSudoku();
@@ -134,7 +178,7 @@ public class PlayMenu implements Serializable {
 	}
       
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton exitButton = new JButton("Quit");
+		exitButton = new JButton("Quit");
 		c.gridx = 6;
 		c.gridy = 0;
 		c.gridwidth = 2;
@@ -151,7 +195,7 @@ public class PlayMenu implements Serializable {
 	}
   
 	private void checkButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton checkButton = new JButton("Check Answer");
+		checkButton = new JButton("Check Answer");
 		c.gridx = 3;
 		c.gridy = 10;
 		c.gridwidth =1;
@@ -180,7 +224,7 @@ public class PlayMenu implements Serializable {
 	}
       
 	private void hintButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton hintButton = new JButton("Hint");
+		hintButton = new JButton("Hint");
 		c.gridx = 1;
 		c.gridy = 10;
 		f.add(hintButton, c);
@@ -193,7 +237,7 @@ public class PlayMenu implements Serializable {
 	}
        
 	private void sudokuBoard(final BackgroundJFrame f, GridBagConstraints c) {
-		SudokuBoard board = new SudokuBoard(sudokuBoard); 
+		board = new SudokuBoard(sudokuBoard); 
 		c.gridx = 0;
 		c.gridwidth = 9;
 		c.gridy = 1;
@@ -255,12 +299,17 @@ public class PlayMenu implements Serializable {
 	
 	private void showTimer(BackgroundJFrame f, GridBagConstraints c) {
 		//start a new thread
-		Timer gameTimer = new Timer(f, c);
+		timeLabel = new JLabel();
+		c.gridx = 8;
+		c.gridy = 10;
+		c.gridwidth = 1;
+		gameTimer = new Timer(f, c, timeLabel);
+		f.add(timeLabel, c);
 		gameTimer.start();
 	}
 	
 	private void checkBox(BackgroundJFrame f, GridBagConstraints c) {
-		JCheckBox checkbox = new JCheckBox("Show conflicts");
+		checkbox = new JCheckBox("Show conflicts");
 		c.gridy = 20;
 		c.gridx = 10;
 		checkbox.addItemListener(new
