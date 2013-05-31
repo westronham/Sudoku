@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -42,6 +45,7 @@ public class MainMenu {
 		this.errorMessage(f, c);
 		this.playButton(f, c);
 		this.difficultyOptions(f, c);
+		this.loadButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
 		
@@ -126,11 +130,41 @@ public class MainMenu {
 					}
 			});
 	}
+	
+	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
+		JButton instructionButton = new JButton("Resume Previous Game");
+		c.gridx = 0;
+		c.gridy = 2;
+		c.insets = new Insets(10,0,0,0);
+		f.add(instructionButton, c);
+		instructionButton.addActionListener(new
+			ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					try {
+						FileInputStream fileStream = new FileInputStream("MyGame.ser");
+						ObjectInputStream os = new ObjectInputStream(fileStream);
+						Object one = os.readObject();
+						//Object two = os.readObject();
+						sudoku = (Sudoku) one;
+						//PlayMenu p = (PlayMenu) two;
+						os.close();
+						f.getContentPane().removeAll();
+						SwingUtilities.updateComponentTreeUI(f);
+						PlayMenu p = new PlayMenu(sudoku, difficulty);
+						p.startPlayMenu(f);
+					} catch (ClassNotFoundException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+		});
+	}
 
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Instruction");
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.insets = new Insets(10,0,0,0);
 		f.add(instructionButton, c);
 		instructionButton.addActionListener(new
@@ -147,7 +181,7 @@ public class MainMenu {
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {

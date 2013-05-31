@@ -1,5 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
 
 import javax.swing.*;
@@ -15,7 +20,7 @@ import javax.swing.text.PlainDocument;
  * When 
  * 
  */
-public class PlayMenu {
+public class PlayMenu implements Serializable {
 	private Sudoku sudokuBoard;
 	private JTextField[][] listOfJTextAreaEntries;
 	private HintSystem hintSystem;
@@ -23,6 +28,7 @@ public class PlayMenu {
 	int difficulty;
 	private SudokuImporter importer;
   	int[] sudokuFile;
+  	boolean showConflicts;
 	
 	public PlayMenu(Sudoku SudokuBoard, int difficulty) {
 		this.sudokuBoard = SudokuBoard;
@@ -47,11 +53,13 @@ public class PlayMenu {
 		c.fill = GridBagConstraints.BOTH;
 		  
 		this.saveButton(f, c);
+		this.pauseButton(f, c);
 		this.restartButton(f, c);
 		this.exitButton(f, c);
 		this.checkButton(f, c);
 		this.hintButton(f, c);
 		this.sudokuBoard(f, c);
+		this.checkBox(f, c);
 		//this.showTimer(f, c);
 		  
 		f.setSize(620,600);
@@ -59,7 +67,7 @@ public class PlayMenu {
 	}
       
 	private void saveButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton saveButton = new JButton("Save");
+		JButton saveButton = new JButton("Save Current Game");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 3;
@@ -69,16 +77,54 @@ public class PlayMenu {
 		saveButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-		
+					try {
+						FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
+						ObjectOutputStream os = new ObjectOutputStream(fileStream);
+						os.writeObject(sudokuBoard);
+						//os.writeObject(this);
+						os.close();
+						f.getContentPane().removeAll();
+						SwingUtilities.updateComponentTreeUI(f);
+						MainMenu mainMenu = new MainMenu();
+						mainMenu.startMainMenu(f);
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}
+		});
+	}
+	
+	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
+		JButton saveButton = new JButton("Save Current Game");
+		c.gridx = 2;
+		c.gridy = 0;
+		c.gridwidth = 2;
+		c.gridheight = 1;
+		  
+		f.add(saveButton, c);
+		saveButton.addActionListener(new
+			ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					f.getContentPane().removeAll();
+					SwingUtilities.updateComponentTreeUI(f);
+					PausePage paused = new PausePage(f);
+					
+				}
+
 		});
 	}
       
 	private void restartButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Restart");
-		c.gridx = 3;
+		c.gridx = 4;
 		c.gridy = 0;
-		c.gridwidth = 3;
+		c.gridwidth = 2;
 		f.add(instructionButton, c);
 		instructionButton.addActionListener(new
 			ActionListener() {
@@ -96,7 +142,7 @@ public class PlayMenu {
 		JButton exitButton = new JButton("Quit");
 		c.gridx = 6;
 		c.gridy = 0;
-		c.gridwidth = 3;
+		c.gridwidth = 2;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {
@@ -168,7 +214,7 @@ public class PlayMenu {
 		
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
-				final JTextField sudokuArea = board.getSubGrids()[i][j];
+				final JTextField sudokuArea = listOfJTextAreaEntries[i][j];
 		
 				Font font;
 				if (sudokuBoard.getPlayerSudoku()[i][j] != 0) {
@@ -220,6 +266,28 @@ public class PlayMenu {
 		f.add(timeLabel, c);
 	}
 	
+	private void checkBox(BackgroundJFrame f, GridBagConstraints c) {
+		JCheckBox checkbox = new JCheckBox("Show conflicts");
+		c.gridy = 20;
+		c.gridx = 10;
+		checkbox.addItemListener(new
+				ItemListener() {
+
+					@Override
+					public void itemStateChanged(ItemEvent arg0) {
+						if (arg0.getStateChange() == ItemEvent.DESELECTED) {
+							showConflicts = false;
+						} else {
+							showConflicts = true;
+						}
+						
+					}
+			
+		});
+		f.getContentPane().add(checkbox);
+		
+	}
+	
 	private void updateUserSudoku(BackgroundJFrame f) {
 		int count = 0;
 		for(int i = 0; i < 9; i++) {
@@ -228,7 +296,18 @@ public class PlayMenu {
 					sudokuBoard.getPlayerSudoku()[i][j] = 0;
 					count++;
 				} else {
-					sudokuBoard.getPlayerSudoku()[i][j] = new Integer(listOfJTextAreaEntries[i][j].getText());
+					sudokuBoard.getPlayerSudoku ()[i][j] = new Integer(listOfJTextAreaEntries[i][j].getText());
+					
+					//Few things: so firstly we don't want to go through every box, just the one we're on so we need to fix that
+					//Also, we need to set it back to false if we change a number
+					int value = sudokuBoard.getPlayerSudoku()[i][j];
+					if (sudokuBoard.checkUserValueConditions(i, j, value)) {
+						//highlight the conflicting cells
+						System.out.println("THERE'S A CONFLICT BIATCH");
+					} else {
+						sudokuBoard.setUserValueConditions(i, j, value, true);
+						System.out.println("all good");
+					}
 				}
 			}
 		}

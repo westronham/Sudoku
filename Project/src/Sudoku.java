@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /*
  * Ideas of what to do next?
  * 1) We should make a 3rd Sudoku array for user input
@@ -10,7 +12,7 @@
  * 		updates to the user with more puzzles and also allows us greater control over things such as difficulty of puzzle that a user gets
  * 3) I'm going to read into saving, and also I'm going to try get the Sudoku grid into a Sudoku GUI rather than have it print the numbers like it does
  */
-public class Sudoku {
+public class Sudoku implements Serializable {
 	public Sudoku () {
 		unsolvedSudoku = new int[9][9];
 		solvedSudoku = new int[9][9];
@@ -83,14 +85,18 @@ public class Sudoku {
   * It allows us to really quickly check if there is already a number in a row/column/box before we put it in a cell
   */
 	public void initConditionMatrices() {
-        rowMatrix = new boolean[gridSize][gridSize];
-        colMatrix = new boolean[gridSize][gridSize];
-        boxMatrix = new boolean[gridSize][gridSize];
+        rowMatrixSolution = new boolean[gridSize][gridSize];
+        colMatrixSolution = new boolean[gridSize][gridSize];
+        boxMatrixSolution = new boolean[gridSize][gridSize];
+        rowMatrixUser = new boolean[gridSize][gridSize];
+        colMatrixUser = new boolean[gridSize][gridSize];
+        boxMatrixUser = new boolean[gridSize][gridSize];
         for(int i = 0; i < sudoku.length; i++) {
             for(int j = 0; j < sudoku.length; j++) {
                 int value = sudoku[i][j];
                 if(value != 0) {
-                    setValueConditions(i, j, value, true);
+                    setSolutionValueConditions(i, j, value, true);
+                    setUserValueConditions(i, j, value, true);
                 }
             }
         }
@@ -103,11 +109,30 @@ public class Sudoku {
   * boxSubset - We determine which box our coordinates place us in and then put down that our value is present in that box
   * Note how we do value-1 because our index starts from 0
   */
-	private void setValueConditions(int i, int j, int value, boolean exists) {
-	    rowMatrix[i][value - 1] = exists;
-	    colMatrix[j][value - 1] = exists;
-	    boxMatrix[findBoxNum(i, j)][value - 1] = exists;
+	private void setSolutionValueConditions(int i, int j, int value, boolean exists) {
+	    rowMatrixSolution[i][value - 1] = exists;
+	    colMatrixSolution[j][value - 1] = exists;
+	    boxMatrixSolution[findBoxNum(i, j)][value - 1] = exists;
 	}
+	
+	public void setUserValueConditions(int i, int j, int value, boolean exists) {
+	    rowMatrixUser[i][value - 1] = exists;
+	    colMatrixUser[j][value - 1] = exists;
+	    boxMatrixUser[findBoxNum(i, j)][value - 1] = exists;
+	}
+	
+	public boolean checkUserValueConditions(int i, int j, int value) {
+		if (rowMatrixUser[i][value - 1] == true) {
+			return true;
+		} else if (colMatrixUser[j][value - 1] == true) {
+			return true;
+		} else if (boxMatrixUser[findBoxNum(i, j)][value - 1] == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 /*
  * Our solve algorithm is given the coordinates from which to solve onwards
@@ -143,11 +168,11 @@ public boolean solve() {
 	    for(int value = 1; value <= gridSize; value++) {
 	        if(isValid(i, j, value)) {
 	        	solvedSudoku[i][j] = value;
-	            setValueConditions(i, j, value, true);
+	            setSolutionValueConditions(i, j, value, true);
 	            if(solve(i + 1, j)) {
 	                return true;
 	            }
-	            setValueConditions(i, j, value, false);
+	            setSolutionValueConditions(i, j, value, false);
 	        }
 	    }
 	    solvedSudoku[i][j] = 0;
@@ -161,7 +186,7 @@ public boolean solve() {
  */
 	private boolean isValid(int i, int j, int value) {
 	    value--;
-	    boolean present = rowMatrix[i][value] || colMatrix[j][value] || boxMatrix[findBoxNum(i, j)][value];
+	    boolean present = rowMatrixSolution[i][value] || colMatrixSolution[j][value] || boxMatrixSolution[findBoxNum(i, j)][value];
 	    return !present;
 	}
 
@@ -221,7 +246,10 @@ public boolean solve() {
 	private int[][] solvedSudoku;   //the correct, solved board
 	private int gridSize;
 	private int gridBoxSize;
-	private boolean rowMatrix[][];
-    private boolean colMatrix[][];
-    private boolean boxMatrix[][];
+	private boolean rowMatrixSolution[][];
+    private boolean colMatrixSolution[][];
+    private boolean boxMatrixSolution[][];
+    private boolean rowMatrixUser[][];
+    private boolean colMatrixUser[][];
+    private boolean boxMatrixUser[][];
 }
