@@ -122,7 +122,7 @@ public class PlayMenu {
 	}
 	
 	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
-		pauseButton = new JButton("Pause Current Game");
+		pauseButton = new JButton("Pause");
 		c.gridx = 2;
 		c.gridy = 0;
 		c.gridwidth = 2;
@@ -518,12 +518,24 @@ public class PlayMenu {
 			if (mistakes == 0) {
 				//save high score
 				saveHighScore(gameTimer.getTime());
+				try {
+					FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
+					ObjectOutputStream os = new ObjectOutputStream(fileStream);
+					os.reset();
+					os.close();
+		
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +
                         "=\"Papyrus\">Congratulations!</font><br><font size=\"10\" face" +
                         "=\"Papyrus\">Would you like to start a new game?</font></html>", 
-                        "You Win", 
+                        "You Win!", 
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         icon);
