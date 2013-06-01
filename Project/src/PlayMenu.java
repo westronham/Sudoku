@@ -32,13 +32,14 @@ public class PlayMenu {
   	JButton saveButton;
   	JButton pauseButton;
   	JButton restartButton;
-  	JButton exitButton;
   	JButton checkButton;
   	JButton hintButton;
   	SudokuBoard board;
   	JCheckBox checkbox;
   	JLabel timeLabel;
   	Timer gameTimer;
+  	JLabel highScoreLabel ;
+  	
   	long startTime;
   	long highScore; //for output
   	private final static long NOHIGHSCORE = 1999999999;
@@ -70,10 +71,9 @@ public class PlayMenu {
 		f.setLayout(gridbag);
 		c.fill = GridBagConstraints.BOTH;
 		  
-		this.saveButton(f, c);
+		this.saveQuitButton(f, c);
 		this.pauseButton(f, c);
 		this.restartButton(f, c);
-		this.exitButton(f, c);
 		this.checkButton(f, c);
 		this.hintButton(f, c);
 		this.sudokuBoard(f, c);
@@ -85,8 +85,8 @@ public class PlayMenu {
 		f.setVisible(true);
 	}
       
-	private void saveButton(final BackgroundJFrame f, GridBagConstraints c) {
-		saveButton = new JButton("Save Current Game");
+	private void saveQuitButton(final BackgroundJFrame f, GridBagConstraints c) {
+		saveButton = new JButton("Quit and Save");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
@@ -136,12 +136,12 @@ public class PlayMenu {
 					saveButton.setVisible(false);
 				  	pauseButton.setVisible(false);
 				  	restartButton.setVisible(false);
-				  	exitButton.setVisible(false);
 				  	checkButton.setVisible(false);
 				  	hintButton.setVisible(false);
 				  	board.setVisible(false);
 				  	checkbox.setVisible(false);
 				  	timeLabel.setVisible(false);
+				  	highScoreLabel.setVisible(false);
 				  	gameTimer.pause();
 				  	
 				  	final JLabel pause = new JLabel("Game Paused");
@@ -156,12 +156,12 @@ public class PlayMenu {
 							saveButton.setVisible(true);
 						  	pauseButton.setVisible(true);
 						  	restartButton.setVisible(true);
-						  	exitButton.setVisible(true);
 						  	checkButton.setVisible(true);
 						  	hintButton.setVisible(true);
 						  	board.setVisible(true);
 						  	checkbox.setVisible(true);
 						  	timeLabel.setVisible(true);
+						  	highScoreLabel.setVisible(true);
 						  	gameTimer.resume();
 							
 						}
@@ -193,22 +193,6 @@ public class PlayMenu {
 		});
 	}
       
-	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
-		exitButton = new JButton("Quit");
-		c.gridx = 6;
-		c.gridy = 0;
-		c.gridwidth = 2;
-		f.add(exitButton, c);
-		exitButton.addActionListener(new
-			ActionListener() {
-				public void actionPerformed(ActionEvent event) {
-					f.getContentPane().removeAll();
-					SwingUtilities.updateComponentTreeUI(f);
-					MainMenu mainMenu = new MainMenu();
-					mainMenu.startMainMenu(f);
-				}
-		});
-	}
   
 	private void checkButton(final BackgroundJFrame f, GridBagConstraints c) {
 		checkButton = new JButton("Check Answer");
@@ -368,7 +352,7 @@ public class PlayMenu {
 	
 	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
 
-		JLabel highScoreLabel = new JLabel();
+		highScoreLabel = new JLabel();
 		
 		if(highScore == NOHIGHSCORE){
 			highScoreLabel.setText("best time: ---");

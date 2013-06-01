@@ -29,10 +29,10 @@ public class HighScoreMenu {
   	private JLabel highScoreLabel2;
   	private JLabel highScoreLabel3;
   	
-	public HighScoreMenu() {
-
-	}
-	
+	/**
+	 * starts up the High Score meny
+	 * @param f
+	 */
 	public void startHighScoreMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
@@ -57,7 +57,11 @@ public class HighScoreMenu {
 		//f.pack();
 		f.setVisible(true);
 	}
-      
+     /**
+      * Label for "easy" 
+      * @param f
+      * @param c
+      */
 	private void easyLabel(BackgroundJFrame f, GridBagConstraints c) {
 
 		JLabel highScoreLabel = new JLabel("   Easy");
@@ -72,6 +76,11 @@ public class HighScoreMenu {
 		f.add(highScoreLabel, c);
 	}
 	
+    /**
+     * Label for "medium" 
+     * @param f
+     * @param c
+     */
 	private void mediumLabel(BackgroundJFrame f, GridBagConstraints c) {
 
 		JLabel highScoreLabel = new JLabel(" Medium");
@@ -86,6 +95,11 @@ public class HighScoreMenu {
 		f.add(highScoreLabel, c);
 	}
 	
+    /**
+     * Label for "hard" 
+     * @param f
+     * @param c
+     */
 	private void hardLabel(BackgroundJFrame f, GridBagConstraints c) {
 
 		JLabel highScoreLabel = new JLabel("    Hard");
@@ -102,7 +116,7 @@ public class HighScoreMenu {
 	
 	
 	/**
-	 * Simple shows the high score given to it from getHighScore method. 
+	 * Simple shows the easy high score given to it from getHighScore method. 
 	 * @param f
 	 * @param c
 	 */
@@ -130,7 +144,7 @@ public class HighScoreMenu {
 	}
 	
 	/**
-	 * Simple shows the high score given to it from getHighScore method. 
+	 * Simple shows the medium high score given to it from getHighScore method. 
 	 * @param f
 	 * @param c
 	 */
@@ -158,7 +172,7 @@ public class HighScoreMenu {
 	}
 	
 	/**
-	 * Simple shows the high score given to it from getHighScore method. 
+	 * Simple shows the hard high score given to it from getHighScore method. 
 	 * @param f
 	 * @param c
 	 */
@@ -185,7 +199,7 @@ public class HighScoreMenu {
 	}
 	
 	/**
-	 * Gets the high score from input file "HIghScore.ser".
+	 * Gets the high score from the difficulties input file "HIghScore(1-3).ser".
 	 * @return the high score retrieved
 	 */
 	private long getHighScore(int difficulty){
@@ -216,12 +230,12 @@ public class HighScoreMenu {
 	}
 	
 	/**
-	 * Resets the high score by replacing the score with NOHIGHSCORE.
+	 * Resets the easy high score by replacing the score with NOHIGHSCORE.
 	 * @param f
 	 * @param c
 	 */
 	private void resetEasyScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		JButton exitButton = new JButton("Reset1");
+		JButton exitButton = new JButton("Reset");
 		c.gridx = 0;
 		c.gridy = 2;
 		f.add(exitButton, c);
@@ -250,12 +264,12 @@ public class HighScoreMenu {
 	}
 	
 	/**
-	 * Resets the high score by replacing the score with NOHIGHSCORE.
+	 * Resets the medium high score by replacing the score with NOHIGHSCORE.
 	 * @param f
 	 * @param c
 	 */
 	private void resetMediumScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		JButton exitButton = new JButton("Reset2");
+		JButton exitButton = new JButton("Reset");
 		c.gridx = 1;
 		c.gridy = 2;
 		f.add(exitButton, c);
@@ -284,12 +298,12 @@ public class HighScoreMenu {
 	}
 	
 	/**
-	 * Resets the high score by replacing the score with NOHIGHSCORE.
+	 * Resets the hard high score by replacing the score with NOHIGHSCORE.
 	 * @param f
 	 * @param c
 	 */
 	private void resetHardScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		JButton exitButton = new JButton("Reset3");
+		JButton exitButton = new JButton("Reset");
 		c.gridx = 2;
 		c.gridy = 2;
 		f.add(exitButton, c);
@@ -316,6 +330,11 @@ public class HighScoreMenu {
 		});
 	}
 	
+	/**
+	 * Loads up the main menu. 
+	 * @param f
+	 * @param c
+	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Back");
 		c.gridx = 1;
