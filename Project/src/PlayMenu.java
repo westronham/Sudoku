@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
-
+import java.awt.Font;
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
@@ -39,16 +39,25 @@ public class PlayMenu implements Serializable {
   	JCheckBox checkbox;
   	JLabel timeLabel;
   	Timer gameTimer;
-  	
+  	long startTime;
   	
 	
-	public PlayMenu(Sudoku SudokuBoard, int difficulty) {
+	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
 		this.hintSystem = new HintSystem(SudokuBoard);
-		this.difficulty = difficulty;
+		this.difficulty = SudokuBoard.getDifficulty();
 		importer = new SudokuImporter();
 		sudokuFile = new int[81];
+		startTime = 0;
+	}
+	
+	public void setHintsLeft (int n){
+		hintSystem.setHintsLeft(n);
+	}
+	
+	public void setStartTime (long time){
+		startTime = time;
 	}
    
 	public void startPlayMenu(final BackgroundJFrame f) {
@@ -87,9 +96,11 @@ public class PlayMenu implements Serializable {
 					try {
 						FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
 						ObjectOutputStream os = new ObjectOutputStream(fileStream);
+
 						os.writeObject(sudokuBoard);
-						//os.writeObject(gameTimer);
-						os.writeObject(this);
+						os.writeObject(hintSystem.getNumHintsLeft());
+						os.writeObject(gameTimer.getTime());
+						
 						os.close();
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
@@ -172,7 +183,7 @@ public class PlayMenu implements Serializable {
 					sudokuBoard.resetSudoku();
 					f.getContentPane().removeAll();
 					SwingUtilities.updateComponentTreeUI(f);
-					PlayMenu p = new PlayMenu(sudokuBoard, difficulty);
+					PlayMenu p = new PlayMenu(sudokuBoard);
 					p.startPlayMenu(f);
 				}
 		});
@@ -316,12 +327,17 @@ public class PlayMenu implements Serializable {
 	private void showTimer(BackgroundJFrame f, GridBagConstraints c) {
 		//start a new thread
 		timeLabel = new JLabel();
+		
+		Font font = new Font("Dialog", Font.BOLD, 14);
+		timeLabel.setFont(font);
+		
 		c.gridx = 8;
 		c.gridy = 10;
 		c.gridwidth = 1;
 		gameTimer = new Timer(f, c, timeLabel);
+		
 		f.add(timeLabel, c);
-		gameTimer.start();
+		gameTimer.start(startTime);
 	}
 	
 	private void checkBox(BackgroundJFrame f, GridBagConstraints c) {
@@ -503,7 +519,7 @@ public class PlayMenu implements Serializable {
 						sudokuBoard.initSudoku(sudokuFile, difficulty);
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
-						PlayMenu p = new PlayMenu(sudokuBoard, difficulty);
+						PlayMenu p = new PlayMenu(sudokuBoard);
 						p.startPlayMenu(f);
 				 } else if (query == JOptionPane.NO_OPTION) {
 				     f.getContentPane().removeAll();

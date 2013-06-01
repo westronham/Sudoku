@@ -71,7 +71,7 @@ public class MainMenu {
 						sudoku.initSudoku(sudokuFile, difficulty);
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
-						PlayMenu p = new PlayMenu(sudoku, difficulty);
+						PlayMenu p = new PlayMenu(sudoku);
 						p.startPlayMenu(f);
 					} else {
 						error.setVisible(true);
@@ -146,14 +146,24 @@ public class MainMenu {
 						ObjectInputStream os = new ObjectInputStream(fileStream);
 						Object one = os.readObject();
 						Object two = os.readObject();
-						//Object three = os.readObject();
-						sudoku = (Sudoku) one;
-						//Timer gameTimer = (Timer) two;
-						PlayMenu p = (PlayMenu) two;
+						Object three = os.readObject();
 						os.close();
+						
+						sudoku = (Sudoku) one;
+						int hintsLeft = (int) two;
+						long saveTime = (long) three;
+		
+						System.out.println("we have time: " + saveTime);
+				
+						PlayMenu p = new PlayMenu(sudoku);
+						p.setHintsLeft(hintsLeft);
+						p.setStartTime(saveTime);
+						
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
+						
 						p.startPlayMenu(f);
+	
 					} catch (ClassNotFoundException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

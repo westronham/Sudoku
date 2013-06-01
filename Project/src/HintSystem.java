@@ -7,7 +7,8 @@ import java.util.Random;
  * @author Felix
  *
  */
-public class HintSystem {
+public class HintSystem implements Serializable {
+	
 	private int numHints;
 	private final int maxHints;
 	private final static int EASYHINTSNUM = 7;
@@ -27,7 +28,11 @@ public class HintSystem {
 		}
 		numHints = 0;
 	}
-		
+	
+	public void setHintsLeft (int n){
+		numHints = maxHints - n;
+	}
+	
 	/**
 	 * Get's the hint which is to fill in one location. 
 	 * @param board the given Sudoku board. 
@@ -35,9 +40,6 @@ public class HintSystem {
 	 * @param y the y coordinate 
 	 * @return the updated board with the fill.
 	 */
-	
-	//Problem with full board
-	//
 	public Sudoku getHint (Sudoku board){ //assumes number >0
 		
 		if(canHint() && !isFull(board)){
