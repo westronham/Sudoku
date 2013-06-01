@@ -3,9 +3,11 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -24,7 +26,9 @@ public class MainMenu {
   	int[] sudokuFile;
   	private Sudoku sudoku;
   	private JLabel error;
-	
+  	private final static long NOHIGHSCORE = 1999999999;
+  	private JLabel highScoreLabel;
+  	
 	public MainMenu() {
 		//Need to choose a board based on selected difficulty, not becasue we're passing from main
 		//this.SudokuBoards = boards;
@@ -47,8 +51,10 @@ public class MainMenu {
 		this.playButton(f, c);
 		this.difficultyOptions(f, c);
 		this.loadButton(f, c);
+		this.resetScoreButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
+		this.showHighScore(f, c);
 		
 		f.setSize(720,700);
 		//f.pack();
@@ -173,10 +179,45 @@ public class MainMenu {
 		});
 	}
 
+	/**
+	 * Resets the high score by replacing the score with NOHIGHSCORE.
+	 * @param f
+	 * @param c
+	 */
+	private void resetScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
+		JButton exitButton = new JButton("Reset High Score");
+		c.gridx = 0;
+		c.gridy = 3;
+		f.add(exitButton, c);
+		exitButton.addActionListener(new
+			ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					try {
+						FileOutputStream fileStream = new FileOutputStream("HighScore.ser");
+						ObjectOutputStream os = new ObjectOutputStream(fileStream);
+
+						os.writeObject(NOHIGHSCORE);
+						os.close();
+						highScoreLabel.setText("   ---");
+						
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+		});
+
+	}
+	
+	
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Instruction");
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		c.insets = new Insets(10,0,0,0);
 		f.add(instructionButton, c);
 		instructionButton.addActionListener(new
@@ -189,11 +230,14 @@ public class MainMenu {
 				}
 		});
 	}
-      
+    
+	
+	
+	
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
 		c.gridx = 0;
-		c.gridy = 4;
+		c.gridy = 5;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {
@@ -202,4 +246,56 @@ public class MainMenu {
 				}
 		});
 	}
+	
+	/**
+	 * Simple shows the high score given to it from getHighScore method. 
+	 * @param f
+	 * @param c
+	 */
+	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
+	
+		highScoreLabel = new JLabel();
+		c.gridx = 1;
+		c.gridy = 3;
+		c.gridwidth = 1;
+	
+		
+		long highScore = getHighScore();
+		
+		if(highScore == NOHIGHSCORE){
+			highScoreLabel.setText("   ---");
+		} else {
+			highScoreLabel.setText("   " + highScore/1000/60/60 + "h  " 
+									+ highScore/1000/60%60 + "m  " + highScore/1000%60 + "s");
+		}
+		
+		Font font = new Font("Avenir", Font.BOLD, 14);
+		highScoreLabel.setFont(font);
+
+		f.add(highScoreLabel, c);
+	}
+	
+	/**
+	 * Gets the high score from input file "HIghScore.ser".
+	 * @return the high score retrieved
+	 */
+	private long getHighScore(){
+		try {
+			FileInputStream fileStream = new FileInputStream("HighScore.ser");
+			ObjectInputStream os = new ObjectInputStream(fileStream);
+			Object one = os.readObject();
+	
+			long highScore = (long) one;
+			os.close();
+			return highScore;
+	
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return NOHIGHSCORE;
+	}
+	
+	
+	
 }

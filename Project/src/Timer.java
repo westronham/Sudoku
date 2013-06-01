@@ -6,11 +6,14 @@ import javax.swing.JLabel;
 public class Timer implements Runnable {
 	Thread thread;
 	private boolean flag=true;
+	public boolean pauseFlag=false;
 	BackgroundJFrame f;
 	GridBagConstraints c;
 	JLabel timeLabel;
 	long time;
 	long startTime;
+	long currentTime;
+	long beginTime;
 	
 	public Timer(BackgroundJFrame f, GridBagConstraints c, JLabel timeLabel)
 	{
@@ -18,19 +21,31 @@ public class Timer implements Runnable {
 		this.f = f;
 		this.c = c;
 		this.timeLabel = timeLabel;
-		this.startTime = startTime;
+		//this.startTime = startTime;
 	}
  
 	public void run(){
-		long beginTime=System.currentTimeMillis() - startTime;
+		currentTime=System.currentTimeMillis();
+		beginTime=currentTime - startTime;
 		time=0;
 		while(flag){
 			time=System.currentTimeMillis()-beginTime;
-			timeLabel.setText("time: " + time/1000/60/60 + "h  " + time/1000/60%60 + "m  " + time/1000%60 + "s");
+			timeLabel.setText(time/1000/60/60 + "h  " + time/1000/60%60 + "m  " + time/1000%60 + "s");
 			try{
 				Thread.sleep(1000);
 			}catch(InterruptedException e1){
 				e1.printStackTrace();
+			}
+			if(pauseFlag) {
+				beginTime+=1000;
+				while(pauseFlag){
+					try{
+						Thread.sleep(100);
+						beginTime+=100;
+					}catch(InterruptedException e){
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}
@@ -41,17 +56,11 @@ public class Timer implements Runnable {
 	}
  
 	public void pause(){
-		synchronized(thread) {
-			try{
-				thread.wait();
-			}catch(InterruptedException e){
-				e.printStackTrace();
-			}
-		}
+		pauseFlag = true;
 	}
 
 	public void resume(){
-		thread.notifyAll();
+		pauseFlag = false;
 	}
 
 	public void stop(){

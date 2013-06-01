@@ -1,8 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.Font;
 import javax.swing.*;
@@ -38,8 +40,8 @@ public class PlayMenu {
   	JLabel timeLabel;
   	Timer gameTimer;
   	long startTime;
-  	
-	
+  	long highScore; //for output
+  	private final static long NOHIGHSCORE = 1999999999;
 	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
@@ -48,6 +50,7 @@ public class PlayMenu {
 		importer = new SudokuImporter();
 		sudokuFile = new int[81];
 		startTime = 0;
+		highScore = getHighScore();
 	}
 	
 	public void setHintsLeft (int n){
@@ -59,6 +62,7 @@ public class PlayMenu {
 	}
    
 	public void startPlayMenu(final BackgroundJFrame f) {
+		System.out.println("High score: "+ highScore);
 		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
@@ -75,7 +79,8 @@ public class PlayMenu {
 		this.sudokuBoard(f, c);
 		this.checkBox(f, c);
 		this.showTimer(f, c);
-		  
+		this.showHighScore(f, c); 
+		
 		f.setSize(720,700);
 		f.setVisible(true);
 	}
@@ -137,7 +142,7 @@ public class PlayMenu {
 				  	board.setVisible(false);
 				  	checkbox.setVisible(false);
 				  	timeLabel.setVisible(false);
-				  	//gameTimer.pause();
+				  	gameTimer.pause();
 				  	
 				  	final JLabel pause = new JLabel("Game Paused");
 					f.getContentPane().add(pause);
@@ -157,7 +162,7 @@ public class PlayMenu {
 						  	board.setVisible(true);
 						  	checkbox.setVisible(true);
 						  	timeLabel.setVisible(true);
-						  	//gameTimer.resume();
+						  	gameTimer.resume();
 							
 						}
 					});
@@ -361,6 +366,29 @@ public class PlayMenu {
 		
 	}
 	
+	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
+
+		JLabel highScoreLabel = new JLabel();
+		
+		if(highScore == NOHIGHSCORE){
+			highScoreLabel.setText("best time: ---");
+		} else {
+			highScoreLabel.setText("best time: " + highScore/1000/60/60 + "h  " 
+									+ highScore/1000/60%60 + "m  " + highScore/1000%60 + "s");
+		}
+		
+		Font font = new Font("Avenir", Font.BOLD, 16);
+		highScoreLabel.setFont(font);
+		
+		c.gridx = 1;
+		c.gridy = 10;
+		c.gridwidth = 1;
+	
+		
+		f.add(highScoreLabel, c);
+
+	}
+	
 	private void updateUserSudoku(BackgroundJFrame f) {
 		int count = 0;
 		for(int i = 0; i < 9; i++) {
@@ -534,7 +562,8 @@ public class PlayMenu {
 		if (count == 0) {
 			int mistakes = this.isCorrect();
 			if (mistakes == 0) {
-				
+				//save high score
+				setHighScore(gameTimer.getTime());
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +
@@ -595,5 +624,46 @@ public class PlayMenu {
 			}
 		}
 		return mistakes;
+	}
+	
+	private long getHighScore(){
+		try {
+			FileInputStream fileStream = new FileInputStream("HighScore.ser");
+			ObjectInputStream os = new ObjectInputStream(fileStream);
+			Object one = os.readObject();
+	
+			long highScore = (long) one;
+			os.close();
+			return highScore;
+	
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return NOHIGHSCORE;
+	}
+	
+	private boolean setHighScore(long newScore){
+		
+		if(newScore < highScore) { //if its less than high Score
+			try {
+				FileOutputStream fileStream = new FileOutputStream("HighScore.ser");
+				ObjectOutputStream os = new ObjectOutputStream(fileStream);
+
+				os.writeObject(newScore);
+
+				os.close();
+				return true;
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
 	}
 }

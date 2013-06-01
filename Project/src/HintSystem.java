@@ -31,6 +31,7 @@ public class HintSystem{
 		} else {
 			this.maxHints = 0;
 		}
+	
 		numHints = 0;
 	}
 	
