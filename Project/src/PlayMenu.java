@@ -39,10 +39,10 @@ public class PlayMenu {
   	JLabel timeLabel;
   	Timer gameTimer;
   	JLabel highScoreLabel ;
-  	
   	long startTime;
   	long highScore; //for output
   	private final static long NOHIGHSCORE = 1999999999;
+  	
 	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
@@ -70,7 +70,10 @@ public class PlayMenu {
 		
 		f.setLayout(gridbag);
 		c.fill = GridBagConstraints.BOTH;
-		  
+		c.anchor = GridBagConstraints.EAST;
+		//c.weighty = 0.1;
+		c.weightx = 0.1;
+		
 		this.saveQuitButton(f, c);
 		this.pauseButton(f, c);
 		this.restartButton(f, c);
@@ -89,9 +92,8 @@ public class PlayMenu {
 		saveButton = new JButton("Quit and Save");
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 2;
-		c.gridheight = 1;
-		  
+		c.gridwidth = 3;
+		c.gridheight = 1;  
 		f.add(saveButton, c);
 		saveButton.addActionListener(new
 			ActionListener() {
@@ -123,11 +125,10 @@ public class PlayMenu {
 	
 	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
 		pauseButton = new JButton("Pause");
-		c.gridx = 2;
+		c.gridx = 3;
 		c.gridy = 0;
-		c.gridwidth = 2;
-		c.gridheight = 1;
-		  
+		c.gridwidth = 3;
+		c.gridheight = 1; 
 		f.add(pauseButton, c);
 		pauseButton.addActionListener(new
 			ActionListener() {
@@ -177,9 +178,10 @@ public class PlayMenu {
       
 	private void restartButton(final BackgroundJFrame f, GridBagConstraints c) {
 		restartButton = new JButton("Restart");
-		c.gridx = 4;
+		c.gridx = 6;
 		c.gridy = 0;
-		c.gridwidth = 2;
+		c.gridwidth = 3;
+		
 		f.add(restartButton, c);
 		restartButton.addActionListener(new
 			ActionListener() {
@@ -196,9 +198,10 @@ public class PlayMenu {
   
 	private void checkButton(final BackgroundJFrame f, GridBagConstraints c) {
 		checkButton = new JButton("Check Answer");
-		c.gridx = 3;
-		c.gridy = 10;
+		c.gridx = 9;
+		c.gridy = 4;
 		c.gridwidth =1;
+		c.weightx = 0.01;
 		f.add(checkButton, c);
 		checkButton.addActionListener(new
 			ActionListener() {
@@ -254,7 +257,7 @@ public class PlayMenu {
 		c.weighty = 0.01;
 		c.weightx = 0.01;
 		c.anchor = GridBagConstraints.CENTER;
-		c.insets = new Insets(25,55,25,55);
+		c.insets = new Insets(5,11,5,11);
 		c.fill = GridBagConstraints.BOTH;
 		f.add(board, c);
 		listOfJTextAreaEntries = board.getSubGrids();
