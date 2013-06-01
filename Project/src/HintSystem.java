@@ -35,17 +35,21 @@ public class HintSystem {
 	 * @param y the y coordinate 
 	 * @return the updated board with the fill.
 	 */
+	
+	//Problem with full board
+	//
 	public Sudoku getHint (Sudoku board){ //assumes number >0
 		
-		int x = (new Random ()).nextInt(8) + 1;
-		int y = (new Random ()).nextInt(8) + 1;
-		while(!isEmptyField(board, x, y)) {
-			x = (new Random ()).nextInt(8) + 1;
-			y = (new Random ()).nextInt(8) + 1;
-			System.out.println(x);
-		}        	
+		if(canHint() && !isFull(board)){
 		
-		if(canHint()){
+			int x = (new Random ()).nextInt(8) + 1;
+			int y = (new Random ()).nextInt(8) + 1;
+			while(!isEmptyField(board, x, y)) {
+				x = (new Random ()).nextInt(8) + 1;
+				y = (new Random ()).nextInt(8) + 1;
+				System.out.println(x);
+			}        	
+		
 			System.out.println("HI");
 			board.getPlayerSudoku()[x][y] = board.getSolvedSudoku()[x][y];
 			numHints++;
@@ -70,6 +74,19 @@ public class HintSystem {
 	
 	private boolean canHint(){
 		return numHints < maxHints;
+	}
+	
+	
+	private boolean isFull(Sudoku board){
+		for(int i = 0; i < 9; i++) {
+			for(int j = 0; j < 9; j++) {
+				if(board.getPlayerSudoku()[i][j] == 0){
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 	/**

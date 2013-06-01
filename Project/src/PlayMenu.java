@@ -225,7 +225,8 @@ public class PlayMenu implements Serializable {
 	}
       
 	private void hintButton(final BackgroundJFrame f, GridBagConstraints c) {
-		hintButton = new JButton("Hint");
+		hintButton = new JButton();
+		hintButton.setText("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
 		c.gridx = 1;
 		c.gridy = 10;
 		f.add(hintButton, c);
@@ -236,10 +237,11 @@ public class PlayMenu implements Serializable {
 					hintButton.setText("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
 					for(int i = 0; i < 9; i++) {
 						for(int j = 0; j < 9; j++) {
-						if(sudokuBoard.getPlayerSudoku()[i][j] != 0)
-						listOfJTextAreaEntries[i][j].setText(String.valueOf(sudokuBoard.getPlayerSudoku()[i][j]));
+							if(sudokuBoard.getPlayerSudoku()[i][j] != 0)
+									listOfJTextAreaEntries[i][j].setText(String.valueOf(sudokuBoard.getPlayerSudoku()[i][j]));
 						}
-						}
+					}
+					updateUserSudoku(f);
 				}
 		});
 	}
