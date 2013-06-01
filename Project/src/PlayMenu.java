@@ -367,7 +367,7 @@ public class PlayMenu {
 	}
 	
 	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
-		//start a new thread
+
 		JLabel highScoreLabel = new JLabel();
 		
 		if(highScore == NOHIGHSCORE){
