@@ -266,7 +266,7 @@ public class PlayMenu implements Serializable {
 				final JTextField sudokuArea = listOfJTextAreaEntries[i][j];
 		
 				Font font;
-				if (sudokuBoard.getPlayerSudoku()[i][j] != 0) {
+				if (sudokuBoard.getUnsolvedSudoku()[i][j] != 0) {  //Enter in the details for reset board
 					sudokuArea.setText(Integer.toString(sudokuBoard.getPlayerSudoku()[i][j]));
 					sudokuArea.setEditable(false);
 					font = new Font("Verdana", Font.BOLD, 12);
@@ -274,6 +274,12 @@ public class PlayMenu implements Serializable {
 					sudokuArea.setEditable(true);
 					font = new Font("Verdana", Font.PLAIN, 12);
 				}
+				
+				if (sudokuBoard.getPlayerSudoku()[i][j] != 0 && sudokuBoard.getUnsolvedSudoku()[i][j] == 0) { //Add in player's details
+					sudokuArea.setText(Integer.toString(sudokuBoard.getPlayerSudoku()[i][j]));
+					font = new Font("Verdana", Font.PLAIN, 12);
+				}
+				
 				Document styleDoc = (sudokuArea).getDocument();
 				if (styleDoc instanceof AbstractDocument) {
 					doc = (AbstractDocument)styleDoc;

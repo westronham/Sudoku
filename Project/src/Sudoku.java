@@ -256,6 +256,10 @@ public boolean solve() {
 		return solvedSudoku;
 	}
 	
+	public int[][] getUnsolvedSudoku() {
+		return unsolvedSudoku;
+	}
+	
 	public int getDifficulty() {
 		return difficulty;
 	}
