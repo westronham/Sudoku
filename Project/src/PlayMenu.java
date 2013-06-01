@@ -374,6 +374,7 @@ public class PlayMenu {
 				}
 				if (listOfJTextAreaEntries[i][j].getText().trim().isEmpty()) {
 					if (sudokuBoard.getPlayerSudoku()[i][j] != 0) {
+						System.out.println("Backspaced on a number");
 						listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
 						int rowCount = 0;
 						int colCount = 0;
@@ -395,20 +396,35 @@ public class PlayMenu {
 								}
 							}
 						}
+						System.out.println("Boxcount = " + boxCount);
 						if (rowCount == 0) {
 							sudokuBoard.setRowUserValueConditions(i, j, userValue, false);
 						} else if (rowCount == 1) {
-							//make the other box turn white
+							for (int l = 0; l < 9; l++) {
+								if (listOfJTextAreaEntries[l][j].getText().compareTo(Integer.toString(userValue)) == 0) {
+									listOfJTextAreaEntries[l][j].setBackground(Color.WHITE);
+								}
+							}
 						}
 						if (colCount == 0) {
 							sudokuBoard.setColUserValueConditions(i, j, userValue, false);
 						} else if (colCount == 1) {
-							//make the other box turn white
+							for (int l = 0; l < 9; l++) {
+								if (listOfJTextAreaEntries[i][l].getText().compareTo(Integer.toString(userValue)) == 0) {
+									listOfJTextAreaEntries[i][l].setBackground(Color.WHITE);
+								}
+							}
 						}
 						if (boxCount == 0) {
 							sudokuBoard.setBoxUserValueConditions(i, j, userValue, false);
 						} else if (boxCount == 1) {
-							//make the other box turn white
+							for (int r = row; r < row + 3; r++) {
+								for (int c = col; c < col + 3; c++) {
+									if (listOfJTextAreaEntries[r][c].getText().compareTo(Integer.toString(userValue)) == 0) {
+										listOfJTextAreaEntries[r][c].setBackground(Color.WHITE);
+									}
+								}
+							}
 						}
 					}
 				} else {
@@ -440,21 +456,35 @@ public class PlayMenu {
 								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
 							} else if (rowCount == 1) {
 								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
-								//make the other box turn white
+								for (int l = 0; l < 9; l++) {
+									if (listOfJTextAreaEntries[l][j].getText().compareTo(Integer.toString(userValue)) == 0) {
+										listOfJTextAreaEntries[l][j].setBackground(Color.WHITE);
+									}
+								}
 							}
 							if (colCount == 0) {
 								sudokuBoard.setColUserValueConditions(i, j, userValue, false);
 								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
 							} else if (colCount == 1) {
 								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
-								//make the other box turn white
+								for (int l = 0; l < 9; l++) {
+									if (listOfJTextAreaEntries[i][l].getText().compareTo(Integer.toString(userValue)) == 0) {
+										listOfJTextAreaEntries[i][l].setBackground(Color.WHITE);
+									}
+								}
 							}
 							if (boxCount == 0) {
 								sudokuBoard.setBoxUserValueConditions(i, j, userValue, false);
 								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
 							} else if (boxCount == 1) {
 								listOfJTextAreaEntries[i][j].setBackground(Color.WHITE);
-								//make the other box turn white
+								for (int r = row; r < row + 3; r++) {
+									for (int c = col; c < col + 3; c++) {
+										if (listOfJTextAreaEntries[r][c].getText().compareTo(Integer.toString(userValue)) == 0) {
+											listOfJTextAreaEntries[r][c].setBackground(Color.WHITE);
+										}
+									}
+								}
 							}
 						}
 						if (sudokuBoard.checkRowUserValueConditions(i, j, textValue) == true) {
