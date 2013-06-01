@@ -41,7 +41,7 @@ public class PlayMenu {
   	Timer gameTimer;
   	long startTime;
   	long highScore; //for output
-	
+  	private final static long NOHIGHSCORE = 1999999999;
 	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
@@ -369,13 +369,18 @@ public class PlayMenu {
 	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		//start a new thread
 		JLabel highScoreLabel = new JLabel();
-		highScoreLabel.setText("best time: " + highScore/1000/60/60 + "h  " 
+		
+		if(highScore == NOHIGHSCORE){
+			highScoreLabel.setText("best time: ---");
+		} else {
+			highScoreLabel.setText("best time: " + highScore/1000/60/60 + "h  " 
 									+ highScore/1000/60%60 + "m  " + highScore/1000%60 + "s");
+		}
 		
 		Font font = new Font("Avenir", Font.BOLD, 16);
 		highScoreLabel.setFont(font);
 		
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 10;
 		c.gridwidth = 1;
 	
@@ -605,7 +610,7 @@ public class PlayMenu {
 			e.printStackTrace();
 		}
 		
-		return 99999999;
+		return NOHIGHSCORE;
 	}
 	
 	private boolean setHighScore(long newScore){
