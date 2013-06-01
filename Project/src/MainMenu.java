@@ -51,10 +51,9 @@ public class MainMenu {
 		this.playButton(f, c);
 		this.difficultyOptions(f, c);
 		this.loadButton(f, c);
-		this.resetScoreButton(f, c);
+		this.highScoresButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
-		this.showHighScore(f, c);
 		
 		f.setSize(720,700);
 		//f.pack();
@@ -184,30 +183,20 @@ public class MainMenu {
 	 * @param f
 	 * @param c
 	 */
-	private void resetScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		JButton exitButton = new JButton("Reset High Score");
+	private void highScoresButton (final BackgroundJFrame f, GridBagConstraints c) {
+		JButton exitButton = new JButton("High Scores");
 		c.gridx = 0;
 		c.gridy = 3;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					try {
-						FileOutputStream fileStream = new FileOutputStream("HighScore.ser");
-						ObjectOutputStream os = new ObjectOutputStream(fileStream);
-
-						os.writeObject(NOHIGHSCORE);
-						os.close();
-						highScoreLabel.setText("   ---");
-						
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					
+					f.getContentPane().removeAll();
+					SwingUtilities.updateComponentTreeUI(f);
+					HighScoreMenu p = new HighScoreMenu();
+					p.startHighScoreMenu(f);
+
 				}
 		});
 
@@ -232,8 +221,6 @@ public class MainMenu {
 	}
     
 	
-	
-	
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
 		c.gridx = 0;
@@ -246,56 +233,6 @@ public class MainMenu {
 				}
 		});
 	}
-	
-	/**
-	 * Simple shows the high score given to it from getHighScore method. 
-	 * @param f
-	 * @param c
-	 */
-	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
-	
-		highScoreLabel = new JLabel();
-		c.gridx = 1;
-		c.gridy = 3;
-		c.gridwidth = 1;
-	
-		
-		long highScore = getHighScore();
-		
-		if(highScore == NOHIGHSCORE){
-			highScoreLabel.setText("   ---");
-		} else {
-			highScoreLabel.setText("   " + highScore/1000/60/60 + "h  " 
-									+ highScore/1000/60%60 + "m  " + highScore/1000%60 + "s");
-		}
-		
-		Font font = new Font("Avenir", Font.BOLD, 14);
-		highScoreLabel.setFont(font);
-
-		f.add(highScoreLabel, c);
-	}
-	
-	/**
-	 * Gets the high score from input file "HIghScore.ser".
-	 * @return the high score retrieved
-	 */
-	private long getHighScore(){
-		try {
-			FileInputStream fileStream = new FileInputStream("HighScore.ser");
-			ObjectInputStream os = new ObjectInputStream(fileStream);
-			Object one = os.readObject();
-	
-			long highScore = (long) one;
-			os.close();
-			return highScore;
-	
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-		
-		return NOHIGHSCORE;
-	}
-	
 	
 	
 }

@@ -533,7 +533,7 @@ public class PlayMenu {
 			int mistakes = this.isCorrect();
 			if (mistakes == 0) {
 				//save high score
-				setHighScore(gameTimer.getTime());
+				saveHighScore(gameTimer.getTime());
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +
@@ -598,7 +598,16 @@ public class PlayMenu {
 	
 	private long getHighScore(){
 		try {
-			FileInputStream fileStream = new FileInputStream("HighScore.ser");
+			FileInputStream fileStream;
+			
+			if(sudokuBoard.getDifficulty() == 1){
+				fileStream = new FileInputStream("HighScore1.ser");
+			} else if (sudokuBoard.getDifficulty() == 2){
+				fileStream = new FileInputStream("HighScore2.ser");
+			} else {
+				fileStream = new FileInputStream("HighScore3.ser");
+			}
+			
 			ObjectInputStream os = new ObjectInputStream(fileStream);
 			Object one = os.readObject();
 	
@@ -613,13 +622,24 @@ public class PlayMenu {
 		return NOHIGHSCORE;
 	}
 	
-	private boolean setHighScore(long newScore){
+	private boolean saveHighScore(long newScore){
 		
 		if(newScore < highScore) { //if its less than high Score
 			try {
-				FileOutputStream fileStream = new FileOutputStream("HighScore.ser");
+				FileOutputStream fileStream;
+				System.out.println("!!");
+				if(sudokuBoard.getDifficulty() == 1){
+					System.out.println("Error1");
+					fileStream = new FileOutputStream("HighScore1.ser");
+				} else if (sudokuBoard.getDifficulty() == 2){
+					fileStream = new FileOutputStream("HighScore2.ser");
+				} else {
+					System.out.println("Error2");
+					fileStream = new FileOutputStream("HighScore3.ser");
+				}
+				
+				
 				ObjectOutputStream os = new ObjectOutputStream(fileStream);
-
 				os.writeObject(newScore);
 
 				os.close();
