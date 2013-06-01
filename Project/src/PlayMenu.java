@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.*;
 import java.awt.Font;
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
@@ -20,7 +18,7 @@ import javax.swing.text.PlainDocument;
  * When 
  * 
  */
-public class PlayMenu implements Serializable {
+public class PlayMenu {
 	private Sudoku sudokuBoard;
 	private JTextField[][] listOfJTextAreaEntries;
 	private HintSystem hintSystem;
@@ -328,7 +326,7 @@ public class PlayMenu implements Serializable {
 		//start a new thread
 		timeLabel = new JLabel();
 		
-		Font font = new Font("Dialog", Font.BOLD, 14);
+		Font font = new Font("Avenir", Font.BOLD, 16);
 		timeLabel.setFont(font);
 		
 		c.gridx = 8;

@@ -7,7 +7,7 @@ import java.util.Random;
  * @author Felix
  *
  */
-public class HintSystem implements Serializable {
+public class HintSystem{
 	
 	private int numHints;
 	private final int maxHints;
@@ -15,6 +15,11 @@ public class HintSystem implements Serializable {
 	private final static int MEDIUMHINTSNUM = 4;
 	private final static int HARDHINTSNUM = 0;
 	
+	
+	/**
+	 * Constructs a new hint system with max number of hints dependent of the given board's difficulty. 
+	 * @param board Sudoku board used to determine difficulty and maximum hints
+	 */
 	public HintSystem(Sudoku board){
 		
 		if(board.getDifficulty() == 1){
@@ -74,11 +79,19 @@ public class HintSystem implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * If the number of hints used hasn't surpassed the maximum.
+	 * @return true if the number of hints used hasn't surpassed the maximum.
+	 */
 	private boolean canHint(){
 		return numHints < maxHints;
 	}
 	
-	
+	/**
+	 * If the given Sudoku board is full return true, 
+	 * @param board the Sudoku board
+	 * @return true if the given Sudoku board is full
+	 */
 	private boolean isFull(Sudoku board){
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {

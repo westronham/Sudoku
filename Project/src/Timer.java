@@ -26,7 +26,7 @@ public class Timer implements Runnable {
 		time=0;
 		while(flag){
 			time=System.currentTimeMillis()-beginTime;
-			timeLabel.setText("time: 0" +time/1000/60/60 + " : 0" + time/1000/60%60 + " : " + time/1000%60);
+			timeLabel.setText("time: " + time/1000/60/60 + "h  " + time/1000/60%60 + "m  " + time/1000%60 + "s");
 			try{
 				Thread.sleep(1000);
 			}catch(InterruptedException e1){
