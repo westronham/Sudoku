@@ -142,7 +142,7 @@ public class PlayMenu {
 				  	board.setVisible(false);
 				  	checkbox.setVisible(false);
 				  	timeLabel.setVisible(false);
-				  	//gameTimer.pause();
+				  	gameTimer.pause();
 				  	
 				  	final JLabel pause = new JLabel("Game Paused");
 					f.getContentPane().add(pause);
@@ -162,7 +162,7 @@ public class PlayMenu {
 						  	board.setVisible(true);
 						  	checkbox.setVisible(true);
 						  	timeLabel.setVisible(true);
-						  	//gameTimer.resume();
+						  	gameTimer.resume();
 							
 						}
 					});
