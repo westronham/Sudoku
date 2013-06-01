@@ -138,6 +138,7 @@ public class PlayMenu {
 				  	checkbox.setVisible(false);
 				  	timeLabel.setVisible(false);
 				  	//gameTimer.pause();
+				  	
 				  	final JLabel pause = new JLabel("Game Paused");
 					f.getContentPane().add(pause);
 					final JButton returnB = new JButton("Resume Game");
@@ -503,6 +504,7 @@ public class PlayMenu {
 		if (count == 0) {
 			int mistakes = this.isCorrect();
 			if (mistakes == 0) {
+				
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +
