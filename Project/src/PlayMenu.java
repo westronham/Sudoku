@@ -229,8 +229,8 @@ public class PlayMenu {
 	private void hintButton(final BackgroundJFrame f, GridBagConstraints c) {
 		hintButton = new JButton();
 		hintButton.setText("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
-		c.gridx = 1;
-		c.gridy = 10;
+		c.gridx = 9;
+		c.gridy = 6;
 		f.add(hintButton, c);
 		hintButton.addActionListener(new
 			ActionListener() {
@@ -367,7 +367,7 @@ public class PlayMenu {
 		Font font = new Font("Avenir", Font.BOLD, 16);
 		highScoreLabel.setFont(font);
 		
-		c.gridx = 1;
+		c.gridx = 0;
 		c.gridy = 10;
 		c.gridwidth = 1;
 	
