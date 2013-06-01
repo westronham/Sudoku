@@ -61,7 +61,7 @@ public class MainMenu {
 	}
       
 	private void playButton(final BackgroundJFrame f, final GridBagConstraints c) {
-		JButton playButton = new JButton("Play Sudoku");
+		JButton playButton = new JButton("New Game");
 		c.gridx = 0;
 		c.gridy = 1;
 		c.ipady = 10;
@@ -138,7 +138,7 @@ public class MainMenu {
 	}
 	
 	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton instructionButton = new JButton("Resume Previous Game");
+		JButton instructionButton = new JButton("Continue Game");
 		c.gridx = 0;
 		c.gridy = 2;
 		c.insets = new Insets(10,0,0,0);
