@@ -46,7 +46,7 @@ public class InstructionsPage {
             + "<br><p>There is a timer that allows you to challenge yourself to solving the puzzle in the shortest time possible and your best time is saved so you can try and beat your previous records too.</p>"
             + "<br><p>If you need to step away from the computer you can pause the game with the ‘Pause Game’ button or you can ‘Save and Quit’ the game and return to it later by pressing ‘Continue Game’ in the Main Menu.</p>"
             + "<br><p>There is also a ‘Hint’ button which will fill in a random cell on the board for you. You only get a limited number of these so make sure you save them for a time of need!</p>"
-            + "<h1>Good Luck!</h1>"
+            + "<br><h1>Good Luck!</h1>"
             + "</html>");
         c.gridx = 2;
         c.gridwidth = 10;
