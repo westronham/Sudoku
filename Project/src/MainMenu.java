@@ -83,7 +83,7 @@ public class MainMenu {
 		difficultyError.setForeground(Color.red);
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 2;
+		c.gridwidth = 3;
 		f.getContentPane().add(difficultyError, c);
 		difficultyError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
@@ -96,7 +96,7 @@ public class MainMenu {
 		loadError.setForeground(Color.red);
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 2;
+		c.gridwidth = 3;
 		f.getContentPane().add(loadError, c);
 		loadError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
@@ -108,6 +108,7 @@ public class MainMenu {
 		c.gridx = 1;
 		c.gridy = 2;
 		c.ipady = 10;
+		c.gridwidth = 1;
 		f.add(modeCombo, c);
 		modeCombo.addActionListener(new
 				ActionListener() {

@@ -49,7 +49,7 @@ public class HighScoreMenu {
 		this.resetMediumScoreButton(f, c);
 		this.resetHardScoreButton(f, c);
 		this.backButton(f, c);
-		f.setSize(720,700);
+		//f.setSize(720,700);
 		//f.pack();
 		f.setVisible(true);
 	}
