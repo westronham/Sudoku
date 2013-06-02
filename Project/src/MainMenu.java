@@ -10,7 +10,7 @@ import javax.swing.*;
 public class MainMenu {
   	
 	private Sudoku sudoku;
-  	private JLabel difficultyError;
+  	private JLabel continueError;
   	private JLabel loadError;
   	private JButton playButton;
   	private JButton loadButton;
@@ -61,15 +61,15 @@ public class MainMenu {
 
 	private void errorMessage(BackgroundJFrame f, GridBagConstraints c) {
 		Font font = new Font("Papyrus", Font.BOLD, 14);
-		difficultyError = new JLabel("No Previous Game");
-		difficultyError.setFont(font);
-		difficultyError.setForeground(Color.red);
+		continueError = new JLabel("No Previous Game");
+		continueError.setFont(font);
+		continueError.setForeground(Color.red);
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 3;
 		c.insets = new Insets(0,0,100,0);
-		f.getContentPane().add(difficultyError, c);
-		difficultyError.setVisible(false);
+		f.getContentPane().add(continueError, c);
+		continueError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
 	}
 
@@ -105,7 +105,7 @@ public class MainMenu {
 						p.startPlayMenu(f);
 
 					} catch (ClassNotFoundException | IOException e) {
-						loadError.setVisible(true);
+						continueError.setVisible(true);
 						e.printStackTrace();
 					}
 
