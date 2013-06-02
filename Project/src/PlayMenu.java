@@ -79,7 +79,7 @@ public class PlayMenu {
 	}
       
 	private void saveQuitButton(final BackgroundJFrame f, GridBagConstraints c) {
-		saveButton = new JButton("Quit and Save");
+		saveButton = new JButton("Save & Quit");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 3;
@@ -310,6 +310,8 @@ public class PlayMenu {
 		c.gridx = 8;
 		c.gridy = 10;
 		c.gridwidth = 1;
+		c.weightx = 0;
+		c.weighty = 0;
 		gameTimer = new Timer(f, c, timeLabel);
 
 		f.add(timeLabel, c);
@@ -319,9 +321,9 @@ public class PlayMenu {
 	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel = new JLabel();
 		if(highScore == NOHIGHSCORE){
-			highScoreLabel.setText("best time: ---");
+			highScoreLabel.setText("Best Time: ---");
 		} else {
-			highScoreLabel.setText("best time: " + highScore/1000/60/60 + "h  " 
+			highScoreLabel.setText("Best Time: " + highScore/1000/60/60 + "h  " 
 									+ highScore/1000/60%60 + "m  " + highScore/1000%60 + "s");
 		}
 

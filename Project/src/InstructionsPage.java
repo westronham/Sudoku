@@ -46,13 +46,13 @@ public class InstructionsPage {
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(0, 100, 100, 0);
+        c.insets = new Insets(0, 80, 100, 0);
         f.add(label, c);
         f.pack();
 	}
 	
 	private void returnButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton returnButton = new JButton("Return");
+		JButton returnButton = new JButton("Back");
 		c.anchor = GridBagConstraints.PAGE_END;
 		c.gridwidth = 1;
 		c.gridx = 12;
