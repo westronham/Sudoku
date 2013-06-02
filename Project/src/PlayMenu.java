@@ -74,7 +74,7 @@ public class PlayMenu {
 		this.showTimer(f, c);
 		this.showHighScore(f, c); 
 
-		f.setSize(720,700);
+		f.setSize(820,800);
 		f.setVisible(true);
 	}
       

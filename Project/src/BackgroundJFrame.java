@@ -33,7 +33,7 @@ public class BackgroundJFrame extends JFrame {
 		setContentPane(new JLabel(new ImageIcon("image4.jpg")));
 		setLayout(new FlowLayout());
 		
-		setSize(620,600);
+		setSize(820,800);
 	}
 	
 	public void setBackgroundImage(String backgroundFile) {

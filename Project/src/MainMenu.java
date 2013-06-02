@@ -43,7 +43,7 @@ public class MainMenu {
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
 
-		f.setSize(720,700);
+		f.setSize(820,800);
 		//f.pack();
 		f.setVisible(true);
 	}

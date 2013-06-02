@@ -20,7 +20,7 @@ public class InstructionsPage {
 		this.instructionPanel(f, c);
 		this.returnButton(f, c);
 		
-		f.setSize(720,700);
+		f.setSize(820,800);
 		//f.pack();
 		f.setVisible(true);
 	}
