@@ -71,7 +71,6 @@ public class PlayMenu {
 		c.anchor = GridBagConstraints.EAST;
 		//c.weighty = 0.1;
 		c.weightx = 0.1;
-
 		this.saveQuitButton(f, c);
 		this.pauseButton(f, c);
 		this.restartButton(f, c);
@@ -178,7 +177,6 @@ public class PlayMenu {
 		c.gridx = 6;
 		c.gridy = 0;
 		c.gridwidth = 3;
-
 		f.add(restartButton, c);
 		restartButton.addActionListener(new
 			ActionListener() {
@@ -329,9 +327,7 @@ public class PlayMenu {
 	}
 
 	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
-
 		highScoreLabel = new JLabel();
-
 		if(highScore == NOHIGHSCORE){
 			highScoreLabel.setText("best time: ---");
 		} else {
@@ -341,11 +337,9 @@ public class PlayMenu {
 
 		Font font = new Font("Avenir", Font.BOLD, 16);
 		highScoreLabel.setFont(font);
-
 		c.gridx = 0;
 		c.gridy = 10;
 		c.gridwidth = 1;
-
 
 		f.add(highScoreLabel, c);
 
@@ -375,13 +369,12 @@ public class PlayMenu {
 					ObjectOutputStream os = new ObjectOutputStream(fileStream);
 					os.reset();
 					os.close();
-
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
+				
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +
@@ -485,7 +478,6 @@ public class PlayMenu {
 					System.out.println("Error2");
 					fileStream = new FileOutputStream("HighScore3.ser");
 				}
-
 
 				ObjectOutputStream os = new ObjectOutputStream(fileStream);
 				os.writeObject(newScore);

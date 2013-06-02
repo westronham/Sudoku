@@ -238,7 +238,6 @@ public class MainMenu {
 				}
 		});
 	}
-    
 
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
@@ -252,6 +251,5 @@ public class MainMenu {
 				}
 		});
 	}
-
 
 }
