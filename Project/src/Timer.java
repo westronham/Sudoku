@@ -4,7 +4,7 @@ public class Timer implements Runnable {
 	
 	private Thread thread;
 	private boolean flag=true;
-	public boolean pauseFlag=false;
+	private boolean pauseFlag;
 	private JLabel timeLabel;
 	private long time;
 	private long startTime;
@@ -15,6 +15,7 @@ public class Timer implements Runnable {
 	{
 		thread=new Thread(this);
 		this.timeLabel = timeLabel;
+		pauseFlag = false;
 	}
  
 	public void run(){

@@ -58,7 +58,6 @@ public class DifficultySelectMenu {
 		JLabel label = new JLabel("Choose Difficulty");
 		
 		Font font = new Font("Andalus", Font.BOLD, 40);
-		//label.setForeground(Color.red);
 		label.setFont(font);
 		c.gridx = 0;
 		c.gridy = 0;
@@ -80,7 +79,6 @@ public class DifficultySelectMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		//c.insets = new Insets(60,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -113,7 +111,6 @@ public class DifficultySelectMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		//c.insets = new Insets(50,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -146,7 +143,6 @@ public class DifficultySelectMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		//c.insets = new Insets(50,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
