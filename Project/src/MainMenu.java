@@ -11,7 +11,6 @@ public class MainMenu {
   	
 	private Sudoku sudoku;
   	private JLabel continueError;
-  	private JLabel loadError;
   	private JButton playButton;
   	private JButton loadButton;
   	private JButton highScoreButton;
