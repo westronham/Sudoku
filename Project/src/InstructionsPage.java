@@ -21,7 +21,6 @@ public class InstructionsPage {
 		this.returnButton(f, c);
 		
 		f.setSize(820,800);
-		//f.pack();
 		f.setVisible(true);
 	}
 	
@@ -30,16 +29,16 @@ public class InstructionsPage {
         label.setText("<html>"
             + "<h2>How To Play Sudoku</h2>"
             + "<p>Sudoku is a logic-based thinking game that requires the player to fill in the cells of a 9x9 grid with the numbers 1-9 such that:</p>"
-            + "<p>•	Each number appears only once in each row.</p>"
-            + "<p>•	Each number appears only once in each column.</p>"
-            + "<p>•	Each number appears only once in each of the 3x3 sub-grids.</p>"
-            + "<p>There is only one correct solution to each puzzle.</p>"
+            + "<br><p>•	Each number appears only once in each row.</p>"
+            + "<br><p>•	Each number appears only once in each column.</p>"
+            + "<br><p>•	Each number appears only once in each of the 3x3 sub-grids.</p>"
+            + "<br><p>There is only one correct solution to each puzzle.</p>"
             + "<h2>Using This Program</h2>"
             + "<p>To start a game, choose a difficulty and select New Game in the Main Menu. To fill in the cells of your Sudoku, click on cell you would like to fill and press the number on your keyboard.</p>"
-            + "<p>If you are unsure of your progress you can use the ‘Check Progress’ button to see if you are on the right track. If you find that you have lost yourself you can ‘Restart’ the game and try again.</p>"
-            + "<p>There is a timer that allows you to challenge yourself to solving the puzzle in the shortest time possible and your best time is saved so you can try and beat your previous records too.</p>"
-            + "<p>If you need to step away from the computer you can pause the game with the ‘Pause Game’ button or you can ‘Save and Quit’ the game and return to it later by pressing ‘Continue Game’ in the Main Menu.</p>"
-            + "<p>There is also a ‘Hint’ button which will fill in a random cell on the board for you. You only get a limited number of these so make sure you save them for a time of need!</p>"
+            + "<br><p>If you are unsure of your progress you can use the ‘Check Progress’ button to see if you are on the right track. If you find that you have lost yourself you can ‘Restart’ the game and try again.</p>"
+            + "<br><p>There is a timer that allows you to challenge yourself to solving the puzzle in the shortest time possible and your best time is saved so you can try and beat your previous records too.</p>"
+            + "<br><p>If you need to step away from the computer you can pause the game with the ‘Pause Game’ button or you can ‘Save and Quit’ the game and return to it later by pressing ‘Continue Game’ in the Main Menu.</p>"
+            + "<br><p>There is also a ‘Hint’ button which will fill in a random cell on the board for you. You only get a limited number of these so make sure you save them for a time of need!</p>"
             + "<h1>Good Luck!</h1>"
             + "</html>");
         c.gridx = 2;
@@ -47,6 +46,7 @@ public class InstructionsPage {
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(0, 100, 100, 0);
         f.add(label, c);
         f.pack();
 	}
@@ -54,9 +54,12 @@ public class InstructionsPage {
 	private void returnButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton returnButton = new JButton("Return");
 		c.anchor = GridBagConstraints.PAGE_END;
-		c.gridwidth = 2;
-		c.gridx = 10;
+		c.gridwidth = 1;
+		c.gridx = 12;
 		c.gridy = 10;
+		c.weightx = 0;
+		c.weighty = 0;
+		c.insets = new Insets(0, 0, 0, 0);
 		f.add(returnButton, c);
 		returnButton.addActionListener(new
 			ActionListener() {
