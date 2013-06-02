@@ -8,20 +8,20 @@ import java.util.Random;
  *
  */
 public class HintSystem{
-	
+
 	private int numHints;
 	private final int maxHints;
 	private final static int EASYHINTSNUM = 7;
 	private final static int MEDIUMHINTSNUM = 4;
 	private final static int HARDHINTSNUM = 0;
-	
-	
+
+
 	/**
 	 * Constructs a new hint system with max number of hints dependent of the given board's difficulty. 
 	 * @param board Sudoku board used to determine difficulty and maximum hints
 	 */
 	public HintSystem(Sudoku board){
-		
+
 		if(board.getDifficulty() == 1){
 			this.maxHints = EASYHINTSNUM;	
 		} else if (board.getDifficulty() == 2){
@@ -31,14 +31,14 @@ public class HintSystem{
 		} else {
 			this.maxHints = 0;
 		}
-	
+
 		numHints = 0;
 	}
-	
+
 	public void setHintsLeft (int n){
 		numHints = maxHints - n;
 	}
-	
+
 	/**
 	 * Get's the hint which is to fill in one location. 
 	 * @param board the given Sudoku board. 
@@ -47,9 +47,9 @@ public class HintSystem{
 	 * @return the updated board with the fill.
 	 */
 	public Sudoku getHint (Sudoku board){ //assumes number >0
-		
+
 		if(canHint() && !isFull(board)){
-		
+
 			int x = (new Random ()).nextInt(8) + 1;
 			int y = (new Random ()).nextInt(8) + 1;
 			while(!isEmptyField(board, x, y)) {
@@ -57,15 +57,15 @@ public class HintSystem{
 				y = (new Random ()).nextInt(8) + 1;
 				System.out.println(x);
 			}        	
-		
+
 			System.out.println("HI");
 			board.getPlayerSudoku()[x][y] = board.getSolvedSudoku()[x][y];
 			numHints++;
 		}
-		
+
 		return board;
 	}
-	
+
 	/**
 	 * Returns if a field in the player's board in the given Sudoku is empty.
 	 * @param board Sudoku board
@@ -79,7 +79,7 @@ public class HintSystem{
 		}
 		return false;
 	}
-	
+
 	/**
 	 * If the number of hints used hasn't surpassed the maximum.
 	 * @return true if the number of hints used hasn't surpassed the maximum.
@@ -87,7 +87,7 @@ public class HintSystem{
 	private boolean canHint(){
 		return numHints < maxHints;
 	}
-	
+
 	/**
 	 * If the given Sudoku board is full return true, 
 	 * @param board the Sudoku board
@@ -101,10 +101,10 @@ public class HintSystem{
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Returns the number of remainder of hints so far. 
 	 * @return

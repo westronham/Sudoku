@@ -25,9 +25,10 @@ public class MainMenu {
   	private SudokuImporter importer;
   	int[] sudokuFile;
   	private Sudoku sudoku;
-  	private JLabel error;
+  	private JLabel difficultyError;
   	private final static long NOHIGHSCORE = 1999999999;
   	private JLabel highScoreLabel;
+  	private JLabel loadError;
   	
 	public MainMenu() {
 		//Need to choose a board based on selected difficulty, not becasue we're passing from main
@@ -36,33 +37,33 @@ public class MainMenu {
 		sudokuFile = new int[81];
 		sudoku = new Sudoku();
 	}
-	
+
 	public void startMainMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image4.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
-		 
+
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(gridbag);
-		
+
 		c.fill = GridBagConstraints.BOTH;
-		
+
 		this.errorMessage(f, c);
+		this.loadFailError(f, c);
 		this.playButton(f, c);
 		this.difficultyOptions(f, c);
 		this.loadButton(f, c);
-		this.resetScoreButton(f, c);
+		this.highScoresButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
-		this.showHighScore(f, c);
-		
+
 		f.setSize(720,700);
 		//f.pack();
 		f.setVisible(true);
 	}
       
 	private void playButton(final BackgroundJFrame f, final GridBagConstraints c) {
-		JButton playButton = new JButton("Play Sudoku");
+		JButton playButton = new JButton("New Game");
 		c.gridx = 0;
 		c.gridy = 1;
 		c.ipady = 10;
@@ -74,31 +75,45 @@ public class MainMenu {
 					//Read difficulty from drop down menu, set difficulty = {1.2.3}
 					if (difficulty != 0) {
 						sudokuFile = importer.readSudoku(difficulty);
-						sudoku.initSudoku(sudokuFile, difficulty);
-						f.getContentPane().removeAll();
-						SwingUtilities.updateComponentTreeUI(f);
-						PlayMenu p = new PlayMenu(sudoku);
-						p.startPlayMenu(f);
+						if (sudokuFile != null) {
+							sudoku.initSudoku(sudokuFile, difficulty);
+							f.getContentPane().removeAll();
+							SwingUtilities.updateComponentTreeUI(f);
+							PlayMenu p = new PlayMenu(sudoku);
+							p.startPlayMenu(f);	
+						} else {
+							loadError.setVisible(true);
+						}
 					} else {
-						error.setVisible(true);
-							
-						//JOptionPane.showMessageDialog
-        				//(null,"Please choose a difficulty", "No Difficulty Selected", JOptionPane.PLAIN_MESSAGE);
+						difficultyError.setVisible(true);
 					}
 				}
 		});
 	}
-	
+
 	private void errorMessage(BackgroundJFrame f, GridBagConstraints c) {
 		Font font = new Font("Papyrus", Font.BOLD, 14);
-		error = new JLabel("Please select a difficulty from the drop down menu");
-		error.setFont(font);
-		error.setForeground(Color.red);
+		difficultyError = new JLabel("Please select a difficulty from the drop down menu");
+		difficultyError.setFont(font);
+		difficultyError.setForeground(Color.red);
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
-		f.getContentPane().add(error, c);
-		error.setVisible(false);
+		f.getContentPane().add(difficultyError, c);
+		difficultyError.setVisible(false);
+		SwingUtilities.updateComponentTreeUI(f);
+	}
+	
+	private void loadFailError(BackgroundJFrame f, GridBagConstraints c) {
+		Font font = new Font("Papyrus", Font.BOLD, 14);
+		loadError = new JLabel("Error: No valid files in directory");
+		loadError.setFont(font);
+		loadError.setForeground(Color.red);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 2;
+		f.getContentPane().add(loadError, c);
+		loadError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
 	}
 
@@ -116,17 +131,20 @@ public class MainMenu {
 						switch (s) {
 						case "Easy":
 							difficulty = 1;
-							error.setVisible(false);
+							difficultyError.setVisible(false);
+							loadError.setVisible(false);
 							System.out.println("Easy Difficulty selected, difficulty: " + difficulty);
 							break;
 						case "Normal":
 							difficulty = 2;
-							error.setVisible(false);
+							difficultyError.setVisible(false);
+							loadError.setVisible(false);
 							System.out.println("Normal Difficulty selected, difficulty: " + difficulty);
 							break;
 						case "Hard":
 							difficulty = 3;
-							error.setVisible(false);
+							difficultyError.setVisible(false);
+							loadError.setVisible(false);
 							System.out.println("Hard Difficulty selected, difficulty: " + difficulty);
 							break;
 						default:
@@ -137,9 +155,9 @@ public class MainMenu {
 					}
 			});
 	}
-	
+
 	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
-		JButton instructionButton = new JButton("Resume Previous Game");
+		JButton instructionButton = new JButton("Continue Game");
 		c.gridx = 0;
 		c.gridy = 2;
 		c.insets = new Insets(10,0,0,0);
@@ -154,27 +172,27 @@ public class MainMenu {
 						Object two = os.readObject();
 						Object three = os.readObject();
 						os.close();
-						
+
 						sudoku = (Sudoku) one;
 						int hintsLeft = (int) two;
 						long saveTime = (long) three;
-		
+
 						System.out.println("we have time: " + saveTime);
-				
+
 						PlayMenu p = new PlayMenu(sudoku);
 						p.setHintsLeft(hintsLeft);
 						p.setStartTime(saveTime);
-						
+
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
-						
+
 						p.startPlayMenu(f);
-	
+
 					} catch (ClassNotFoundException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				}
 		});
 	}
@@ -184,36 +202,26 @@ public class MainMenu {
 	 * @param f
 	 * @param c
 	 */
-	private void resetScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		JButton exitButton = new JButton("Reset High Score");
+	private void highScoresButton (final BackgroundJFrame f, GridBagConstraints c) {
+		JButton exitButton = new JButton("High Scores");
 		c.gridx = 0;
 		c.gridy = 3;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					try {
-						FileOutputStream fileStream = new FileOutputStream("HighScore.ser");
-						ObjectOutputStream os = new ObjectOutputStream(fileStream);
 
-						os.writeObject(NOHIGHSCORE);
-						os.close();
-						highScoreLabel.setText("   ---");
-						
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
+					f.getContentPane().removeAll();
+					SwingUtilities.updateComponentTreeUI(f);
+					HighScoreMenu p = new HighScoreMenu();
+					p.startHighScoreMenu(f);
+
 				}
 		});
 
 	}
-	
-	
+
+
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Instruction");
 		c.gridx = 0;
@@ -231,9 +239,7 @@ public class MainMenu {
 		});
 	}
     
-	
-	
-	
+
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
 		c.gridx = 0;
@@ -246,56 +252,6 @@ public class MainMenu {
 				}
 		});
 	}
-	
-	/**
-	 * Simple shows the high score given to it from getHighScore method. 
-	 * @param f
-	 * @param c
-	 */
-	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
-	
-		highScoreLabel = new JLabel();
-		c.gridx = 1;
-		c.gridy = 3;
-		c.gridwidth = 1;
-	
-		
-		long highScore = getHighScore();
-		
-		if(highScore == NOHIGHSCORE){
-			highScoreLabel.setText("   ---");
-		} else {
-			highScoreLabel.setText("   " + highScore/1000/60/60 + "h  " 
-									+ highScore/1000/60%60 + "m  " + highScore/1000%60 + "s");
-		}
-		
-		Font font = new Font("Avenir", Font.BOLD, 14);
-		highScoreLabel.setFont(font);
 
-		f.add(highScoreLabel, c);
-	}
-	
-	/**
-	 * Gets the high score from input file "HIghScore.ser".
-	 * @return the high score retrieved
-	 */
-	private long getHighScore(){
-		try {
-			FileInputStream fileStream = new FileInputStream("HighScore.ser");
-			ObjectInputStream os = new ObjectInputStream(fileStream);
-			Object one = os.readObject();
-	
-			long highScore = (long) one;
-			os.close();
-			return highScore;
-	
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-		
-		return NOHIGHSCORE;
-	}
-	
-	
-	
+
 }

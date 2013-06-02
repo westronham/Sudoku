@@ -33,6 +33,9 @@ public class SudokuBoard extends JPanel {
                     	boxRow = boxRow + 1;
                     }
                 	boxCell[i] = new JTextField();
+                	if (j % 2 == 0) {
+                		boxCell[i].setBackground(new Color(220, 220, 220));
+                	}
                     boxCell[i].setPreferredSize(new Dimension(30, 30));
                     add(boxCell[i]);
                     subGrids[boxCol][boxRow] = boxCell[i];

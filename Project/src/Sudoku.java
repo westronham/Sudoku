@@ -17,7 +17,7 @@ public class Sudoku implements Serializable {
 		unsolvedSudoku = new int[9][9];
 		solvedSudoku = new int[9][9];
 	}
-	
+
 	/*
 	 * We need to initialise a few things in our Sudoku before we can solve it
 	 * Firstly we need to load all the given values into the correct coordinates
@@ -37,23 +37,23 @@ public class Sudoku implements Serializable {
 		}
 		gridSize = unsolvedSudoku.length;
 		gridBoxSize = (int)Math.sqrt(gridSize);
-		
+
 		sudoku = cloneUnsolvedSudoku();
 		solvedSudoku = cloneUnsolvedSudoku();
-		
+
 		initConditionMatrices();
 		solve();
 	}
-	
+
 	public int[][] cloneUnsolvedSudoku (){
 		int[][] clonedSudoku = new int[9][9];
-		
+
 		for (int k = 0; k < gridSize; k++) {
 			clonedSudoku[k] = unsolvedSudoku[k].clone();
 		}
 		return clonedSudoku;
 	}
-	
+
 	/*
 	 * Simply prints the Sudoku. Used for debugging.
 	 */
@@ -65,7 +65,7 @@ public class Sudoku implements Serializable {
 			System.out.println();
 		}
 	}
-	
+
 	public void printSolvedSudoku() {
 		for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
@@ -74,7 +74,7 @@ public class Sudoku implements Serializable {
 			System.out.println();
 		}
 	}
-	
+
  /*
   * There are 3 different conditions we need to meet in order for a number to be valid
   * 	1) A number must only appear once in any row
@@ -88,15 +88,11 @@ public class Sudoku implements Serializable {
         rowMatrixSolution = new boolean[gridSize][gridSize];
         colMatrixSolution = new boolean[gridSize][gridSize];
         boxMatrixSolution = new boolean[gridSize][gridSize];
-        rowMatrixUser = new boolean[gridSize][gridSize];
-        colMatrixUser = new boolean[gridSize][gridSize];
-        boxMatrixUser = new boolean[gridSize][gridSize];
         for(int i = 0; i < sudoku.length; i++) {
             for(int j = 0; j < sudoku.length; j++) {
                 int value = sudoku[i][j];
                 if(value != 0) {
                     setSolutionValueConditions(i, j, value, true);
-                    setUserValueConditions(i, j, value, true);
                 }
             }
         }
@@ -114,46 +110,7 @@ public class Sudoku implements Serializable {
 	    colMatrixSolution[j][value - 1] = exists;
 	    boxMatrixSolution[findBoxNum(i, j)][value - 1] = exists;
 	}
-	
-	public void setUserValueConditions(int i, int j, int value, boolean exists) {
-	    rowMatrixUser[i][value - 1] = exists;
-	    colMatrixUser[j][value - 1] = exists;
-	    boxMatrixUser[findBoxNum(i, j)][value - 1] = exists;
-	}
-	
-	public void setRowUserValueConditions(int i, int j, int value, boolean exists) {
-		rowMatrixUser[i][value - 1] = exists;
-	}
-	
-	public void setColUserValueConditions(int i, int j, int value, boolean exists) {
-		colMatrixUser[j][value - 1] = exists;
-	}
-	
-	public void setBoxUserValueConditions(int i, int j, int value, boolean exists) {
-		boxMatrixUser[findBoxNum(i, j)][value - 1] = exists;
-	}
-	
-	public boolean checkColUserValueConditions(int i, int j, int value) {
-		if (rowMatrixUser[i][value - 1] == true) {
-			return true;
-		}
-		return false;
-	}
 
-	public boolean checkRowUserValueConditions(int i, int j, int value) {
-		if (colMatrixUser[j][value - 1] == true) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean checkBoxUserValueConditions(int i, int j, int value) {
-		if (boxMatrixUser[findBoxNum(i, j)][value - 1] == true) {
-			return true;
-		}
-		return false;
-	}
-	
 
 /*
  * Our solve algorithm is given the coordinates from which to solve onwards
@@ -219,7 +176,7 @@ public boolean solve() {
 	    int boxCol = j / gridBoxSize;
 	    return (boxRow * gridBoxSize) + boxCol;
 	}
-	
+
 	/*
 	 * Got it working
 	 */
@@ -228,12 +185,12 @@ public boolean solve() {
 			sudoku[k] = unsolvedSudoku[k].clone();
 		}
 	}
-	
+
 	//set check that it is a [9][9] array
 	public void setSudoku(int[][] board) {
 		sudoku = board;
 	}
-	
+
 	public boolean checkBoard(){
 		for(int i = 0; i < 9; i++)
         {
@@ -244,27 +201,27 @@ public boolean solve() {
       		 }
       	  }
         }
-		
+
 		return true;
 	}
-	
+
 	public int[][] getPlayerSudoku() {
 		return sudoku;
 	}
-	
+
 	public int[][] getSolvedSudoku() {
 		return solvedSudoku;
 	}
-	
+
 	public int[][] getUnsolvedSudoku() {
 		return unsolvedSudoku;
 	}
-	
+
 	public int getDifficulty() {
 		return difficulty;
 	}
-	
-	
+
+
 	private int difficulty;
 	private int[][] sudoku; 		//the player's board everytime it is updated
 	private int[][] unsolvedSudoku; //the original default board
@@ -274,7 +231,4 @@ public boolean solve() {
 	private boolean rowMatrixSolution[][];
     private boolean colMatrixSolution[][];
     private boolean boxMatrixSolution[][];
-    private boolean rowMatrixUser[][];
-    private boolean colMatrixUser[][];
-    private boolean boxMatrixUser[][];
 }

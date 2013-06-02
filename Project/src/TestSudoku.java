@@ -11,7 +11,7 @@ public class TestSudoku {
 			final BackgroundJFrame f = new BackgroundJFrame();
 			MainMenu mainMenu = new MainMenu();
 			mainMenu.startMainMenu(f);
-	
+
 	   }
-		
+
 }
