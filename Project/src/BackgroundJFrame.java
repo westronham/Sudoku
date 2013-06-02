@@ -23,6 +23,7 @@ public class BackgroundJFrame extends JFrame {
 		setTitle("Sudoku");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(820,800);
+		setResizable(false);
 	}
 	
 	public void setBackgroundImage(String backgroundFile) {

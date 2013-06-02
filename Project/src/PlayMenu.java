@@ -184,9 +184,12 @@ public class PlayMenu {
 	private void checkButton(final BackgroundJFrame f, GridBagConstraints c) {
 		checkButton = new JButton("Check Answer");
 		c.gridx = 9;
-		c.gridy = 4;
-		c.gridwidth =1;
+		c.gridy = 7;
+		c.gridwidth = 1;
+		c.gridheight = 2;
 		c.weightx = 0.01;
+		c.insets = new Insets(280, 0, -340, 0);
+		//c.ipady = 3;
 		f.add(checkButton, c);
 		checkButton.addActionListener(new
 			ActionListener() {
@@ -215,7 +218,11 @@ public class PlayMenu {
 		hintButton = new JButton();
 		hintButton.setText("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
 		c.gridx = 9;
-		c.gridy = 6;
+		c.gridy = 10;
+		c.gridwidth = 1;
+		c.gridheight = 2;
+		c.weightx = 0.01;
+		c.insets = new Insets(-360, 0, 300, 0);
 		f.add(hintButton, c);
 		hintButton.addActionListener(new
 			ActionListener() {
@@ -367,6 +374,7 @@ public class PlayMenu {
 					e.printStackTrace();
 				}
 				
+
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +

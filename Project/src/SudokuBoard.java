@@ -20,7 +20,7 @@ public class SudokuBoard extends JPanel {
         public static class BoardPart extends JPanel {
 
             public BoardPart(int j) {
-                setBorder(BorderFactory.createLineBorder(Color.GRAY));
+                setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 setLayout(new GridLayout(3, 3));
                 JTextField boxCell[] = new JTextField[9];
                 int boxCol = getBoxColCoordinate(j);
