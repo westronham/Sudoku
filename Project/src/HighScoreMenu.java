@@ -116,7 +116,6 @@ public class HighScoreMenu {
 	 */
 	private void showEasyHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel1 = new JLabel();
-
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -143,7 +142,6 @@ public class HighScoreMenu {
 	 */
 	private void showMediumHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel2 = new JLabel();
-
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -170,7 +168,6 @@ public class HighScoreMenu {
 	 */
 	private void showHardHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel3 = new JLabel();
-
 		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 1;

@@ -74,7 +74,6 @@ public class DifficultySelectMenu {
      */
 	private void playEasyButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Easy");
-
 		c.gridx = 0;
 		c.gridy = 1;
 		c.ipady = 10;
@@ -107,7 +106,6 @@ public class DifficultySelectMenu {
      */
 	private void playMediumButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Medium");
-
 		c.gridx = 0;
 		c.gridy = 2;
 		c.ipady = 10;
@@ -140,7 +138,6 @@ public class DifficultySelectMenu {
      */
 	private void playHardButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Hard");
-
 		c.gridx = 0;
 		c.gridy = 3;
 		c.ipady = 10;
@@ -172,7 +169,6 @@ public class DifficultySelectMenu {
 	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Back");
-
 		Font font = new Font("Avenir", Font.BOLD, 12);
 		exitButton.setFont(font);
 
@@ -200,7 +196,6 @@ public class DifficultySelectMenu {
 	 */
 	private void loadFailError(BackgroundJFrame f, GridBagConstraints c) {
 		Font font = new Font("Papyrus", Font.BOLD, 14);
-
 		loadError = new JLabel("Error: No valid files in directory");
 		loadError.setFont(font);
 		loadError.setForeground(Color.red);

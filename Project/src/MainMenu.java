@@ -70,8 +70,7 @@ public class MainMenu {
 				}
 		});
 	}
-
-
+	
 	/**
 	 * Error message that loads if there is no previous game. 
 	 * @param f The JFrame that the button is added to.
