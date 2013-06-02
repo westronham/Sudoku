@@ -105,7 +105,6 @@ public class MainMenu {
 
 					} catch (ClassNotFoundException | IOException e) {
 						continueError.setVisible(true);
-						e.printStackTrace();
 					}
 
 				}
