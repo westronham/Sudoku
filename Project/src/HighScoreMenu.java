@@ -15,18 +15,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-
+/**
+ * Displays high scores for three difficulties; easy, medium and hard. Has options
+ * to reset each high score.  
+ * @author Felix
+ *
+ */
 public class HighScoreMenu {
 
-	//private Sudoku SudokuBoards;
-  	int[] sudokuFile;
   	private final static long NOHIGHSCORE = 1999999999;
   	private JLabel highScoreLabel1;
   	private JLabel highScoreLabel2;
   	private JLabel highScoreLabel3;
   	
 	/**
-	 * starts up the High Score meny
+	 * starts up the High Score menu
 	 * @param f
 	 */
 	public void startHighScoreMenu(final BackgroundJFrame f) {
@@ -50,7 +53,6 @@ public class HighScoreMenu {
 		this.resetHardScoreButton(f, c);
 		this.backButton(f, c);
 
-		//f.pack();
 		f.setVisible(true);
 	}
      /**
@@ -231,10 +233,13 @@ public class HighScoreMenu {
 	 * @param c
 	 */
 	private void resetEasyScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
+		
 		JButton exitButton = new JButton("Reset");
+		
 		c.gridx = 0;
 		c.gridy = 2;
 		f.add(exitButton, c);
+		
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -263,10 +268,13 @@ public class HighScoreMenu {
 	 * @param c
 	 */
 	private void resetMediumScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
+		
 		JButton exitButton = new JButton("Reset");
+		
 		c.gridx = 1;
 		c.gridy = 2;
 		f.add(exitButton, c);
+		
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -295,10 +303,13 @@ public class HighScoreMenu {
 	 * @param c
 	 */
 	private void resetHardScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
+		
 		JButton exitButton = new JButton("Reset");
+		
 		c.gridx = 2;
 		c.gridy = 2;
 		f.add(exitButton, c);
+		
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -326,11 +337,14 @@ public class HighScoreMenu {
 	 * @param c
 	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
+		
 		JButton exitButton = new JButton("Back");
+		
 		c.gridx = 1;
 		c.gridy = 4;
 		c.gridheight = 2;
 		f.add(exitButton, c);
+		
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
