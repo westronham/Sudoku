@@ -9,11 +9,12 @@ import java.util.Scanner;
 
 
 public class SudokuImporter {
-	Scanner scanner;
-	static Random random;
-	int difficulty;
-	List<File> listOfFiles;
-	int randomNum;
+	
+	private Scanner scanner;
+	private  static Random random;
+	private int difficulty;
+	private List<File> listOfFiles;
+	private int randomNum;
 	
 	public SudokuImporter() {
 		random = new Random();

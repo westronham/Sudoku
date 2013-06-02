@@ -57,6 +57,8 @@ public class InstructionsPage {
 		c.weightx = 0;
 		c.weighty = 0;
 		c.insets = new Insets(0, 0, 0, 0);
+		c.ipadx = 30;
+		c.ipady = 20;
 		f.add(returnButton, c);
 		returnButton.addActionListener(new
 			ActionListener() {

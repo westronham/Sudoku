@@ -17,9 +17,9 @@ public class SudokuBoard extends JPanel {
             }
         }
 
-        public static class BoardPart extends JPanel {
+        private static class BoardPart extends JPanel {
 
-            public BoardPart(int j) {
+            private BoardPart(int j) {
                 setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 setLayout(new GridLayout(3, 3));
                 JTextField boxCell[] = new JTextField[9];
@@ -46,7 +46,7 @@ public class SudokuBoard extends JPanel {
         	return subGrids;
         }
         
-        public static int getBoxRowCoordinate(int j) {
+        private static int getBoxRowCoordinate(int j) {
         	if (j == 0) {
         		return 0;
         	} else if (j == 1) {
@@ -69,7 +69,7 @@ public class SudokuBoard extends JPanel {
         	return -1;
         }
         
-        public static int getBoxColCoordinate(int j) {
+        private static int getBoxColCoordinate(int j) {
         	if (j == 0) {
         		return 0;
         	} else if (j == 1) {

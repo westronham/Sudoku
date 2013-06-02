@@ -136,24 +136,20 @@ public class MainMenu {
 							difficulty = 1;
 							difficultyError.setVisible(false);
 							loadError.setVisible(false);
-							System.out.println("Easy Difficulty selected, difficulty: " + difficulty);
 							break;
 						case "Normal":
 							difficulty = 2;
 							difficultyError.setVisible(false);
 							loadError.setVisible(false);
-							System.out.println("Normal Difficulty selected, difficulty: " + difficulty);
 							break;
 						case "Hard":
 							difficulty = 3;
 							difficultyError.setVisible(false);
 							loadError.setVisible(false);
-							System.out.println("Hard Difficulty selected, difficulty: " + difficulty);
 							break;
 						default:
 							difficulty = 0;
 							loadError.setVisible(false);
-							System.out.println("No Difficulty selected, difficulty: " + difficulty);
 							break;
 						}
 					}
@@ -181,8 +177,6 @@ public class MainMenu {
 						sudoku = (Sudoku) one;
 						int hintsLeft = (int) two;
 						long saveTime = (long) three;
-
-						System.out.println("we have time: " + saveTime);
 
 						PlayMenu p = new PlayMenu(sudoku);
 						p.setHintsLeft(hintsLeft);

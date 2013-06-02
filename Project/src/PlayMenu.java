@@ -446,14 +446,11 @@ public class PlayMenu {
 		if(newScore < highScore) {
 			try {
 				FileOutputStream fileStream;
-				System.out.println("!!");
 				if(sudokuBoard.getDifficulty() == 1){
-					System.out.println("Error1");
 					fileStream = new FileOutputStream("HighScore1.ser");
 				} else if (sudokuBoard.getDifficulty() == 2){
 					fileStream = new FileOutputStream("HighScore2.ser");
 				} else {
-					System.out.println("Error2");
 					fileStream = new FileOutputStream("HighScore3.ser");
 				}
 

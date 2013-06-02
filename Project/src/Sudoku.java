@@ -1,17 +1,6 @@
 import java.io.Serializable;
 
-/*
- * Ideas of what to do next?
- * 1) We should make a 3rd Sudoku array for user input
- * 		That way if we want to check the solution it's easy, we just compare it to our Sudoku solutions
- * 		Every time the user types in a number in a cell in our GUI, it should write to the corresponding cell in the userSudoku 2d array
- * 2) Haven't gotten a generate sudoku algorithm. At the moment I'm thinking maybe we just focus on getting our GUI
- * 		and hints all done and if we have time we can do the generate sudoku algorithm.
- * 		We can make a folder for easy, medium, hard and have a heap of Sudoku txt files that the user can choose from at the start
- * 		A lot of Sudoku apps do this and if they ask us about why we chose to do this we can say it's because we can provide
- * 		updates to the user with more puzzles and also allows us greater control over things such as difficulty of puzzle that a user gets
- * 3) I'm going to read into saving, and also I'm going to try get the Sudoku grid into a Sudoku GUI rather than have it print the numbers like it does
- */
+
 public class Sudoku implements Serializable {
 	
 	public Sudoku () {

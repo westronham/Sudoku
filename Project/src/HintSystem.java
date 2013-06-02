@@ -54,7 +54,6 @@ public class HintSystem{
 			while(!isEmptyField(board, x, y)) {
 				x = (new Random ()).nextInt(8) + 1;
 				y = (new Random ()).nextInt(8) + 1;
-				System.out.println(x);
 			}        	
 
 			board.getPlayerSudoku()[x][y] = board.getSolvedSudoku()[x][y];
