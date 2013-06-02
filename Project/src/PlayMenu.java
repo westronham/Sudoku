@@ -104,6 +104,10 @@ public class PlayMenu {
 		c.gridy = 0;
 		c.gridwidth = 3;
 		c.gridheight = 1;  
+		
+		Font font = new Font("Avenir", Font.BOLD, 12);
+		saveButton.setFont(font);
+		
 		f.add(saveButton, c);
 		saveButton.addActionListener(new
 			ActionListener() {
@@ -497,6 +501,10 @@ public class PlayMenu {
 		return mistakes;
 	}
 
+	/**
+	 * Gets the high score from the ser file from input for the current Sudoku's difficulty.
+	 * @return the high score for the Sudoku's difficulty. 
+	 */
 	private long getHighScore(){
 		try {
 			FileInputStream fileStream;
@@ -523,6 +531,11 @@ public class PlayMenu {
 		return NOHIGHSCORE;
 	}
 
+	/**
+	 * Saves the new score if it is less than the current high score. 
+	 * @param newScore to save
+	 * @return if it was saved 
+	 */
 	private boolean saveHighScore(long newScore){
 
 		if(newScore < highScore) {

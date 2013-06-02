@@ -28,7 +28,7 @@ public class DifficultySelectMenu {
 	
 	/**
 	 * Initialise all the buttons and labels.
-	 * @param f
+	 * @param f The JFrame that the buttons/labels are added to.
 	 */
 	public void startDifficultySelectMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image.jpg");
@@ -51,8 +51,8 @@ public class DifficultySelectMenu {
 	
 	/**
 	 * Message for choosing difficulty. 
-	 * @param f
-	 * @param c
+	 * @param f The JFrame that the label is added to.
+	 * @param c The GridBagLayout constraints.
 	 */
 	private void displayMessage(BackgroundJFrame f, GridBagConstraints c) {
 		JLabel label = new JLabel("Choose Difficulty");
@@ -62,15 +62,15 @@ public class DifficultySelectMenu {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 1;
-		c.insets = new Insets(0, 0, 10, 0);
+		c.insets = new Insets(0, 0, 20, 0);
 
 		f.add(label, c);
 	}
 
     /**
      * Button for loading up an easy game. 
-     * @param f
-     * @param c
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
      */
 	private void playEasyButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Easy");
@@ -101,8 +101,8 @@ public class DifficultySelectMenu {
 	
 	/**
      * Button for loading up a medium game. 
-     * @param f
-     * @param c
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
      */
 	private void playMediumButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Medium");
@@ -133,8 +133,8 @@ public class DifficultySelectMenu {
 	
 	/**
      * Button for loading up an hard game. 
-     * @param f
-     * @param c
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
      */
 	private void playHardButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("Hard");
@@ -164,8 +164,8 @@ public class DifficultySelectMenu {
 	
 	/**
 	 * Loads up the main menu to go back. 
-	 * @param f
-	 * @param c
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
 	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
 		
@@ -190,6 +190,11 @@ public class DifficultySelectMenu {
 		});
 	}
 	
+	/**
+	 * Loads an error message that is hidden until set visible by errors.
+	 * @param f The JFrame that the label is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void loadFailError(BackgroundJFrame f, GridBagConstraints c) {
 		Font font = new Font("Papyrus", Font.BOLD, 14);
 		loadError = new JLabel("Error: No valid files in directory");
