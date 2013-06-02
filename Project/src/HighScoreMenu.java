@@ -60,7 +60,6 @@ public class HighScoreMenu {
       * @param c The GridBagLayout Constraints
       */
 	private void easyLabel(BackgroundJFrame f, GridBagConstraints c) {
-
 		JLabel highScoreLabel = new JLabel("   Easy");
 
 		Font font = new Font("Avenir", Font.BOLD, 16);
@@ -79,7 +78,6 @@ public class HighScoreMenu {
      * @param c The GridBagLayout Constraints
      */
 	private void mediumLabel(BackgroundJFrame f, GridBagConstraints c) {
-
 		JLabel highScoreLabel = new JLabel(" Medium");
 
 		Font font = new Font("Avenir", Font.BOLD, 16);
@@ -98,7 +96,6 @@ public class HighScoreMenu {
      * @param c The GridBagLayout Constraints
      */
 	private void hardLabel(BackgroundJFrame f, GridBagConstraints c) {
-
 		JLabel highScoreLabel = new JLabel("    Hard");
 
 		Font font = new Font("Avenir", Font.BOLD, 16);
@@ -118,12 +115,11 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void showEasyHighScore(BackgroundJFrame f, GridBagConstraints c) {
-
 		highScoreLabel1 = new JLabel();
+	
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
-
 
 		long highScore = getHighScore(1);
 
@@ -146,12 +142,11 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void showMediumHighScore(BackgroundJFrame f, GridBagConstraints c) {
-
 		highScoreLabel2 = new JLabel();
+		
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
-
 
 		long highScore = getHighScore(2);
 
@@ -174,8 +169,8 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void showHardHighScore(BackgroundJFrame f, GridBagConstraints c) {
-
 		highScoreLabel3 = new JLabel();
+		
 		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -232,7 +227,6 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void resetEasyScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		
 		JButton exitButton = new JButton("Reset");
 		
 		c.gridx = 0;
@@ -267,7 +261,6 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void resetMediumScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		
 		JButton exitButton = new JButton("Reset");
 		
 		c.gridx = 1;
@@ -302,7 +295,6 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void resetHardScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
-		
 		JButton exitButton = new JButton("Reset");
 		
 		c.gridx = 2;
@@ -336,7 +328,6 @@ public class HighScoreMenu {
 	 * @param c The GridBagLayout Constraints
 	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
-		
 		JButton exitButton = new JButton("Back");
 		
 		c.gridx = 1;
