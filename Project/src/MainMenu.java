@@ -6,7 +6,11 @@ import java.io.ObjectInputStream;
 
 import javax.swing.*;
 
-
+/**
+ * Menu that allows the user to select to play a new game, a previous game, view high scores, 
+ * read instructions, or exit the game. 
+ *
+ */
 public class MainMenu {
   	
 	private Sudoku sudoku;
@@ -17,6 +21,10 @@ public class MainMenu {
   	private JButton instructionButton;
   	private JButton exitButton;
 
+  	/**
+  	 * Initialises the buttons and labels for the Main Menu. 
+  	 * @param f The JFrame that the buttons/labels are added to.
+  	 */
 	public void startMainMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image4.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
@@ -24,19 +32,24 @@ public class MainMenu {
 		f.setLayout(gridbag);
 
 		c.fill = GridBagConstraints.BOTH;
-		
+
 		this.errorMessage(f, c);
 		this.playButton(f, c);
 		this.loadButton(f, c);
 		this.highScoresButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
-		
+
 		f.setLocationRelativeTo(null);
 		//f.pack();
 		f.setVisible(true);
 	}
-      
+    
+	/**
+	 * The button that loads up the difficulty select menu. 
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void playButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		playButton = new JButton("New Game");
 		c.gridx = 1;
@@ -44,7 +57,7 @@ public class MainMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		c.insets = new Insets(240,0,0,0);
+		c.insets = new Insets(230,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -53,11 +66,17 @@ public class MainMenu {
 					SwingUtilities.updateComponentTreeUI(f);
 					DifficultySelectMenu m = new DifficultySelectMenu();
 					m.startDifficultySelectMenu(f);	
-					
+
 				}
 		});
 	}
 
+
+	/**
+	 * Error message that loads if there is no previous game. 
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void errorMessage(BackgroundJFrame f, GridBagConstraints c) {
 		Font font = new Font("Papyrus", Font.BOLD, 14);
 		continueError = new JLabel("No Previous Game");
@@ -72,6 +91,11 @@ public class MainMenu {
 		SwingUtilities.updateComponentTreeUI(f);
 	}
 
+	/**
+	 * The button that loads the previous incomplete game. 
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
 		loadButton = new JButton("Continue Game");
 		c.gridx = 1;
@@ -113,8 +137,8 @@ public class MainMenu {
 
 	/**
 	 * Resets the high score by replacing the score with NOHIGHSCORE.
-	 * @param f
-	 * @param c
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
 	 */
 	private void highScoresButton (final BackgroundJFrame f, GridBagConstraints c) {
 		highScoreButton = new JButton("High Scores");
@@ -136,7 +160,11 @@ public class MainMenu {
 
 	}
 
-
+	/**
+	 * Button that loads the instruction page. 
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		instructionButton = new JButton("Instructions");
 		c.gridx = 1;
@@ -155,15 +183,20 @@ public class MainMenu {
 		});
 	}
 
+	/**
+	 * Button that closes the game.
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		exitButton = new JButton("Exit");
 		c.gridx = 1;
 		c.gridy = 14;
 		c.gridheight = 1;
-		
+
 		Font font = new Font("Avenir", Font.BOLD, 12);
 		exitButton.setFont(font);
-		
+
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {

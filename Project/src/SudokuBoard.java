@@ -5,10 +5,17 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * The grid representing the Sudoku Board.
+ */
 public class SudokuBoard extends JPanel {
 
     private static JTextField[][] subGrids = new JTextField[9][9];
     
+    /**
+     * The 3x3 sub-grid.
+     * @param sudoku The sudoku puzzle to be written to the board.
+     */
     public SudokuBoard(Sudoku sudoku) {
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setLayout(new GridLayout(3, 3));
@@ -18,9 +25,16 @@ public class SudokuBoard extends JPanel {
             add(boxGrid[i]);
         }
     }
-
+    
+    /**
+     * The Individual cells of the 3x3 sub-grid
+     */
     private static class BoardPart extends JPanel {
-
+    	
+    	/**
+    	 * The 3x3 sub-grid
+    	 * @param j The number of the sub-grid we are creating
+    	 */
         private BoardPart(int j) {
             setBorder(BorderFactory.createLineBorder(Color.BLACK));
             setLayout(new GridLayout(3, 3));
@@ -43,7 +57,12 @@ public class SudokuBoard extends JPanel {
             }
         }
     }
-        
+       
+    /**
+     * Gets the row of the first cell in the sub-grid
+     * @param j The number of the sub-grid
+     * @return Number of row
+     */
     private static int getBoxRowCoordinate(int j) {
     	if (j == 0) {
     		return 0;
@@ -67,6 +86,11 @@ public class SudokuBoard extends JPanel {
     	return -1;
     }
         
+    /**
+     * Gets the column of the first cell in the sub-grid
+     * @param j The number of the sub-grid
+     * @return Number of column
+     */
 	private static int getBoxColCoordinate(int j) {
 		if (j == 0) {
 			return 0;
