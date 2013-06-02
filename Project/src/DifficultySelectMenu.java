@@ -12,10 +12,9 @@ import javax.swing.SwingUtilities;
 
 /**
  * Displays up options for easy, medium and hard games. Option to go back. 
- * @author Felix
- *
  */
 public class DifficultySelectMenu {
+	
 	private SudokuImporter importer;
   	private int[] sudokuFile;
   	private Sudoku sudoku;
@@ -43,6 +42,7 @@ public class DifficultySelectMenu {
 		this.playMediumButton(f, c);
 		this.playHardButton(f, c);
 		this.backButton(f, c);
+		this.loadFailError(f, c);
 		
 		f.setLocationRelativeTo(null);
 
@@ -55,14 +55,15 @@ public class DifficultySelectMenu {
 	 * @param c
 	 */
 	private void displayMessage(BackgroundJFrame f, GridBagConstraints c) {
-		JLabel label = new JLabel("CHOOSE DIFFICULTY");
+		JLabel label = new JLabel("Choose Difficulty");
 		
-		Font font = new Font("Avenir", Font.BOLD, 20);
-		label.setForeground(Color.red);
+		Font font = new Font("Andalus", Font.BOLD, 40);
+		//label.setForeground(Color.red);
 		label.setFont(font);
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 1;
+		c.insets = new Insets(0, 0, 10, 0);
 
 		f.add(label, c);
 	}
@@ -79,7 +80,7 @@ public class DifficultySelectMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		c.insets = new Insets(60,0,0,0);
+		//c.insets = new Insets(60,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -112,7 +113,7 @@ public class DifficultySelectMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		c.insets = new Insets(50,0,0,0);
+		//c.insets = new Insets(50,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -145,7 +146,7 @@ public class DifficultySelectMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		c.insets = new Insets(50,0,0,0);
+		//c.insets = new Insets(50,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -179,6 +180,7 @@ public class DifficultySelectMenu {
 		c.gridx = 0;
 		c.gridy = 4;
 		c.gridheight = 1;
+		c.insets = new Insets(20, 0, 0, 0);
 		f.add(exitButton, c);
 		
 		exitButton.addActionListener(new
@@ -190,5 +192,19 @@ public class DifficultySelectMenu {
 					mainMenu.startMainMenu(f);
 				}
 		});
+	}
+	
+	private void loadFailError(BackgroundJFrame f, GridBagConstraints c) {
+		Font font = new Font("Papyrus", Font.BOLD, 14);
+		loadError = new JLabel("Error: No valid files in directory");
+		loadError.setFont(font);
+		loadError.setForeground(Color.red);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 4;
+		c.insets = new Insets(100,0,0,0);
+		f.getContentPane().add(loadError, c);
+		loadError.setVisible(false);
+		SwingUtilities.updateComponentTreeUI(f);
 	}
 }

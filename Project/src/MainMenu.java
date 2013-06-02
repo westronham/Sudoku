@@ -27,7 +27,6 @@ public class MainMenu {
 		c.fill = GridBagConstraints.BOTH;
 		
 		this.errorMessage(f, c);
-		this.loadFailError(f, c);
 		this.playButton(f, c);
 		this.loadButton(f, c);
 		this.highScoresButton(f, c);
@@ -71,20 +70,6 @@ public class MainMenu {
 		c.insets = new Insets(0,0,100,0);
 		f.getContentPane().add(difficultyError, c);
 		difficultyError.setVisible(false);
-		SwingUtilities.updateComponentTreeUI(f);
-	}
-	
-	private void loadFailError(BackgroundJFrame f, GridBagConstraints c) {
-		Font font = new Font("Papyrus", Font.BOLD, 14);
-		loadError = new JLabel("Error: No valid files in directory");
-		loadError.setFont(font);
-		loadError.setForeground(Color.red);
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 4;
-		c.insets = new Insets(0,0,100,0);
-		f.getContentPane().add(loadError, c);
-		loadError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
 	}
 
