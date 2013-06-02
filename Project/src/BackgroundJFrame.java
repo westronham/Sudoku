@@ -21,7 +21,6 @@ public class BackgroundJFrame extends JFrame {
 		}
 		
 		setTitle("Sudoku");
-		//setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(820,800);
 	}
