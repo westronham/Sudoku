@@ -104,6 +104,10 @@ public class PlayMenu {
 		c.gridy = 0;
 		c.gridwidth = 3;
 		c.gridheight = 1;  
+		
+		Font font = new Font("Avenir", Font.BOLD, 12);
+		saveButton.setFont(font);
+		
 		f.add(saveButton, c);
 		saveButton.addActionListener(new
 			ActionListener() {

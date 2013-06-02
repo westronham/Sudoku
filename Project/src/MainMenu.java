@@ -138,7 +138,7 @@ public class MainMenu {
 
 
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
-		instructionButton = new JButton("Instruction");
+		instructionButton = new JButton("Instructions");
 		c.gridx = 1;
 		c.gridy = 13;
 		c.insets = new Insets(10,0,0,0);
