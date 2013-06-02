@@ -62,20 +62,21 @@ public class MainMenu {
       
 	private void playButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		playButton = new JButton("New Game");
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 10;
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		if (difficultyError.isVisible()) {
+		/*if (difficultyError.isVisible()) {
 			c.insets = new Insets(100, 100, 0, 0);
 		} else if (loadError.isVisible()) {
-			c.insets = new Insets(0, 0, 0, 0);
+			c.insets = new Insets(100, 0, 0, 0);
 		} else {
 			c.insets = new Insets(240,0,0,0);
-		}
+		}*/
 		//c.weighty = 0;
 		//c.anchor = GridBagConstraints.CENTER;
+		c.insets = new Insets(240,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -91,7 +92,7 @@ public class MainMenu {
 							p.startPlayMenu(f);	
 						} else {
 							loadError.setVisible(true);
-							f.getContentPane().remove(playButton);
+							/*f.getContentPane().remove(playButton);
 							f.getContentPane().remove(modeCombo);
 							f.getContentPane().remove(loadButton);
 							f.getContentPane().remove(highScoreButton);
@@ -103,7 +104,7 @@ public class MainMenu {
 							loadButton(f, c);
 							highScoresButton(f, c);
 							instructionButton(f, c);
-							exitButton(f, c);
+							exitButton(f, c);*/
 						}
 					} else {
 						difficultyError.setVisible(true);
@@ -134,7 +135,7 @@ public class MainMenu {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 4;
-		c.insets = new Insets(0,0,300,0);
+		c.insets = new Insets(0,0,100,0);
 		f.getContentPane().add(loadError, c);
 		loadError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
@@ -143,7 +144,7 @@ public class MainMenu {
 	private void difficultyOptions(final BackgroundJFrame f, GridBagConstraints c) {
 		String[] options = {"Choose Difficulty", "Easy", "Normal", "Hard"};
 		modeCombo = new JComboBox(options);
-		c.gridx = 1;
+		c.gridx = 2;
 		c.gridy = 10;
 		c.ipady = 10;
 		c.gridwidth = 1;
@@ -184,7 +185,7 @@ public class MainMenu {
 
 	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
 		loadButton = new JButton("Continue Game");
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 11;
 		c.insets = new Insets(10,0,0,0);
 		c.gridheight = 1;
@@ -231,7 +232,7 @@ public class MainMenu {
 	 */
 	private void highScoresButton (final BackgroundJFrame f, GridBagConstraints c) {
 		highScoreButton = new JButton("High Scores");
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 12;
 		c.gridheight = 1;
 		f.add(highScoreButton, c);
@@ -252,7 +253,7 @@ public class MainMenu {
 
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		instructionButton = new JButton("Instruction");
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 13;
 		c.insets = new Insets(10,0,0,0);
 		c.gridheight = 1;
@@ -270,7 +271,7 @@ public class MainMenu {
 
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		exitButton = new JButton("Exit");
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 14;
 		c.gridheight = 1;
 		f.add(exitButton, c);
