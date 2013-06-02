@@ -44,7 +44,7 @@ public class MainMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		c.insets = new Insets(240,0,0,0);
+		c.insets = new Insets(230,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -66,7 +66,7 @@ public class MainMenu {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 3;
-		c.insets = new Insets(0,0,100,0);
+		c.insets = new Insets(0,0,20,0);
 		f.getContentPane().add(continueError, c);
 		continueError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
