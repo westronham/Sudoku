@@ -44,7 +44,7 @@ public class MainMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		c.insets = new Insets(230,0,0,0);
+		c.insets = new Insets(240,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
