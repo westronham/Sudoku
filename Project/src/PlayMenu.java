@@ -12,7 +12,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
 
 /**
- * The screen containing all the gameplay components
+ * The screen containing all the gameplay components.
  */
 public class PlayMenu {
 	
@@ -37,8 +37,8 @@ public class PlayMenu {
   	private final static long NOHIGHSCORE = 1999999999;
 	
   	/**
-  	 * Initialises the game screen
-  	 * @param SudokuBoard The Sudoku game that the user will be playing
+  	 * Initialises the game screen.
+  	 * @param SudokuBoard The Sudoku game that the user will be playing.
   	 */
 	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
@@ -52,8 +52,8 @@ public class PlayMenu {
 	}
 
 	/**
-	 * Sets the number of hints the user has left when loading a game
-	 * @param n The number of hints left
+	 * Sets the number of hints the user has left when loading a game.
+	 * @param n The number of hints left.
 	 */
 	public void setHintsLeft (int n){
 		hintSystem.setHintsLeft(n);
@@ -67,6 +67,10 @@ public class PlayMenu {
 		startTime = time;
 	}
    
+	/**
+	 * Starts the play menu.
+	 * @param f The JFrame on which all the components will go on.
+	 */
 	public void startPlayMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
@@ -87,7 +91,13 @@ public class PlayMenu {
 
 		f.setVisible(true);
 	}
-      
+    
+	/**
+	 * The 'Save & Quit' button. 
+	 * Saves progress and returns to the main menu.
+	 * @param f The JFrame that the button is added to.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void saveQuitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		saveButton = new JButton("Save & Quit");
 		c.gridx = 0;
@@ -120,6 +130,12 @@ public class PlayMenu {
 		});
 	}
 
+	/**
+	 * The 'Pause' button.
+	 * Pauses the game and takes the player to the pause screen.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
 		pauseButton = new JButton("Pause");
 		c.gridx = 3;
@@ -166,7 +182,13 @@ public class PlayMenu {
 
 		});
 	}
-      
+     
+	/**
+	 * The 'Restart' button.
+	 * Resets the board, timer and remaining hints number.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void restartButton(final BackgroundJFrame f, GridBagConstraints c) {
 		restartButton = new JButton("Restart");
 		c.gridx = 6;
@@ -185,7 +207,12 @@ public class PlayMenu {
 		});
 	}
       
-  
+	/**
+	 * The 'Check Progress' button.
+	 * Informs the user whether the current board is correct or not.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void checkButton(final BackgroundJFrame f, GridBagConstraints c) {
 		checkButton = new JButton("Check Answer");
 		c.gridx = 9;
@@ -216,7 +243,13 @@ public class PlayMenu {
 
 		});
 	}
-      
+    
+	/**
+	 * The 'Hint' button.
+	 * Fills in a random cell on the Sudoku board.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void hintButton(final BackgroundJFrame f, GridBagConstraints c) {
 		hintButton = new JButton("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
 		c.gridx = 9;
@@ -241,7 +274,12 @@ public class PlayMenu {
 				}
 		});
 	}
-       
+    
+	/**
+	 * The Sudoku board.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void sudokuBoard(final BackgroundJFrame f, GridBagConstraints c) {
 		board = new SudokuBoard(sudokuBoard); 
 		c.gridx = 0;
@@ -304,7 +342,12 @@ public class PlayMenu {
 			}
 		}
 	}
-
+	
+	/**
+	 * The 'Timer' counting the number of seconds the player takes to complete the game.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void showTimer(BackgroundJFrame f, GridBagConstraints c) {
 		timeLabel = new JLabel();
 		Font font = new Font("Avenir", Font.BOLD, 16);
@@ -320,7 +363,12 @@ public class PlayMenu {
 		f.add(timeLabel, c);
 		gameTimer.start(startTime);
 	}
-
+	
+	/**
+	 * Shows the player's highest score at the current difficulty.
+	 * @param f The JFrame.
+	 * @param c The GridBagLayout constraints.
+	 */
 	private void showHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel = new JLabel();
 		if(highScore == NOHIGHSCORE){
@@ -340,6 +388,10 @@ public class PlayMenu {
 
 	}
 
+	/**
+	 * Updates the Sudoku board every time the player inserts a number into the board.
+	 * @param f The JFrame.
+	 */
 	private void updateUserSudoku(BackgroundJFrame f) {
 		int count = 0;
 		for(int i = 0; i < 9; i++) {
@@ -403,6 +455,10 @@ public class PlayMenu {
 		System.out.println();
 	}
 
+	/**
+	 * Determines whether the player's Sudoku puzzle is correct.
+	 * @return Returns the number of mistakes in the Sudoku board.
+	 */
 	private int isCorrect() {
 		int mistakes = 0;
 		for (int i = 0; i < 9; i++) {
@@ -415,6 +471,10 @@ public class PlayMenu {
 		return mistakes;
 	}
 
+	/**
+	 * Determines whether the filled in cells of the Sudoku board are correct.
+	 * @return Returns the number of mistakes in the Sudoku board.
+	 */
 	private int checkProgress() {
 		int mistakes = 0;
 		for (int i = 0; i < 9; i++) {
