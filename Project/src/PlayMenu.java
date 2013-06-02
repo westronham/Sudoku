@@ -136,7 +136,7 @@ public class PlayMenu {
 	 * @param f The JFrame.
 	 * @param c The GridBagLayout constraints.
 	 */
-	private void pauseButton(final BackgroundJFrame f, GridBagConstraints c) {
+	private void pauseButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		pauseButton = new JButton("Pause");
 		c.gridx = 3;
 		c.gridy = 0;
@@ -157,8 +157,16 @@ public class PlayMenu {
 				  	gameTimer.pause();
 
 				  	final JLabel pause = new JLabel("Game Paused");
+				  	pause.setFont(new Font("Papyrus", Font.BOLD, 30));
 					f.getContentPane().add(pause);
 					final JButton returnB = new JButton("Resume Game");
+					c.anchor = GridBagConstraints.PAGE_END;
+					c.ipadx = 30;
+					c.ipady = 20;
+					c.gridwidth = 1;
+					c.weightx = 0;
+					c.weighty = 0;
+					c.insets = new Insets(50, 0, 0, 0);
 					returnB.addActionListener(new ActionListener() {
 
 						public void actionPerformed(ActionEvent arg0) {
@@ -176,7 +184,7 @@ public class PlayMenu {
 
 						}
 					});
-					f.getContentPane().add(returnB);
+					f.getContentPane().add(returnB, c);
 					SwingUtilities.updateComponentTreeUI(f);
 				}
 
