@@ -103,7 +103,7 @@ public class HintSystem{
 
 	/**
 	 * Returns the number of remainder of hints so far. 
-	 * @return
+	 * @return Number of hints remaining
 	 */
 	public int getNumHintsLeft(){
 		return maxHints - numHints;

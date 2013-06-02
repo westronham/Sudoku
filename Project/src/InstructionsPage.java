@@ -3,9 +3,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-
+/**
+ * Class that holds all the information contained on the Instruction Page
+ */
 public class InstructionsPage {
 	
+	/**
+	 * Initialises the Instruction Page
+	 * @param f The JFrame on which all the pages components will be displayed
+	 */
 	public void startInstructionsPage(BackgroundJFrame f) {
 		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
@@ -20,6 +26,11 @@ public class InstructionsPage {
 		f.setVisible(true);
 	}
 	
+	/**
+	 * The instructions that will be visible to the player
+	 * @param f The JFrame
+	 * @param c The GridBagLayout constraints
+	 */
 	private void instructionPanel(BackgroundJFrame f, GridBagConstraints c) {
 		JLabel label = new JLabel();
         label.setText("<html>"
@@ -46,6 +57,11 @@ public class InstructionsPage {
         f.add(label, c);
 	}
 	
+	/**
+	 * The button taking the player to the main menu
+	 * @param f The JFrame
+	 * @param c The GridBagLayout constraints
+	 */
 	private void returnButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton returnButton = new JButton("Back");
 		c.anchor = GridBagConstraints.PAGE_END;

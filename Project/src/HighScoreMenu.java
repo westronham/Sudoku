@@ -29,7 +29,7 @@ public class HighScoreMenu {
   	
 	/**
 	 * starts up the High Score menu
-	 * @param f
+	 * @param f The JFrame
 	 */
 	public void startHighScoreMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image.jpg");
@@ -56,8 +56,8 @@ public class HighScoreMenu {
 	}
      /**
       * Label for "easy" 
-      * @param f
-      * @param c
+      * @param f The JFrame
+      * @param c The GridBagLayout Constraints
       */
 	private void easyLabel(BackgroundJFrame f, GridBagConstraints c) {
 
@@ -75,8 +75,8 @@ public class HighScoreMenu {
 
     /**
      * Label for "medium" 
-     * @param f
-     * @param c
+     * @param f The JFrame
+     * @param c The GridBagLayout Constraints
      */
 	private void mediumLabel(BackgroundJFrame f, GridBagConstraints c) {
 
@@ -94,8 +94,8 @@ public class HighScoreMenu {
 
     /**
      * Label for "hard" 
-     * @param f
-     * @param c
+     * @param f The JFrame
+     * @param c The GridBagLayout Constraints
      */
 	private void hardLabel(BackgroundJFrame f, GridBagConstraints c) {
 
@@ -114,8 +114,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Simple shows the easy high score given to it from getHighScore method. 
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void showEasyHighScore(BackgroundJFrame f, GridBagConstraints c) {
 
@@ -142,8 +142,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Simple shows the medium high score given to it from getHighScore method. 
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void showMediumHighScore(BackgroundJFrame f, GridBagConstraints c) {
 
@@ -170,8 +170,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Simple shows the hard high score given to it from getHighScore method. 
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void showHardHighScore(BackgroundJFrame f, GridBagConstraints c) {
 
@@ -228,8 +228,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Resets the easy high score by replacing the score with NOHIGHSCORE.
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void resetEasyScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
 		
@@ -263,8 +263,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Resets the medium high score by replacing the score with NOHIGHSCORE.
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void resetMediumScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
 		
@@ -298,8 +298,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Resets the hard high score by replacing the score with NOHIGHSCORE.
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void resetHardScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
 		
@@ -332,8 +332,8 @@ public class HighScoreMenu {
 
 	/**
 	 * Loads up the main menu. 
-	 * @param f
-	 * @param c
+	 * @param f The JFrame
+	 * @param c The GridBagLayout Constraints
 	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
 		

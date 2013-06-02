@@ -11,7 +11,9 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
 
-
+/**
+ * The screen containing all the gameplay components
+ */
 public class PlayMenu {
 	
 	private Sudoku sudokuBoard;
@@ -34,21 +36,33 @@ public class PlayMenu {
   	private long highScore;
   	private final static long NOHIGHSCORE = 1999999999;
 	
+  	/**
+  	 * Initialises the game screen
+  	 * @param SudokuBoard The Sudoku game that the user will be playing
+  	 */
 	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
 		this.hintSystem = new HintSystem(SudokuBoard);
 		this.difficulty = SudokuBoard.getDifficulty();
-		importer = new SudokuImporter();
-		sudokuFile = new int[81];
-		startTime = 0;
-		highScore = getHighScore();
+		this.importer = new SudokuImporter();
+		this.sudokuFile = new int[81];
+		this.startTime = 0;
+		this.highScore = getHighScore();
 	}
 
+	/**
+	 * Sets the number of hints the user has left when loading a game
+	 * @param n The number of hints left
+	 */
 	public void setHintsLeft (int n){
 		hintSystem.setHintsLeft(n);
 	}
 
+	/**
+	 * Sets the time to resume gameplay from when resuming a previous game
+	 * @param time The time on the timer when the last game was saved
+	 */
 	public void setStartTime (long time){
 		startTime = time;
 	}

@@ -1,8 +1,14 @@
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+/**
+ * Custom JFrame that allows for a background image
+ */
 public class BackgroundJFrame extends JFrame {
 	
+	/**
+	 * Initialises the JFrame
+	 */
 	public BackgroundJFrame() {
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -12,13 +18,9 @@ public class BackgroundJFrame extends JFrame {
 		        }
 		    }
 		} catch (UnsupportedLookAndFeelException e) {
-		    // handle exception
 		} catch (ClassNotFoundException e) {
-		    // handle exception
 		} catch (InstantiationException e) {
-		    // handle exception
 		} catch (IllegalAccessException e) {
-		    // handle exception
 		}
 		
 		setTitle("Sudoku");
@@ -27,6 +29,10 @@ public class BackgroundJFrame extends JFrame {
 		setResizable(false);
 	}
 	
+	/**
+	 * Changes the background image
+	 * @param backgroundFile The image file that the background will be changed to
+	 */
 	public void setBackgroundImage(String backgroundFile) {
 		setContentPane(new JLabel(new ImageIcon(backgroundFile)));
 	}
