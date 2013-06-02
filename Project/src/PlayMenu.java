@@ -12,12 +12,6 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
 
 
-/*TODO: We need to restrict input to jTextArea to numbers only
- *"Finish and Check Answer" should ask sudoku if it is solved correctly, if not 
- *
- * When 
- * 
- */
 public class PlayMenu {
 	private Sudoku sudokuBoard;
 	private JTextField[][] listOfJTextAreaEntries;
@@ -108,10 +102,8 @@ public class PlayMenu {
 						MainMenu mainMenu = new MainMenu();
 						mainMenu.startMainMenu(f);
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -486,10 +478,8 @@ public class PlayMenu {
 				return true;
 
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

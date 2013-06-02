@@ -19,11 +19,7 @@ import javax.swing.SwingUtilities;
 public class HighScoreMenu {
 
 	//private Sudoku SudokuBoards;
-  	private int difficulty;
-  	private SudokuImporter importer;
   	int[] sudokuFile;
-  	private Sudoku sudoku;
-  	private JLabel error;
   	private final static long NOHIGHSCORE = 1999999999;
   	private JLabel highScoreLabel1;
   	private JLabel highScoreLabel2;
@@ -251,10 +247,8 @@ public class HighScoreMenu {
 						highScoreLabel1.setText("      ---");
 
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -285,10 +279,8 @@ public class HighScoreMenu {
 						highScoreLabel2.setText("      ---");
 
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -319,10 +311,8 @@ public class HighScoreMenu {
 						highScoreLabel3.setText("      ---");
 
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 

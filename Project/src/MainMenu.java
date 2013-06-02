@@ -1,23 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Scanner;
 
 import javax.swing.*;
-import javax.swing.UIManager.LookAndFeelInfo;
 
-/*TODO: Need to have working;
- * Read in difficulty from drop down menu when we click "Play Sudoku"
- * 
- */
 
 public class MainMenu {
 	//private Sudoku SudokuBoards;
@@ -26,8 +14,6 @@ public class MainMenu {
   	int[] sudokuFile;
   	private Sudoku sudoku;
   	private JLabel difficultyError;
-  	private final static long NOHIGHSCORE = 1999999999;
-  	private JLabel highScoreLabel;
   	private JLabel loadError;
   	
 	public MainMenu() {
@@ -149,6 +135,7 @@ public class MainMenu {
 							break;
 						default:
 							difficulty = 0;
+							loadError.setVisible(false);
 							System.out.println("No Difficulty selected, difficulty: " + difficulty);
 							break;
 						}
@@ -189,7 +176,7 @@ public class MainMenu {
 						p.startPlayMenu(f);
 
 					} catch (ClassNotFoundException | IOException e) {
-						// TODO Auto-generated catch block
+
 						e.printStackTrace();
 					}
 
