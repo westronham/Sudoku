@@ -18,7 +18,7 @@ public class Timer implements Runnable {
 		pauseFlag = false;
 	}
  
-	public void run(){
+	public void run() {
 		currentTime=System.currentTimeMillis();
 		beginTime=currentTime - startTime;
 		time=0;
@@ -36,7 +36,7 @@ public class Timer implements Runnable {
 					try{
 						Thread.sleep(100);
 						beginTime+=100;
-					}catch(InterruptedException e){
+					}catch(InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
@@ -44,16 +44,16 @@ public class Timer implements Runnable {
 		}
 	}
  
-	public void start(long startTime){
+	public void start(long startTime) {
 		this.startTime = startTime;
 		thread.start();
 	}
  
-	public void pause(){
+	public void pause() {
 		pauseFlag = true;
 	}
 
-	public void resume(){
+	public void resume() {
 		pauseFlag = false;
 	}
 
@@ -61,7 +61,7 @@ public class Timer implements Runnable {
 		flag=false;
 	}
 	
-	public void setTime(long time){
+	public void setTime(long time) {
 		this.time = time;
 	}
 	
