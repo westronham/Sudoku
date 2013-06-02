@@ -8,7 +8,6 @@ import javax.swing.*;
 
 
 public class MainMenu {
-	//private Sudoku SudokuBoards;
   	private int difficulty;
   	private SudokuImporter importer;
   	int[] sudokuFile;
@@ -17,8 +16,6 @@ public class MainMenu {
   	private JLabel loadError;
   	
 	public MainMenu() {
-		//Need to choose a board based on selected difficulty, not becasue we're passing from main
-		//this.SudokuBoards = boards;
 		importer = new SudokuImporter();
 		sudokuFile = new int[81];
 		sudoku = new Sudoku();
@@ -29,7 +26,7 @@ public class MainMenu {
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(gridbag);
 
 		c.fill = GridBagConstraints.BOTH;
@@ -43,7 +40,8 @@ public class MainMenu {
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
 
-		f.setSize(820,800);
+		//f.setSize(820,800);
+		f.setLocationRelativeTo(null);
 		//f.pack();
 		f.setVisible(true);
 	}
@@ -51,9 +49,10 @@ public class MainMenu {
 	private void playButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		JButton playButton = new JButton("New Game");
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.ipady = 10;
 		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.SOUTH;
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
@@ -107,8 +106,8 @@ public class MainMenu {
 		String[] options = {"Choose Difficulty", "Easy", "Normal", "Hard"};
 		final JComboBox modeCombo = new JComboBox(options);
 		c.gridx = 1;
-		c.gridy = 1;
-		c.ipady = 0;
+		c.gridy = 2;
+		c.ipady = 10;
 		f.add(modeCombo, c);
 		modeCombo.addActionListener(new
 				ActionListener() {
@@ -146,7 +145,7 @@ public class MainMenu {
 	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Continue Game");
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.insets = new Insets(10,0,0,0);
 		f.add(instructionButton, c);
 		instructionButton.addActionListener(new
@@ -192,7 +191,7 @@ public class MainMenu {
 	private void highScoresButton (final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("High Scores");
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {
@@ -212,7 +211,7 @@ public class MainMenu {
 	private void instructionButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton instructionButton = new JButton("Instruction");
 		c.gridx = 0;
-		c.gridy = 4;
+		c.gridy = 5;
 		c.insets = new Insets(10,0,0,0);
 		f.add(instructionButton, c);
 		instructionButton.addActionListener(new
@@ -229,7 +228,7 @@ public class MainMenu {
 	private void exitButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Exit");
 		c.gridx = 0;
-		c.gridy = 5;
+		c.gridy = 6;
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {

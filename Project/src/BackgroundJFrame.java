@@ -1,4 +1,3 @@
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -21,18 +20,9 @@ public class BackgroundJFrame extends JFrame {
 		    // handle exception
 		}
 		
-		//this.backgroundFile = backgroundFile;
 		setTitle("Sudoku");
-		setSize(400,400);
-		setLocationRelativeTo(null);
-		pack();
+		//setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
-		
-		setLayout(new BorderLayout());
-		setContentPane(new JLabel(new ImageIcon("image4.jpg")));
-		setLayout(new FlowLayout());
-		
 		setSize(820,800);
 	}
 	

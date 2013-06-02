@@ -128,7 +128,6 @@ public class PlayMenu {
 				  	checkButton.setVisible(false);
 				  	hintButton.setVisible(false);
 				  	board.setVisible(false);
-				  	checkbox.setVisible(false);
 				  	timeLabel.setVisible(false);
 				  	highScoreLabel.setVisible(false);
 				  	gameTimer.pause();
@@ -148,7 +147,6 @@ public class PlayMenu {
 						  	checkButton.setVisible(true);
 						  	hintButton.setVisible(true);
 						  	board.setVisible(true);
-						  	checkbox.setVisible(true);
 						  	timeLabel.setVisible(true);
 						  	highScoreLabel.setVisible(true);
 						  	gameTimer.resume();
