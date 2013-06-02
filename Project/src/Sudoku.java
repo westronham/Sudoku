@@ -13,6 +13,7 @@ import java.io.Serializable;
  * 3) I'm going to read into saving, and also I'm going to try get the Sudoku grid into a Sudoku GUI rather than have it print the numbers like it does
  */
 public class Sudoku implements Serializable {
+	
 	public Sudoku () {
 		unsolvedSudoku = new int[9][9];
 		solvedSudoku = new int[9][9];
@@ -45,7 +46,7 @@ public class Sudoku implements Serializable {
 		solve();
 	}
 
-	public int[][] cloneUnsolvedSudoku (){
+	private int[][] cloneUnsolvedSudoku (){
 		int[][] clonedSudoku = new int[9][9];
 
 		for (int k = 0; k < gridSize; k++) {
@@ -54,26 +55,6 @@ public class Sudoku implements Serializable {
 		return clonedSudoku;
 	}
 
-	/*
-	 * Simply prints the Sudoku. Used for debugging.
-	 */
-	public void printSudoku() {
-		for (int i = 0; i < gridSize; i++) {
-			for (int j = 0; j < gridSize; j++) {
-				System.out.print(sudoku[j][i] + " ");
-			}
-			System.out.println();
-		}
-	}
-
-	public void printSolvedSudoku() {
-		for (int i = 0; i < gridSize; i++) {
-			for (int j = 0; j < gridSize; j++) {
-				System.out.print(sudoku[j][i] + " ");
-			}
-			System.out.println();
-		}
-	}
 
  /*
   * There are 3 different conditions we need to meet in order for a number to be valid
@@ -133,7 +114,7 @@ public boolean solve() {
  * 			If we recurse forward without encountering any issues, we return all true and we have the right answer
  * 			If the number turns out to be bad we change the value back to 0 and change the conditional matrix back to false and try the next available value
  */
-	public boolean solve(int i, int j) {
+	private boolean solve(int i, int j) {
 	    if(i == gridSize) {
 	        i = 0;
 	        if(++j == gridSize) {
@@ -171,7 +152,7 @@ public boolean solve() {
 /*
  * Quick method for calculating which box any coordinate is in
  */
-	public int findBoxNum(int i, int j) {
+	private int findBoxNum(int i, int j) {
 	    int boxRow = i / gridBoxSize;
 	    int boxCol = j / gridBoxSize;
 	    return (boxRow * gridBoxSize) + boxCol;
@@ -187,11 +168,11 @@ public boolean solve() {
 	}
 
 	//set check that it is a [9][9] array
-	public void setSudoku(int[][] board) {
+	/*public void setSudoku(int[][] board) {
 		sudoku = board;
-	}
+	}*/
 
-	public boolean checkBoard(){
+	/*public boolean checkBoard(){
 		for(int i = 0; i < 9; i++)
         {
       	  for(int j = 0; j < 9; j++)
@@ -203,7 +184,7 @@ public boolean solve() {
         }
 
 		return true;
-	}
+	}*/
 
 	public int[][] getPlayerSudoku() {
 		return sudoku;
@@ -223,9 +204,9 @@ public boolean solve() {
 
 
 	private int difficulty;
-	private int[][] sudoku; 		//the player's board everytime it is updated
-	private int[][] unsolvedSudoku; //the original default board
-	private int[][] solvedSudoku;   //the correct, solved board
+	private int[][] sudoku; 		
+	private int[][] unsolvedSudoku; 
+	private int[][] solvedSudoku;  
 	private int gridSize;
 	private int gridBoxSize;
 	private boolean rowMatrixSolution[][];

@@ -1,25 +1,20 @@
-import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 
 public class Timer implements Runnable {
-	Thread thread;
+	
+	private Thread thread;
 	private boolean flag=true;
 	public boolean pauseFlag=false;
-	BackgroundJFrame f;
-	GridBagConstraints c;
-	JLabel timeLabel;
-	long time;
-	long startTime;
-	long currentTime;
-	long beginTime;
+	private JLabel timeLabel;
+	private long time;
+	private long startTime;
+	private long currentTime;
+	private long beginTime;
 	
-	public Timer(BackgroundJFrame f, GridBagConstraints c, JLabel timeLabel)
+	public Timer(JLabel timeLabel)
 	{
 		thread=new Thread(this);
-		this.f = f;
-		this.c = c;
 		this.timeLabel = timeLabel;
-		//this.startTime = startTime;
 	}
  
 	public void run(){

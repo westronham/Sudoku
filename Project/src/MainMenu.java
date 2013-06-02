@@ -8,18 +8,6 @@ import javax.swing.*;
 
 
 public class MainMenu {
-  	private int difficulty;
-  	private SudokuImporter importer;
-  	int[] sudokuFile;
-  	private Sudoku sudoku;
-  	private JLabel difficultyError;
-  	private JLabel loadError;
-  	JButton playButton;
-  	JComboBox modeCombo;
-  	JButton loadButton;
-  	JButton highScoreButton;
-  	JButton instructionButton;
-  	JButton exitButton;
   	
 	public MainMenu() {
 		importer = new SudokuImporter();
@@ -31,19 +19,9 @@ public class MainMenu {
 		f.setBackgroundImage("image4.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
-
-		//f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(gridbag);
 
 		c.fill = GridBagConstraints.BOTH;
-		
-		/*JPanel filler = new JPanel();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridheight = 1;
-		c.weighty = 0.1;
-		filler.setOpaque(false);
-		f.getContentPane().add(filler, c);*/
 		
 		this.errorMessage(f, c);
 		this.loadFailError(f, c);
@@ -53,8 +31,7 @@ public class MainMenu {
 		this.highScoresButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
-
-		//f.setSize(820,800);
+		
 		f.setLocationRelativeTo(null);
 		//f.pack();
 		f.setVisible(true);
@@ -282,5 +259,17 @@ public class MainMenu {
 				}
 		});
 	}
-
+	
+	private int difficulty;
+  	private SudokuImporter importer;
+  	private int[] sudokuFile;
+  	private Sudoku sudoku;
+  	private JLabel difficultyError;
+  	private JLabel loadError;
+  	private JButton playButton;
+  	private JComboBox modeCombo;
+  	private JButton loadButton;
+  	private JButton highScoreButton;
+  	private JButton instructionButton;
+  	private JButton exitButton;
 }

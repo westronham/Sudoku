@@ -22,7 +22,7 @@ public class SudokuImporter {
 	
 	public int[] readSudoku(int difficulty) {
 		this.difficulty = difficulty;
-		try { //Get sudoku based on difficulty (test with only 1, it will be "easy". We can replace this with an input class
+		try {
 		if (difficulty == 1) {
 			File directory = new File("../Project/Tests/Easy/"); 
 			File[] files = directory.listFiles();

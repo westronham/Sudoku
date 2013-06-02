@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 public class BackgroundJFrame extends JFrame {
+	
 	public BackgroundJFrame() {
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

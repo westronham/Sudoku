@@ -20,12 +20,6 @@ public class InputLimiter extends DocumentFilter {
     		if(isDigit || isEmpty)
     			if ((fb.getDocument().getLength() + str.length()) <= maxChars && !str.equals("0"))
         			super.replace(fb, offs, length, str, a);
-        		//else
-        			//JOptionPane.showMessageDialog
-        				//(null,"Please choose a number between 1-9", "Invalid Number", JOptionPane.PLAIN_MESSAGE);
-    		//else
-    			//JOptionPane.showMessageDialog
-				//(null,"Please choose a number between 1-9", "Illegal Character", JOptionPane.PLAIN_MESSAGE);
     }
     
     int maxChars;

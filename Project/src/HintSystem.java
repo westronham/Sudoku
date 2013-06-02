@@ -45,7 +45,7 @@ public class HintSystem{
 	 * @param y the y coordinate 
 	 * @return the updated board with the fill.
 	 */
-	public Sudoku getHint (Sudoku board){ //assumes number >0
+	public Sudoku getHint (Sudoku board){
 
 		if(canHint() && !isFull(board)){
 
@@ -57,7 +57,6 @@ public class HintSystem{
 				System.out.println(x);
 			}        	
 
-			System.out.println("HI");
 			board.getPlayerSudoku()[x][y] = board.getSolvedSudoku()[x][y];
 			numHints++;
 		}

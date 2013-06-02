@@ -13,28 +13,27 @@ import javax.swing.text.Document;
 
 
 public class PlayMenu {
+	
 	private Sudoku sudokuBoard;
 	private JTextField[][] listOfJTextAreaEntries;
 	private HintSystem hintSystem;
-	AbstractDocument doc;
-	int difficulty;
+	private AbstractDocument doc;
+	private int difficulty;
 	private SudokuImporter importer;
-  	int[] sudokuFile;
-  	boolean showConflicts;
-  	JButton saveButton;
-  	JButton pauseButton;
-  	JButton restartButton;
-  	JButton checkButton;
-  	JButton hintButton;
-  	SudokuBoard board;
-  	JCheckBox checkbox;
-  	JLabel timeLabel;
-  	Timer gameTimer;
-  	JLabel highScoreLabel ;
-  	long startTime;
-  	long highScore; //for output
+  	private int[] sudokuFile;
+  	private JButton saveButton;
+  	private JButton pauseButton;
+  	private JButton restartButton;
+  	private JButton checkButton;
+  	private JButton hintButton;
+  	private SudokuBoard board;
+  	private JLabel timeLabel;
+  	private Timer gameTimer;
+  	private JLabel highScoreLabel ;
+  	private long startTime;
+  	private long highScore;
   	private final static long NOHIGHSCORE = 1999999999;
-  	
+	
 	public PlayMenu(Sudoku SudokuBoard) {
 		this.sudokuBoard = SudokuBoard;
 		this.listOfJTextAreaEntries = new JTextField[9][9];
@@ -55,16 +54,14 @@ public class PlayMenu {
 	}
    
 	public void startPlayMenu(final BackgroundJFrame f) {
-		System.out.println("High score: "+ highScore);
 		f.setBackgroundImage("image.jpg");
 		GridBagLayout gridbag = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
-
 		f.setLayout(gridbag);
 		c.fill = GridBagConstraints.BOTH;
 		c.anchor = GridBagConstraints.EAST;
-		//c.weighty = 0.1;
 		c.weightx = 0.1;
+		
 		this.saveQuitButton(f, c);
 		this.pauseButton(f, c);
 		this.restartButton(f, c);
@@ -74,7 +71,6 @@ public class PlayMenu {
 		this.showTimer(f, c);
 		this.showHighScore(f, c); 
 
-		f.setSize(820,800);
 		f.setVisible(true);
 	}
       
@@ -91,12 +87,11 @@ public class PlayMenu {
 					try {
 						FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
 						ObjectOutputStream os = new ObjectOutputStream(fileStream);
-
 						os.writeObject(sudokuBoard);
 						os.writeObject(hintSystem.getNumHintsLeft());
 						os.writeObject(gameTimer.getTime());
-
 						os.close();
+						
 						f.getContentPane().removeAll();
 						SwingUtilities.updateComponentTreeUI(f);
 						MainMenu mainMenu = new MainMenu();
@@ -120,7 +115,6 @@ public class PlayMenu {
 		f.add(pauseButton, c);
 		pauseButton.addActionListener(new
 			ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					saveButton.setVisible(false);
 				  	pauseButton.setVisible(false);
@@ -137,7 +131,6 @@ public class PlayMenu {
 					final JButton returnB = new JButton("Resume Game");
 					returnB.addActionListener(new ActionListener() {
 
-						@Override
 						public void actionPerformed(ActionEvent arg0) {
 							f.getContentPane().remove(pause);
 							f.getContentPane().remove(returnB);
@@ -155,8 +148,6 @@ public class PlayMenu {
 					});
 					f.getContentPane().add(returnB);
 					SwingUtilities.updateComponentTreeUI(f);
-					//PausePage paused = new PausePage(f);
-
 				}
 
 		});
@@ -189,11 +180,9 @@ public class PlayMenu {
 		c.gridheight = 2;
 		c.weightx = 0.01;
 		c.insets = new Insets(280, 0, -340, 0);
-		//c.ipady = 3;
 		f.add(checkButton, c);
 		checkButton.addActionListener(new
 			ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					int mistakes = checkProgress();
 					if (mistakes == 0) {
@@ -215,8 +204,7 @@ public class PlayMenu {
 	}
       
 	private void hintButton(final BackgroundJFrame f, GridBagConstraints c) {
-		hintButton = new JButton();
-		hintButton.setText("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
+		hintButton = new JButton("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
 		c.gridx = 9;
 		c.gridy = 10;
 		c.gridwidth = 1;
@@ -254,13 +242,11 @@ public class PlayMenu {
 		f.add(board, c);
 		listOfJTextAreaEntries = board.getSubGrids();
 
-
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
 				final JTextField sudokuArea = listOfJTextAreaEntries[i][j];
-
 				Font font;
-				if (sudokuBoard.getUnsolvedSudoku()[i][j] != 0) {  //Enter in the details for reset board
+				if (sudokuBoard.getUnsolvedSudoku()[i][j] != 0) {
 					sudokuArea.setText(Integer.toString(sudokuBoard.getPlayerSudoku()[i][j]));
 					sudokuArea.setEditable(false);
 					font = new Font("Verdana", Font.BOLD, 12);
@@ -269,7 +255,7 @@ public class PlayMenu {
 					font = new Font("Verdana", Font.PLAIN, 12);
 				}
 
-				if (sudokuBoard.getPlayerSudoku()[i][j] != 0 && sudokuBoard.getUnsolvedSudoku()[i][j] == 0) { //Add in player's details
+				if (sudokuBoard.getPlayerSudoku()[i][j] != 0 && sudokuBoard.getUnsolvedSudoku()[i][j] == 0) {
 					sudokuArea.setText(Integer.toString(sudokuBoard.getPlayerSudoku()[i][j]));
 					font = new Font("Verdana", Font.PLAIN, 12);
 				}
@@ -284,7 +270,6 @@ public class PlayMenu {
 				sudokuArea.setHorizontalAlignment(JTextField.CENTER);
 				sudokuArea.addKeyListener(new
 						KeyListener() {
-
 					@Override
 					public void keyPressed(KeyEvent arg0) {
 						int keyCode = arg0.getKeyChar();
@@ -300,7 +285,6 @@ public class PlayMenu {
 
 					@Override
 					public void keyTyped(KeyEvent arg0) {
-
 					}
 				});
 			}
@@ -308,9 +292,7 @@ public class PlayMenu {
 	}
 
 	private void showTimer(BackgroundJFrame f, GridBagConstraints c) {
-		//start a new thread
 		timeLabel = new JLabel();
-
 		Font font = new Font("Avenir", Font.BOLD, 16);
 		timeLabel.setFont(font);
 
@@ -319,7 +301,7 @@ public class PlayMenu {
 		c.gridwidth = 1;
 		c.weightx = 0;
 		c.weighty = 0;
-		gameTimer = new Timer(f, c, timeLabel);
+		gameTimer = new Timer(timeLabel);
 
 		f.add(timeLabel, c);
 		gameTimer.start(startTime);
@@ -356,12 +338,10 @@ public class PlayMenu {
 				}
 			}
 		}
-		//Also, we need to set it back to false if we change a number
 
 		if (count == 0) {
 			int mistakes = this.isCorrect();
 			if (mistakes == 0) {
-				//save high score
 				saveHighScore(gameTimer.getTime());
 				try {
 					FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
@@ -374,7 +354,6 @@ public class PlayMenu {
 					e.printStackTrace();
 				}
 				
-
 				ImageIcon icon = new ImageIcon("icon.gif");
 				int query = JOptionPane.showConfirmDialog (null, 
                         "<html><font size=\"20\" face" +
@@ -407,7 +386,6 @@ public class PlayMenu {
 				}
 			}
 		}
-		sudokuBoard.printSudoku();
 		System.out.println();
 	}
 
@@ -440,7 +418,7 @@ public class PlayMenu {
 	private long getHighScore(){
 		try {
 			FileInputStream fileStream;
-
+			
 			if(sudokuBoard.getDifficulty() == 1){
 				fileStream = new FileInputStream("HighScore1.ser");
 			} else if (sudokuBoard.getDifficulty() == 2){
@@ -465,7 +443,7 @@ public class PlayMenu {
 
 	private boolean saveHighScore(long newScore){
 
-		if(newScore < highScore) { //if its less than high Score
+		if(newScore < highScore) {
 			try {
 				FileOutputStream fileStream;
 				System.out.println("!!");
@@ -494,4 +472,5 @@ public class PlayMenu {
 
 		return false;
 	}
+	
 }
