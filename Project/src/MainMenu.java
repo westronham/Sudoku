@@ -9,24 +9,14 @@ import javax.swing.*;
 
 public class MainMenu {
   	
-	private int difficulty;
-  	private SudokuImporter importer;
-  	private int[] sudokuFile;
-  	private Sudoku sudoku;
+	private Sudoku sudoku;
   	private JLabel difficultyError;
   	private JLabel loadError;
   	private JButton playButton;
-  	private JComboBox modeCombo;
   	private JButton loadButton;
   	private JButton highScoreButton;
   	private JButton instructionButton;
   	private JButton exitButton;
-	
-	public MainMenu() {
-		importer = new SudokuImporter();
-		sudokuFile = new int[81];
-		sudoku = new Sudoku();
-	}
 
 	public void startMainMenu(final BackgroundJFrame f) {
 		f.setBackgroundImage("image4.jpg");
@@ -39,7 +29,6 @@ public class MainMenu {
 		this.errorMessage(f, c);
 		this.loadFailError(f, c);
 		this.playButton(f, c);
-		this.difficultyOptions(f, c);
 		this.loadButton(f, c);
 		this.highScoresButton(f, c);
 		this.instructionButton(f, c);
@@ -62,27 +51,18 @@ public class MainMenu {
 		playButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					if (difficulty != 0) {
-						sudokuFile = importer.readSudoku(difficulty);
-						if (sudokuFile != null) {
-							sudoku.initSudoku(sudokuFile, difficulty);
-							f.getContentPane().removeAll();
-							SwingUtilities.updateComponentTreeUI(f);
-							PlayMenu p = new PlayMenu(sudoku);
-							p.startPlayMenu(f);	
-						} else {
-							loadError.setVisible(true);
-						}
-					} else {
-						difficultyError.setVisible(true);
-					}
+					f.getContentPane().removeAll();
+					SwingUtilities.updateComponentTreeUI(f);
+					DifficultySelectMenu m = new DifficultySelectMenu();
+					m.startDifficultySelectMenu(f);	
+					
 				}
 		});
 	}
 
 	private void errorMessage(BackgroundJFrame f, GridBagConstraints c) {
 		Font font = new Font("Papyrus", Font.BOLD, 14);
-		difficultyError = new JLabel("Please select a difficulty from the drop down menu");
+		difficultyError = new JLabel("No Previous Game");
 		difficultyError.setFont(font);
 		difficultyError.setForeground(Color.red);
 		c.gridx = 0;
@@ -106,44 +86,6 @@ public class MainMenu {
 		f.getContentPane().add(loadError, c);
 		loadError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
-	}
-
-	private void difficultyOptions(final BackgroundJFrame f, GridBagConstraints c) {
-		String[] options = {"Choose Difficulty", "Easy", "Normal", "Hard"};
-		modeCombo = new JComboBox(options);
-		c.gridx = 2;
-		c.gridy = 10;
-		c.ipady = 10;
-		c.gridwidth = 1;
-		c.gridheight = 1;
-		f.add(modeCombo, c);
-		modeCombo.addActionListener(new
-				ActionListener() {
-					public void actionPerformed(ActionEvent event) {
-						String s = (String)modeCombo.getSelectedItem();
-						switch (s) {
-						case "Easy":
-							difficulty = 1;
-							difficultyError.setVisible(false);
-							loadError.setVisible(false);
-							break;
-						case "Normal":
-							difficulty = 2;
-							difficultyError.setVisible(false);
-							loadError.setVisible(false);
-							break;
-						case "Hard":
-							difficulty = 3;
-							difficultyError.setVisible(false);
-							loadError.setVisible(false);
-							break;
-						default:
-							difficulty = 0;
-							loadError.setVisible(false);
-							break;
-						}
-					}
-			});
 	}
 
 	private void loadButton(final BackgroundJFrame f, GridBagConstraints c) {
@@ -178,7 +120,7 @@ public class MainMenu {
 						p.startPlayMenu(f);
 
 					} catch (ClassNotFoundException | IOException e) {
-
+						loadError.setVisible(true);
 						e.printStackTrace();
 					}
 
@@ -235,6 +177,10 @@ public class MainMenu {
 		c.gridx = 1;
 		c.gridy = 14;
 		c.gridheight = 1;
+		
+		Font font = new Font("Avenir", Font.BOLD, 12);
+		exitButton.setFont(font);
+		
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {
