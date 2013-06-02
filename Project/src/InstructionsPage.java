@@ -16,8 +16,7 @@ public class InstructionsPage {
 		  
 		this.instructionPanel(f, c);
 		this.returnButton(f, c);
-		
-		f.setSize(820,800);
+
 		f.setVisible(true);
 	}
 	
@@ -45,7 +44,6 @@ public class InstructionsPage {
         c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(0, 80, 100, 0);
         f.add(label, c);
-        f.pack();
 	}
 	
 	private void returnButton(final BackgroundJFrame f, GridBagConstraints c) {

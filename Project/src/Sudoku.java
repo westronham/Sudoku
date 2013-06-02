@@ -3,6 +3,16 @@ import java.io.Serializable;
 
 public class Sudoku implements Serializable {
 	
+	private int difficulty;
+	private int[][] sudoku; 		
+	private int[][] unsolvedSudoku; 
+	private int[][] solvedSudoku;  
+	private int gridSize;
+	private int gridBoxSize;
+	private boolean rowMatrixSolution[][];
+    private boolean colMatrixSolution[][];
+    private boolean boxMatrixSolution[][];
+	
 	public Sudoku () {
 		unsolvedSudoku = new int[9][9];
 		solvedSudoku = new int[9][9];
@@ -191,14 +201,4 @@ public boolean solve() {
 		return difficulty;
 	}
 
-
-	private int difficulty;
-	private int[][] sudoku; 		
-	private int[][] unsolvedSudoku; 
-	private int[][] solvedSudoku;  
-	private int gridSize;
-	private int gridBoxSize;
-	private boolean rowMatrixSolution[][];
-    private boolean colMatrixSolution[][];
-    private boolean boxMatrixSolution[][];
 }

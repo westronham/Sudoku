@@ -3,7 +3,6 @@ import java.util.Random;
 /**
  * Hint system that keeps track of number of hints so far, and the max number of hints for a given
  * board's difficulty. 
- * @author Felix
  *
  */
 public class HintSystem{

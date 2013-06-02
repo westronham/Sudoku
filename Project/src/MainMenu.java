@@ -9,6 +9,19 @@ import javax.swing.*;
 
 public class MainMenu {
   	
+	private int difficulty;
+  	private SudokuImporter importer;
+  	private int[] sudokuFile;
+  	private Sudoku sudoku;
+  	private JLabel difficultyError;
+  	private JLabel loadError;
+  	private JButton playButton;
+  	private JComboBox modeCombo;
+  	private JButton loadButton;
+  	private JButton highScoreButton;
+  	private JButton instructionButton;
+  	private JButton exitButton;
+	
 	public MainMenu() {
 		importer = new SudokuImporter();
 		sudokuFile = new int[81];
@@ -44,21 +57,11 @@ public class MainMenu {
 		c.ipady = 10;
 		c.gridwidth = 1;
 		c.gridheight = 1;
-		/*if (difficultyError.isVisible()) {
-			c.insets = new Insets(100, 100, 0, 0);
-		} else if (loadError.isVisible()) {
-			c.insets = new Insets(100, 0, 0, 0);
-		} else {
-			c.insets = new Insets(240,0,0,0);
-		}*/
-		//c.weighty = 0;
-		//c.anchor = GridBagConstraints.CENTER;
 		c.insets = new Insets(240,0,0,0);
 		f.add(playButton, c);
 		playButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-					//Read difficulty from drop down menu, set difficulty = {1.2.3}
 					if (difficulty != 0) {
 						sudokuFile = importer.readSudoku(difficulty);
 						if (sudokuFile != null) {
@@ -69,19 +72,6 @@ public class MainMenu {
 							p.startPlayMenu(f);	
 						} else {
 							loadError.setVisible(true);
-							/*f.getContentPane().remove(playButton);
-							f.getContentPane().remove(modeCombo);
-							f.getContentPane().remove(loadButton);
-							f.getContentPane().remove(highScoreButton);
-							f.getContentPane().remove(instructionButton);
-							f.getContentPane().remove(exitButton);
-							SwingUtilities.updateComponentTreeUI(f);
-							playButton(f, c);
-							difficultyOptions(f, c);
-							loadButton(f, c);
-							highScoresButton(f, c);
-							instructionButton(f, c);
-							exitButton(f, c);*/
 						}
 					} else {
 						difficultyError.setVisible(true);
@@ -253,17 +243,5 @@ public class MainMenu {
 				}
 		});
 	}
-	
-	private int difficulty;
-  	private SudokuImporter importer;
-  	private int[] sudokuFile;
-  	private Sudoku sudoku;
-  	private JLabel difficultyError;
-  	private JLabel loadError;
-  	private JButton playButton;
-  	private JComboBox modeCombo;
-  	private JButton loadButton;
-  	private JButton highScoreButton;
-  	private JButton instructionButton;
-  	private JButton exitButton;
+
 }

@@ -18,7 +18,6 @@ import javax.swing.SwingUtilities;
 /**
  * Displays high scores for three difficulties; easy, medium and hard. Has options
  * to reset each high score.  
- * @author Felix
  *
  */
 public class HighScoreMenu {
