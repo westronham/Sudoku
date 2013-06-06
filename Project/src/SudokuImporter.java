@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-
+/**
+ * Class responsible for reading in the Sudoku text from file and converting it into an array of ints
+ */
 public class SudokuImporter {
 	
 	private Scanner scanner;
@@ -16,11 +18,19 @@ public class SudokuImporter {
 	private List<File> listOfFiles;
 	private int randomNum;
 	
+	/**
+	 * Initialises the importer
+	 */
 	public SudokuImporter() {
 		random = new Random();
 		listOfFiles = new ArrayList<File>();
 	}
 	
+	/**
+	 * Reads in a file and converts it into an array of ints.
+	 * @param difficulty The difficulty specified by the user.
+	 * @return Returns an array of the ints in the Sudoku puzzle.
+	 */
 	public int[] readSudoku(int difficulty) {
 		this.difficulty = difficulty;
 		try {
@@ -60,6 +70,11 @@ public class SudokuImporter {
 	return null;
 	}
 	
+	/**
+	 * Ensures there is a file in the specified directory.
+	 * @return Returns the file read in from the directory.
+	 * @throws FileNotFoundException
+	 */
 	private Scanner readFile() throws FileNotFoundException {
 		if (listOfFiles.size() > 0) {
 			randomNum = random.nextInt(listOfFiles.size());
@@ -69,6 +84,11 @@ public class SudokuImporter {
 		return null;
 	}
 	
+	/**
+	 * Checks whether the file read in is valid.
+	 * @param check The array of ints pertaining to the Sudoku.
+	 * @return True or False depending on whether the file was valid.
+	 */
 	private boolean validFileCheck(int[] check) {
 		if (check.length != 100) {
 			return false;

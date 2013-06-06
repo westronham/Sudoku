@@ -116,7 +116,6 @@ public class HighScoreMenu {
 	 */
 	private void showEasyHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel1 = new JLabel();
-	
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -143,7 +142,6 @@ public class HighScoreMenu {
 	 */
 	private void showMediumHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel2 = new JLabel();
-		
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -170,7 +168,6 @@ public class HighScoreMenu {
 	 */
 	private void showHardHighScore(BackgroundJFrame f, GridBagConstraints c) {
 		highScoreLabel3 = new JLabel();
-		
 		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -228,11 +225,11 @@ public class HighScoreMenu {
 	 */
 	private void resetEasyScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Reset");
-		
+
 		c.gridx = 0;
 		c.gridy = 2;
 		f.add(exitButton, c);
-		
+
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -262,11 +259,11 @@ public class HighScoreMenu {
 	 */
 	private void resetMediumScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Reset");
-		
+
 		c.gridx = 1;
 		c.gridy = 2;
 		f.add(exitButton, c);
-		
+
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -296,11 +293,11 @@ public class HighScoreMenu {
 	 */
 	private void resetHardScoreButton (final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Reset");
-		
+
 		c.gridx = 2;
 		c.gridy = 2;
 		f.add(exitButton, c);
-		
+
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -329,12 +326,12 @@ public class HighScoreMenu {
 	 */
 	private void backButton(final BackgroundJFrame f, GridBagConstraints c) {
 		JButton exitButton = new JButton("Back");
-		
+
 		c.gridx = 1;
 		c.gridy = 4;
 		c.gridheight = 2;
 		f.add(exitButton, c);
-		
+
 		exitButton.addActionListener(new
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {

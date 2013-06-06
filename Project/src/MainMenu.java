@@ -32,14 +32,14 @@ public class MainMenu {
 		f.setLayout(gridbag);
 
 		c.fill = GridBagConstraints.BOTH;
-		
+
 		this.errorMessage(f, c);
 		this.playButton(f, c);
 		this.loadButton(f, c);
 		this.highScoresButton(f, c);
 		this.instructionButton(f, c);
 		this.exitButton(f, c);
-		
+
 		f.setLocationRelativeTo(null);
 		//f.pack();
 		f.setVisible(true);
@@ -66,12 +66,11 @@ public class MainMenu {
 					SwingUtilities.updateComponentTreeUI(f);
 					DifficultySelectMenu m = new DifficultySelectMenu();
 					m.startDifficultySelectMenu(f);	
-					
+
 				}
 		});
 	}
-
-		
+	
 	/**
 	 * Error message that loads if there is no previous game. 
 	 * @param f The JFrame that the button is added to.
@@ -90,7 +89,7 @@ public class MainMenu {
 		continueError.setVisible(false);
 		SwingUtilities.updateComponentTreeUI(f);
 	}
-	
+
 	/**
 	 * The button that loads the previous incomplete game. 
 	 * @param f The JFrame that the button is added to.
@@ -193,10 +192,10 @@ public class MainMenu {
 		c.gridx = 1;
 		c.gridy = 14;
 		c.gridheight = 1;
-		
+
 		Font font = new Font("Avenir", Font.BOLD, 12);
 		exitButton.setFont(font);
-		
+
 		f.add(exitButton, c);
 		exitButton.addActionListener(new
 			ActionListener() {

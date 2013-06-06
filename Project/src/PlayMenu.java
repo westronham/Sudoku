@@ -142,10 +142,9 @@ public class PlayMenu {
 	 */
 	private void pauseButton(final BackgroundJFrame f, final GridBagConstraints c) {
 		pauseButton = new JButton("Pause");
-		c.gridx = 3;
+		c.gridx = 6;
 		c.gridy = 0;
 		c.gridwidth = 3;
-		c.gridheight = 1; 
 		f.add(pauseButton, c);
 		pauseButton.addActionListener(new
 			ActionListener() {
@@ -203,9 +202,10 @@ public class PlayMenu {
 	 */
 	private void restartButton(final BackgroundJFrame f, GridBagConstraints c) {
 		restartButton = new JButton("Restart");
-		c.gridx = 6;
+		c.gridx = 3;
 		c.gridy = 0;
 		c.gridwidth = 3;
+		c.gridheight = 1; 
 		f.add(restartButton, c);
 		restartButton.addActionListener(new
 			ActionListener() {
@@ -228,11 +228,11 @@ public class PlayMenu {
 	private void checkButton(final BackgroundJFrame f, GridBagConstraints c) {
 		checkButton = new JButton("Check Answer");
 		c.gridx = 9;
-		c.gridy = 7;
+		c.gridy = 10;
 		c.gridwidth = 1;
 		c.gridheight = 2;
 		c.weightx = 0.01;
-		c.insets = new Insets(280, 0, -340, 0);
+		c.insets = new Insets(-360, 0, 300, 0);
 		f.add(checkButton, c);
 		checkButton.addActionListener(new
 			ActionListener() {
@@ -265,11 +265,11 @@ public class PlayMenu {
 	private void hintButton(final BackgroundJFrame f, GridBagConstraints c) {
 		hintButton = new JButton("Hint (" + String.valueOf(hintSystem.getNumHintsLeft()) + ")");
 		c.gridx = 9;
-		c.gridy = 10;
+		c.gridy = 7;
 		c.gridwidth = 1;
 		c.gridheight = 2;
 		c.weightx = 0.01;
-		c.insets = new Insets(-360, 0, 300, 0);
+		c.insets = new Insets(280, 0, -340, 0);
 		f.add(hintButton, c);
 		hintButton.addActionListener(new
 			ActionListener() {
